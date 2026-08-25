@@ -2,10 +2,18 @@
 
 import React from 'react';
 import { useDemo } from '@/context/DemoContext';
-import { Pill, Clock, ArrowRight, ShieldCheck, Info, Camera, PlusCircle, AlertCircle } from 'lucide-react';
+import { Pill, Clock, ArrowRight, ShieldCheck, Info, Camera, PlusCircle, AlertCircle, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
 export const MedicationListScreen: React.FC = () => {
-  const { medications, isDemoMode, setStep } = useDemo();
+  const { 
+    medications, 
+    isDemoMode, 
+    updateMedicationReminderTime, 
+    setActiveReminderMedication, 
+    markDoseAsTaken,
+    simulateMissedDose,
+    setStep 
+  } = useDemo();
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4 pb-24">
@@ -16,7 +24,7 @@ export const MedicationListScreen: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-2.5 py-0.5 rounded-md">
-                Step 2 • Active Prescriptions
+                Step 2 • Active Prescriptions & Reminders
               </span>
               {isDemoMode ? (
                 <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md border border-amber-200">
@@ -30,7 +38,7 @@ export const MedicationListScreen: React.FC = () => {
             </div>
             <h1 className="text-2xl font-extrabold text-slate-900">Current Hospital Discharge Medications</h1>
             <p className="text-xs text-slate-500">
-              {medications.length} active medication{medications.length === 1 ? '' : 's'} logged
+              {medications.length} active medication{medications.length === 1 ? '' : 's'} logged • Set custom dosage alarm times
             </p>
           </div>
 
@@ -52,7 +60,7 @@ export const MedicationListScreen: React.FC = () => {
             <div>
               <h3 className="text-lg font-extrabold text-slate-900">No medicines added yet.</h3>
               <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1">
-                Your medication list is currently empty. Add your active prescriptions to enable medicine-remedy interaction screening.
+                Your medication list is currently empty. Add your active prescriptions to enable dosage reminders and safety checks.
               </p>
             </div>
 
@@ -89,9 +97,22 @@ export const MedicationListScreen: React.FC = () => {
                       <p className="text-xs font-medium text-slate-500">{med.genericName}</p>
                     </div>
                   </div>
-                  <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                    {med.status}
-                  </span>
+
+                  {/* Reminder Adherence Status Badge */}
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                      {med.status}
+                    </span>
+                    {med.reminderStatus && (
+                      <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-md ${
+                        med.reminderStatus === 'TAKEN' ? 'bg-emerald-100 text-emerald-800' :
+                        med.reminderStatus === 'SKIPPED' ? 'bg-rose-100 text-rose-800' :
+                        'bg-amber-100 text-amber-800'
+                      }`}>
+                        Dose Today: {med.reminderStatus}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -105,6 +126,73 @@ export const MedicationListScreen: React.FC = () => {
                     <span className="text-slate-400 text-[11px] font-semibold uppercase block">Dosage & Frequency</span>
                     <span className="font-bold text-slate-800 block mt-0.5">{med.dosage}</span>
                     <span className="text-slate-600">{med.frequency}</span>
+                  </div>
+                </div>
+
+                {/* SECTION 6: Missed-Dose Warning Card */}
+                {med.reminderStatus === 'SKIPPED' && (
+                  <div className="bg-rose-50 border-2 border-rose-300 rounded-xl p-3.5 flex items-center justify-between gap-3 text-xs animate-in fade-in">
+                    <div className="flex items-center gap-2 text-rose-900">
+                      <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
+                      <div>
+                        <h4 className="font-extrabold text-xs text-rose-950">⚠️ Missed Today's Dose</h4>
+                        <p className="text-[11px] text-rose-800">You indicated 'No (not taking)' or missed this dosage.</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => markDoseAsTaken(med.id)}
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] py-1.5 px-3 rounded-lg shadow-xs transition shrink-0"
+                    >
+                      ✓ Mark as Taken
+                    </button>
+                  </div>
+                )}
+
+                {/* Reminder Time Customization Card */}
+                <div className="bg-brand-50/60 border border-brand-200 rounded-xl p-4 space-y-3">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-brand-600 shrink-0" />
+                      <span className="text-xs font-bold text-brand-950">Custom Dosage Reminder Time:</span>
+                    </div>
+
+                    <select
+                      value={med.reminderTime || '08:00 AM'}
+                      onChange={(e) => updateMedicationReminderTime(med.id, e.target.value)}
+                      className="text-xs font-bold text-brand-900 bg-white border border-brand-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    >
+                      <option value="08:00 AM">Morning — 08:00 AM</option>
+                      <option value="02:00 PM">Afternoon — 02:00 PM</option>
+                      <option value="08:00 PM">Evening — 08:00 PM</option>
+                      <option value="10:00 PM">Night — 10:00 PM</option>
+                    </select>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                    <p className="text-[11px] text-slate-500">
+                      CareConnect will play a chime alarm & show Yes/No/Snooze options at <strong>{med.reminderTime || '08:00 AM'}</strong>.
+                    </p>
+
+                    <div className="flex items-center gap-2">
+                      {med.reminderStatus !== 'SKIPPED' && (
+                        <button
+                          type="button"
+                          onClick={() => simulateMissedDose(med.id)}
+                          className="bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold text-[10px] py-1.5 px-2.5 rounded-lg border border-rose-200 transition"
+                        >
+                          Simulate Missed Dose
+                        </button>
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() => setActiveReminderMedication(med)}
+                        className="flex items-center gap-1.5 bg-gradient-to-r from-brand-600 to-teal-600 hover:from-brand-700 hover:to-teal-700 text-white font-bold text-[11px] py-1.5 px-3 rounded-lg shadow-xs transition shrink-0"
+                      >
+                        <span>🔔 Test Reminder Alarm</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 

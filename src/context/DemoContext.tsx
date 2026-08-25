@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
 import {
   PatientProfile,
   Medication,
@@ -10,6 +11,7 @@ import {
   DEMO_PATIENT,
   DEMO_MEDICATIONS,
   DEMO_SYMPTOM,
+  EMPTY_SYMPTOM,
   AYURBOOK_REMEDIES,
   DEMO_INTERACTION_RESULT,
   INITIAL_TIMELINE
@@ -21,6 +23,7 @@ export type DemoStep =
   | 'LOG_IN'                  // Log In Screen
   | 'FORGOT_PASSWORD'         // Password Reset Screen
   | 'VERIFY_EMAIL'            // Email Verification Screen
+  | 'LANGUAGE_SELECTION'      // Post-signup Language Selection
   | 'POST_SIGNUP_SETUP'       // Let's set up your recovery
   | 'MANUAL_MEDICINE_ENTRY'   // Enter Your Medicines (Form)
   | 'PRESCRIPTION_UPLOAD'     // Add Prescription (Upload & Scan)
@@ -32,7 +35,6 @@ export type DemoStep =
   | 'AYURBOOK'                // AyurBook Explorer
   | 'REMEDY_DETAIL'           // Remedy Detail
   | 'INTERACTION_RESULT'      // Medicine x Remedy Check
-  | 'TIMELINE'                // Recovery Timeline
   | 'PROFILE';                // Profile & Settings
 
 export const STEP_ORDER: DemoStep[] = [
@@ -41,6 +43,7 @@ export const STEP_ORDER: DemoStep[] = [
   'LOG_IN',
   'FORGOT_PASSWORD',
   'VERIFY_EMAIL',
+  'LANGUAGE_SELECTION',
   'POST_SIGNUP_SETUP',
   'MANUAL_MEDICINE_ENTRY',
   'PRESCRIPTION_UPLOAD',
@@ -52,7 +55,6 @@ export const STEP_ORDER: DemoStep[] = [
   'AYURBOOK',
   'REMEDY_DETAIL',
   'INTERACTION_RESULT',
-  'TIMELINE',
   'PROFILE'
 ];
 
@@ -62,18 +64,18 @@ export const STEP_LABELS: Record<DemoStep, { title: string; subtitle: string }> 
   LOG_IN: { title: "Welcome back", subtitle: "Log In to Your Account" },
   FORGOT_PASSWORD: { title: "Reset Password", subtitle: "Recover Your Account" },
   VERIFY_EMAIL: { title: "Verify Email", subtitle: "Confirm Email Verification" },
+  LANGUAGE_SELECTION: { title: "Language Selection", subtitle: "Choose Preferred Language" },
   POST_SIGNUP_SETUP: { title: "Setup Recovery", subtitle: "Upload or Add Medicines" },
   MANUAL_MEDICINE_ENTRY: { title: "Enter Medicines", subtitle: "Manual Prescription Entry" },
   PRESCRIPTION_UPLOAD: { title: "Scan Prescription", subtitle: "Upload & Extract Medicines" },
   ONBOARDING: { title: "Patient Overview", subtitle: "Recovery Profile" },
   MEDICATIONS: { title: "Active Medicines", subtitle: "Prescriptions & Dosage" },
-  DASHBOARD: { title: "Recovery Hub", subtitle: "Day 1 Progress Tracker" },
+  DASHBOARD: { title: "Recovery Hub", subtitle: "CareConnect Hub" },
   SYMPTOM_CHECKIN: { title: "Symptom Check-in", subtitle: "Log How You Feel" },
   SAFETY_GATE: { title: "Red-Flag Safety Gate", subtitle: "Emergency Triage Check" },
   AYURBOOK: { title: "AyurBook Explorer", subtitle: "Herbal Remedy Library" },
   REMEDY_DETAIL: { title: "Remedy Detail", subtitle: "Ginger Tea Profile" },
   INTERACTION_RESULT: { title: "Interaction Matrix", subtitle: "Medicine × Remedy Check" },
-  TIMELINE: { title: "Recovery Timeline", subtitle: "Recovery Journey" },
   PROFILE: { title: "Profile & Settings", subtitle: "User Account & Privacy" }
 };
 
@@ -83,20 +85,32 @@ interface DemoContextType {
   setStep: (step: DemoStep) => void;
   nextStep: () => void;
   prevStep: () => void;
+  selectedLanguage: string;
+  setSelectedLanguage: (lang: string) => void;
+  treatedCondition: string;
+  setTreatedCondition: (condition: string) => void;
   patient: PatientProfile;
   medications: Medication[];
   realUserMedicines: Medication[];
+  missedMedications: Medication[];
   addUserMedicine: (med: Omit<Medication, 'id'>) => void;
   deleteUserMedicine: (id: string) => void;
   updateUserMedicine: (id: string, updated: Partial<Medication>) => void;
+  updateMedicationReminderTime: (id: string, reminderTime: string) => void;
+  recordDosageAdherence: (id: string, status: 'TAKEN' | 'SKIPPED' | 'SNOOZED') => void;
+  markDoseAsTaken: (id: string) => void;
+  simulateMissedDose: (id: string) => void;
+  activeReminderMedication: Medication | null;
+  setActiveReminderMedication: (med: Medication | null) => void;
   verifyAndSaveMedicines: () => void;
   symptom: SymptomLog;
   updateSymptom: (symptomName: string, severity: number, notes: string) => void;
   selectedRemedy: Remedy;
   setSelectedRemedy: (remedy: Remedy) => void;
+  ayurbookLockUntil: number | null;
+  submitRemedyConfirmation: (remedyId: string, isDoing: boolean, response: string, notes?: string) => void;
+  unlockAyurbook: () => void;
   interactionResult: typeof DEMO_INTERACTION_RESULT;
-  timeline: TimelineEvent[];
-  addTimelineEvent: (event: Omit<TimelineEvent, 'id'>) => void;
   resetDemo: () => void;
   isDemoMode: boolean;
   setIsDemoMode: (val: boolean) => void;
@@ -105,31 +119,47 @@ interface DemoContextType {
 const DemoContext = createContext<DemoContextType | undefined>(undefined);
 
 export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { profile } = useAuth();
   const [currentStep, setCurrentStep] = useState<DemoStep>('LANDING');
   const [isDemoMode, setIsDemoMode] = useState(false);
+
+  // Selected Language preference - defaults to English
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('English');
+
+  // Treatment condition (e.g. Diabetes, Diarrhea, Post-Op Recovery)
+  const [treatedCondition, setTreatedCondition] = useState<string>('');
 
   // Real user medications list - starts completely EMPTY!
   const [realUserMedicines, setRealUserMedicines] = useState<Medication[]>([]);
 
-  const [symptom, setSymptom] = useState<SymptomLog>(DEMO_SYMPTOM);
+  // Active triggering reminder medication for Modal
+  const [activeReminderMedication, setActiveReminderMedication] = useState<Medication | null>(null);
+
+  // Demo vs Real User Symptoms
+  const [demoSymptom, setDemoSymptom] = useState<SymptomLog>(DEMO_SYMPTOM);
+  const [realUserSymptom, setRealUserSymptom] = useState<SymptomLog>(EMPTY_SYMPTOM);
+
+  // Active symptom: if Demo Mode -> return demoSymptom ("Nausea"). If Real User -> return realUserSymptom (starts EMPTY).
+  const symptom = isDemoMode ? demoSymptom : realUserSymptom;
+
   const [selectedRemedy, setSelectedRemedy] = useState<Remedy>(AYURBOOK_REMEDIES[0]);
   const [interactionResult] = useState(DEMO_INTERACTION_RESULT);
-  const [timeline, setTimeline] = useState<TimelineEvent[]>(INITIAL_TIMELINE);
 
   const stepIndex = STEP_ORDER.indexOf(currentStep);
 
   // Active medications: if Demo Mode -> return Ananya's demo medicines. If Real User -> return realUserMedicines (starts EMPTY).
   const medications = isDemoMode ? DEMO_MEDICATIONS : realUserMedicines;
 
-  // Active patient profile: if Demo Mode -> Ananya. If Real User -> Real User Profile.
+  // Missed medications list (status === 'SKIPPED')
+  const missedMedications = medications.filter(m => m.reminderStatus === 'SKIPPED');
+
+  // Active patient profile: if Demo Mode -> Ananya Sharma. If Real User -> Real User Profile.
   const patient: PatientProfile = isDemoMode ? DEMO_PATIENT : {
-    name: "Recovery Patient",
-    age: 29,
+    name: profile?.fullName || profile?.firstName || "Patient",
+    age: profile?.age || 29,
     gender: "User",
-    condition: "Post-Discharge Recovery",
+    condition: treatedCondition.trim() || "Not specified",
     dischargeDate: "Today",
-    recoveryDay: 1,
-    totalRecoveryDays: 14,
     doctorName: "Attending Physician",
     hospitalName: "CareConnect Health"
   };
@@ -157,7 +187,9 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const id = `user-med-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
     const newMed: Medication = {
       ...newMedData,
-      id
+      id,
+      reminderTime: newMedData.reminderTime || '08:00 AM',
+      reminderStatus: 'PENDING'
     };
     setRealUserMedicines(prev => [...prev, newMed]);
   };
@@ -170,33 +202,75 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setRealUserMedicines(prev => prev.map(m => m.id === id ? { ...m, ...updated } : m));
   };
 
+  const updateMedicationReminderTime = (id: string, reminderTime: string) => {
+    setRealUserMedicines(prev => prev.map(m => m.id === id ? { ...m, reminderTime } : m));
+  };
+
+  const recordDosageAdherence = (id: string, status: 'TAKEN' | 'SKIPPED' | 'SNOOZED') => {
+    setRealUserMedicines(prev => prev.map(m => {
+      if (m.id === id) {
+        return {
+          ...m,
+          reminderStatus: status,
+          nextDose: status === 'TAKEN' ? 'Completed for today' : status === 'SKIPPED' ? 'Missed today' : 'Snoozed 15 min'
+        };
+      }
+      return m;
+    }));
+    setActiveReminderMedication(null);
+  };
+
+  const markDoseAsTaken = (id: string) => {
+    recordDosageAdherence(id, 'TAKEN');
+  };
+
+  const simulateMissedDose = (id: string) => {
+    recordDosageAdherence(id, 'SKIPPED');
+  };
+
   const verifyAndSaveMedicines = () => {
     // Navigate to Recovery Dashboard after verifying
     setStep('DASHBOARD');
   };
 
   const updateSymptom = (symptomName: string, severity: number, notes: string) => {
-    setSymptom(prev => ({
-      ...prev,
+    const updatedSymptom: SymptomLog = {
+      id: `symp-${Date.now()}`,
       symptom: symptomName,
       severity,
+      onsetTime: 'Just now',
       notes,
-      timestamp: 'Just now'
-    }));
+      timestamp: 'Just now',
+      isRedFlag: false
+    };
+
+    if (isDemoMode) {
+      setDemoSymptom(updatedSymptom);
+    } else {
+      setRealUserSymptom(updatedSymptom);
+    }
   };
 
-  const addTimelineEvent = (newEvent: Omit<TimelineEvent, 'id'>) => {
-    const id = `tl-${Date.now()}`;
-    setTimeline(prev => [
-      ...prev,
-      { ...newEvent, id }
-    ]);
+  // AyurBook 25-minute Lock / Cooldown state
+  const [ayurbookLockUntil, setAyurbookLockUntil] = useState<number | null>(null);
+
+  const submitRemedyConfirmation = (remedyId: string, isDoing: boolean, response: string, notes?: string) => {
+    // SECTION 8: Lock/freeze AyurBook search feature for 25 minutes (25 * 60 * 1000 ms)
+    const lockExpiry = Date.now() + 25 * 60 * 1000;
+    setAyurbookLockUntil(lockExpiry);
+  };
+
+  const unlockAyurbook = () => {
+    setAyurbookLockUntil(null);
   };
 
   const resetDemo = () => {
     setIsDemoMode(false);
     setRealUserMedicines([]);
-    setSymptom(DEMO_SYMPTOM);
+    setTreatedCondition('');
+    setAyurbookLockUntil(null);
+    setDemoSymptom(DEMO_SYMPTOM);
+    setRealUserSymptom(EMPTY_SYMPTOM);
     setSelectedRemedy(AYURBOOK_REMEDIES[0]);
     setCurrentStep('LANDING');
   };
@@ -209,20 +283,32 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setStep,
         nextStep,
         prevStep,
+        selectedLanguage,
+        setSelectedLanguage,
+        treatedCondition,
+        setTreatedCondition,
         patient,
         medications,
         realUserMedicines,
+        missedMedications,
         addUserMedicine,
         deleteUserMedicine,
         updateUserMedicine,
+        updateMedicationReminderTime,
+        recordDosageAdherence,
+        markDoseAsTaken,
+        simulateMissedDose,
+        activeReminderMedication,
+        setActiveReminderMedication,
         verifyAndSaveMedicines,
         symptom,
         updateSymptom,
         selectedRemedy,
         setSelectedRemedy,
+        ayurbookLockUntil,
+        submitRemedyConfirmation,
+        unlockAyurbook,
         interactionResult,
-        timeline,
-        addTimelineEvent,
         resetDemo,
         isDemoMode,
         setIsDemoMode

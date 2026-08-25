@@ -11,6 +11,9 @@ export interface Medication {
   color: string;
   nextDose: string;
   pillsRemaining: number;
+  reminderTime?: string; // e.g. "08:00 AM", "02:00 PM"
+  reminderStatus?: 'PENDING' | 'TAKEN' | 'SKIPPED' | 'SNOOZED';
+  snoozedUntil?: string;
 }
 
 export interface Remedy {
@@ -66,8 +69,6 @@ export interface PatientProfile {
   gender: string;
   condition: string;
   dischargeDate: string;
-  recoveryDay: number;
-  totalRecoveryDays: number;
   doctorName: string;
   hospitalName: string;
 }
@@ -78,8 +79,6 @@ export const DEMO_PATIENT: PatientProfile = {
   gender: "Female",
   condition: "Post-Op Appendectomy Recovery",
   dischargeDate: "Aug 20, 2026",
-  recoveryDay: 4,
-  totalRecoveryDays: 14,
   doctorName: "Dr. Vikram Malhotra (General Surgery)",
   hospitalName: "CareConnect City Hospital"
 };
@@ -125,6 +124,16 @@ export const DEMO_SYMPTOM: SymptomLog = {
   isRedFlag: false
 };
 
+export const EMPTY_SYMPTOM: SymptomLog = {
+  id: "",
+  symptom: "",
+  severity: 0,
+  onsetTime: "",
+  notes: "",
+  timestamp: "",
+  isRedFlag: false
+};
+
 export const RED_FLAG_CHECKLIST = [
   { id: "rf-1", label: "High Fever above 102°F (38.9°C)", severe: true },
   { id: "rf-2", label: "Severe, worsening abdominal pain or sudden swelling", severe: true },
@@ -149,60 +158,195 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Gently simmer 1/2 tsp fresh crushed ginger root in 1 cup of boiling water for 5 minutes. Strain and sip warm.",
     activeCompounds: ["Gingerols", "Shogaols", "Zingerone"],
     safetyRating: "Safe",
-    recommendedFor: ["Mild nausea", "Indigestion", "Morning uneasiness"],
+    recommendedFor: ["Nausea", "Mild Nausea", "Morning sickness", "Stomach Upset"],
     iconName: "Coffee"
   },
   {
-    id: "rem-peppermint",
-    name: "Peppermint Infusion",
-    botanicalName: "Mentha piperita",
-    sanskritName: "Pudina",
-    category: "Digestive & Antispasmodic",
-    summary: "Cooling aromatic herb that helps relax gastrointestinal smooth muscle and ease bloating.",
+    id: "rem-cardamom",
+    name: "Cardamom & Lemon Water",
+    botanicalName: "Elettaria cardamomum",
+    sanskritName: "Elaichi",
+    category: "Digestive & Anti-Nausea",
+    summary: "Aromatic cooling spice infusion that neutralizes stomach qualms and refreshes the palate after nausea or medication taste.",
     traditionalUses: [
-      "Relieves abdominal crampiness and stomach fullness",
-      "Provides natural cooling sensation for stomach heat",
-      "Soothes mild nausea from medication taste"
+      "Soothes stomach lining and relieves nausea impulses",
+      "Refreshes breath and balances gastric acid pH"
     ],
-    preparation: "Steep 4-5 fresh mint leaves or 1 tsp dried peppermint in hot water for 4 minutes.",
-    activeCompounds: ["Menthol", "Menthone", "Menthyl acetate"],
+    preparation: "Crush 2 green cardamom pods in 1 cup warm water with a drop of fresh lemon juice. Sip slowly.",
+    activeCompounds: ["Cineole", "Terpinyl acetate"],
     safetyRating: "Safe",
-    recommendedFor: ["Bloating", "Mild discomfort", "Gas"],
+    recommendedFor: ["Nausea", "Vomiting", "Indigestion"],
+    iconName: "Sparkles"
+  },
+  {
+    id: "rem-coriander-jeera",
+    name: "Coriander & Cumin Decoction",
+    botanicalName: "Coriandrum sativum & Cuminum cyminum",
+    sanskritName: "Dhaniya-Jeera Water",
+    category: "Headaches & Tension Relief",
+    summary: "Traditional cooling seed decoction that relieves tension headaches, reduces bodily heat, and calms vascular throbbing.",
+    traditionalUses: [
+      "Relieves Pitta-type tension headaches and temples heaviness",
+      "Promotes systemic hydration and kidney flushing"
+    ],
+    preparation: "Soak 1/2 tsp crushed coriander and cumin seeds in warm water for 10 minutes. Strain and drink at room temperature.",
+    activeCompounds: ["Linalool", "Cuminaldehyde"],
+    safetyRating: "Safe",
+    recommendedFor: ["Headaches", "Headache", "Tension", "Body Heat"],
     iconName: "Leaf"
   },
   {
-    id: "rem-licorice",
-    name: "Licorice Root Tea",
-    botanicalName: "Glycyrrhiza glabra",
-    sanskritName: "Yasthimadhu",
-    category: "Mucosal Protection",
-    summary: "Demulcent herb known for forming a soothing protective coating over stomach mucosa.",
+    id: "rem-brahmi",
+    name: "Brahmi & Chamomile Infusion",
+    botanicalName: "Bacopa monnieri & Matricaria chamomilla",
+    sanskritName: "Brahmi-Pudina",
+    category: "Headaches & Stress Relief",
+    summary: "Medhya (nervine) botanical blend that eases stress headaches, neural fatigue, and neck tightness.",
     traditionalUses: [
-      "Soothes hyperacidity and stomach lining irritation",
-      "Supports esophageal comfort after anesthesia intubation"
+      "Soothes mental overactivity and stress-induced head throbbing",
+      "Improves mental clarity without sedation"
     ],
-    preparation: "Boil 1/4 tsp licorice root powder in water for 3 minutes. Sip slowly.",
-    activeCompounds: ["Glycyrrhizin", "Liquiritin"],
-    safetyRating: "Caution",
-    recommendedFor: ["Stomach irritation", "Acid reflux"],
+    preparation: "Steep 1/2 tsp Brahmi powder or tea bag in hot water for 5 minutes.",
+    activeCompounds: ["Bacosides", "Apigenin"],
+    safetyRating: "Safe",
+    recommendedFor: ["Headaches", "Headache", "Stress", "Fatigue"],
+    iconName: "Sparkles"
+  },
+  {
+    id: "rem-fennel",
+    name: "Fennel Seed Water",
+    botanicalName: "Foeniculum vulgare",
+    sanskritName: "Saunf Water",
+    category: "Acidity & Mucosal Protection",
+    summary: "Cooling alkaline herbal water that coats the stomach mucosa, neutralizes acid reflux, and stops heartburn.",
+    traditionalUses: [
+      "Rapidly cools burning sensation in chest and throat",
+      "Relieves bloating, acid reflux (Amlapitta), and sour belching"
+    ],
+    preparation: "Steep 1 tsp bruised fennel seeds in a glass of hot water for 7 minutes. Sip warm after meals.",
+    activeCompounds: ["Anethole", "Fenchone"],
+    safetyRating: "Safe",
+    recommendedFor: ["Acidity", "Heartburn", "GERD", "Gastritis"],
     iconName: "Shield"
   },
   {
-    id: "rem-tulsi",
-    name: "Tulsi (Holy Basil) Tea",
-    botanicalName: "Ocimum sanctum",
-    sanskritName: "Tulsi",
-    category: "Immunity & Stress Relief",
-    summary: "Revered adaptogenic herb that promotes cellular vitality and mild nervous system calm.",
+    id: "rem-amla",
+    name: "Amla & Honey Elixir",
+    botanicalName: "Phyllanthus emblica",
+    sanskritName: "Amalaki",
+    category: "Acidity & Digestive Health",
+    summary: "Vitamin C-rich rejuvenative fruit that regulates gastric juice secretion without causing hyperacidity.",
     traditionalUses: [
-      "Supports natural immune defenses during recovery",
-      "Promotes mental calm and reduces post-hospital stress"
+      "Pacifies hyperactive stomach acid and repairs gut mucosal wall",
+      "Boosts immunity and cellular healing"
     ],
-    preparation: "Steep 5-6 fresh Tulsi leaves in hot water for 5 minutes.",
-    activeCompounds: ["Eugenol", "Ursolic acid", "Rosmarinic acid"],
+    preparation: "Mix 1/2 tsp organic Amla powder with 1 tsp pure honey or warm water.",
+    activeCompounds: ["Emblicanin", "Ellagic acid", "Ascorbic acid"],
     safetyRating: "Safe",
-    recommendedFor: ["Stress", "Mild fatigue", "Immune support"],
+    recommendedFor: ["Acidity", "Acid Reflux", "Indigestion"],
+    iconName: "Shield"
+  },
+  {
+    id: "rem-nutmeg-milk",
+    name: "Warm Nutmeg Milk",
+    botanicalName: "Myristica fragrans",
+    sanskritName: "Jaiphal Ksheera",
+    category: "Insomnia & Sleep Care",
+    summary: "Calming bedtime tonic containing natural mild sedatives to induce restful deep sleep and reduce nighttime restlessness.",
+    traditionalUses: [
+      "Promotes deep, uninterrupted sleep (Nidra Deepana)",
+      "Relieves nocturnal anxiety and insomnia"
+    ],
+    preparation: "Add a small pinch (1/8 tsp) of freshly ground nutmeg to 1 cup of warm milk (or almond milk) 30 minutes before sleep.",
+    activeCompounds: ["Myristicin", "Elemicin"],
+    safetyRating: "Safe",
+    recommendedFor: ["Insomnia", "Sleep Disturbance", "Restlessness", "Anxiety"],
+    iconName: "Coffee"
+  },
+  {
+    id: "rem-ashwagandha",
+    name: "Ashwagandha Moon Milk",
+    botanicalName: "Withania somnifera",
+    sanskritName: "Ashwagandha",
+    category: "Insomnia & Rejuvenation",
+    summary: "Renowned adaptogen that lowers cortisol, calms nervous system strain, and promotes deep recovery sleep.",
+    traditionalUses: [
+      "Lowers stress hormones and improves sleep latency",
+      "Restores physical energy during post-illness convalescence"
+    ],
+    preparation: "Simmer 1/2 tsp Ashwagandha root powder in warm milk with a pinch of cardamom for 5 minutes.",
+    activeCompounds: ["Withanolides", "Withaferin A"],
+    safetyRating: "Safe",
+    recommendedFor: ["Insomnia", "Sleep", "Fatigue", "Stress"],
     iconName: "Sparkles"
+  },
+  {
+    id: "rem-triphala",
+    name: "Triphala Warm Water",
+    botanicalName: "Three Fruits (Haritaki, Bibhitaki, Amalaki)",
+    sanskritName: "Triphala Churna",
+    category: "Constipation & Detox",
+    summary: "Gentle non-habit-forming bowel regulator that promotes regular peristalsis and cleanses the intestinal tract.",
+    traditionalUses: [
+      "Relieves chronic or medication-induced constipation gently",
+      "Improves colon tone and bowel regularity"
+    ],
+    preparation: "Mix 1/2 tsp Triphala powder in 1 glass of warm water before bed.",
+    activeCompounds: ["Tannins", "Gallic acid", "Chebulinic acid"],
+    safetyRating: "Safe",
+    recommendedFor: ["Constipation", "Irregular Bowels", "Bloating"],
+    iconName: "Leaf"
+  },
+  {
+    id: "rem-isabgol",
+    name: "Psyllium Husk (Isabgol) Drink",
+    botanicalName: "Plantago ovata",
+    sanskritName: "Isabgol",
+    category: "Constipation & Fiber Care",
+    summary: "Soluble mucilaginous fiber that absorbs water, softens stool, and eases bowel evacuation smoothly.",
+    traditionalUses: [
+      "Provides gentle bulk to stool for effortless passage",
+      "Soothes inflamed hemorrhoidal or intestinal lining"
+    ],
+    preparation: "Mix 1-2 tsp Isabgol in a full glass of warm water or milk and drink immediately followed by water.",
+    activeCompounds: ["Soluble Hemicellulose Mucilage"],
+    safetyRating: "Safe",
+    recommendedFor: ["Constipation", "Hard Stool", "Bowel Irregularity"],
+    iconName: "Shield"
+  },
+  {
+    id: "rem-pomegranate-peel",
+    name: "Pomegranate Peel Decoction",
+    botanicalName: "Punica granatum",
+    sanskritName: "Dadima",
+    category: "Diarrhea & Gut Astringent",
+    summary: "Natural astringent herbal tea that firms loose stools, reduces intestinal hypermotility, and stops diarrhea.",
+    traditionalUses: [
+      "Stops acute loose motions and intestinal watery stooling",
+      "Restores gut flora and stops abdominal cramping"
+    ],
+    preparation: "Boil a piece of clean dry pomegranate peel in 1 cup water for 5 minutes. Strain and drink warm.",
+    activeCompounds: ["Punicalagins", "Ellagitannins"],
+    safetyRating: "Safe",
+    recommendedFor: ["Diarrhea", "Loose Stools", "Stomach Cramps"],
+    iconName: "Shield"
+  },
+  {
+    id: "rem-jeera-chaas",
+    name: "Roasted Cumin Buttermilk",
+    botanicalName: "Cuminum cyminum & Probiotic Whey",
+    sanskritName: "Takra / Jeera Chaas",
+    category: "Diarrhea & Gut Probiotic",
+    summary: "Traditional Ayurvedic probiotic drink containing digestive enzymes and friendly lactobacilli to restore gut microbiome.",
+    traditionalUses: [
+      "Replenishes gut flora lost due to antibiotic treatments",
+      "Firms loose stools and soothes hyperactive intestines"
+    ],
+    preparation: "Whisk 1 font cup fresh light curd/yogurt with 1 cup water, a pinch of roasted cumin powder, and rock salt.",
+    activeCompounds: ["Probiotic Lactobacilli", "Cuminaldehyde"],
+    safetyRating: "Safe",
+    recommendedFor: ["Diarrhea", "Loose Stools", "Antibiotic Stomach Upset"],
+    iconName: "Coffee"
   }
 ];
 

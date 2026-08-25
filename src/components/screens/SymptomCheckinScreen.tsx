@@ -35,7 +35,7 @@ export const SymptomCheckinScreen: React.FC = () => {
             Step 4 • Daily Check-in
           </span>
           <h1 className="text-2xl font-extrabold text-slate-900 mt-2">Log Daily Recovery Symptom</h1>
-          <p className="text-xs text-slate-500">Record how you feel today (Day 4 of Post-Op Recovery)</p>
+          <p className="text-xs text-slate-500">Record how you feel today</p>
         </div>
 
         {/* Form Card */}

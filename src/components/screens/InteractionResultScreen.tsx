@@ -16,19 +16,10 @@ import {
 } from 'lucide-react';
 
 export const InteractionResultScreen: React.FC = () => {
-  const { interactionResult, selectedRemedy, medications, setStep, addTimelineEvent } = useDemo();
+  const { interactionResult, selectedRemedy, medications, setStep } = useDemo();
 
   const handleFinishFlow = () => {
-    addTimelineEvent({
-      day: 4,
-      date: "Aug 24, 2026",
-      title: "Checked Ginger Tea Compatibility",
-      description: "Interaction check against Demo Medicine A & B completed (Safe with food). Logged into recovery record.",
-      category: "REMEDY",
-      status: "COMPLETED",
-      badgeColor: "emerald"
-    });
-    setStep('TIMELINE');
+    setStep('DASHBOARD');
   };
 
   return (
@@ -150,7 +141,7 @@ export const InteractionResultScreen: React.FC = () => {
             onClick={handleFinishFlow}
             className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-teal-600 hover:from-brand-700 hover:to-teal-700 text-white font-bold text-sm py-4 rounded-xl shadow-lg shadow-brand-500/20 transition"
           >
-            <span>Log Check & View Step 9: Recovery Timeline</span>
+            <span>Return to Dashboard</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

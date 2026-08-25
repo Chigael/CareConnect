@@ -23,7 +23,6 @@ export const MobileNav: React.FC = () => {
     { step: 'MEDICATIONS', label: 'Meds', icon: <Pill className="w-5 h-5" /> },
     { step: 'SAFETY_GATE', label: 'Safety', icon: <ShieldAlert className="w-5 h-5 text-amber-500" /> },
     { step: 'AYURBOOK', label: 'AyurBook', icon: <BookOpen className="w-5 h-5" /> },
-    { step: 'TIMELINE', label: 'Timeline', icon: <Clock className="w-5 h-5" /> },
     { step: 'PROFILE', label: 'Profile', icon: <User className="w-5 h-5" /> },
   ];
 

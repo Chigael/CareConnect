@@ -86,7 +86,7 @@ export const LandingScreen: React.FC = () => {
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-brand-700 bg-brand-100 px-2.5 py-1 rounded-md">
                 Fictional Judge Demo Patient
               </span>
-              <span className="text-xs text-slate-500 font-medium">Day 4 Recovery</span>
+              <span className="text-xs text-slate-500 font-medium">Demo Patient</span>
             </div>
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 font-bold text-lg flex items-center justify-center shrink-0">
@@ -111,18 +111,17 @@ export const LandingScreen: React.FC = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-6">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900">CareConnect End-to-End Journey</h2>
-            <p className="text-xs text-slate-500 mt-1">Prescription → Recovery → Symptom → Safety Gate → AyurBook → Interaction Matrix → Timeline</p>
+            <p className="text-xs text-slate-500 mt-1">Prescription → Dashboard → Symptom → Safety Gate → AyurBook → Interaction Matrix</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-7 gap-2 sm:gap-3 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-2 sm:gap-3 text-center">
             {[
               { title: "1. Prescriptions", desc: "Baseline loaded", color: "bg-teal-50 border-teal-200 text-teal-900" },
-              { title: "2. Recovery", desc: "Day 4/14 hub", color: "bg-slate-50 border-slate-200 text-slate-800" },
-              { title: "3. Symptom", desc: "Log mild nausea", color: "bg-amber-50 border-amber-200 text-amber-900" },
+              { title: "2. Dashboard", desc: "Central hub", color: "bg-slate-50 border-slate-200 text-slate-800" },
+              { title: "3. Symptom", desc: "Log symptom", color: "bg-amber-50 border-amber-200 text-amber-900" },
               { title: "4. Safety Gate", desc: "Red-flag check", color: "bg-rose-50 border-rose-200 text-rose-900" },
               { title: "5. AyurBook", desc: "Herbal explorer", color: "bg-emerald-50 border-emerald-200 text-emerald-900" },
               { title: "6. Check Matrix", desc: "Medicine × Remedy", color: "bg-brand-50 border-brand-200 text-brand-900" },
-              { title: "7. Timeline", desc: "Logged in record", color: "bg-indigo-50 border-indigo-200 text-indigo-900" },
             ].map((step, idx) => (
               <div key={idx} className={`p-3 rounded-xl border text-xs font-medium ${step.color} shadow-xs`}>
                 <div className="font-bold mb-1">{step.title}</div>

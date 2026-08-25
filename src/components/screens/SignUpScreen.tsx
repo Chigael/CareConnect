@@ -72,8 +72,8 @@ export const SignUpScreen: React.FC = () => {
       return;
     }
 
-    // Direct entry if verified immediately
-    setStep('POST_SIGNUP_SETUP');
+    // Direct entry if verified immediately -> language selection
+    setStep('LANGUAGE_SELECTION');
   };
 
   return (

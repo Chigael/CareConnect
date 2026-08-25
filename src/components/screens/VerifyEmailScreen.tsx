@@ -25,7 +25,7 @@ export const VerifyEmailScreen: React.FC = () => {
     setIsChecking(false);
 
     if (isVerified) {
-      setStep('POST_SIGNUP_SETUP');
+      setStep('LANGUAGE_SELECTION');
     } else {
       setErrorMessage("Your email address is not verified yet. Please check your email inbox and click the verification link sent by CareConnect.");
     }

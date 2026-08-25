@@ -30,7 +30,8 @@ interface SelectedFileInfo {
 }
 
 export const PrescriptionUploadScreen: React.FC = () => {
-  const { realUserMedicines, addUserMedicine, deleteUserMedicine, verifyAndSaveMedicines, setStep } = useDemo();
+  const { realUserMedicines, addUserMedicine, deleteUserMedicine, verifyAndSaveMedicines, treatedCondition, setTreatedCondition, setStep } = useDemo();
+  const [conditionInput, setConditionInput] = useState(treatedCondition || '');
 
   // Hidden native file input references
   const cameraInputRef = useRef<HTMLInputElement>(null);
@@ -203,6 +204,24 @@ export const PrescriptionUploadScreen: React.FC = () => {
           <p className="text-xs text-slate-500">
             Upload your discharge summary or prescription photo to extract active medications.
           </p>
+        </div>
+
+        {/* Treatment Condition Card */}
+        <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-soft space-y-2">
+          <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+            What are you currently being treated for? *
+          </label>
+          <input
+            type="text"
+            value={conditionInput}
+            onChange={(e) => {
+              setConditionInput(e.target.value);
+              setTreatedCondition(e.target.value);
+            }}
+            placeholder="e.g. Diabetes, Diarrhea, Post-Op Recovery..."
+            className="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 transition"
+          />
+          <p className="text-[11px] text-slate-400">Stored alongside your prescription data for safety & remedy checks.</p>
         </div>
 
         {/* Error / Validation Banner */}

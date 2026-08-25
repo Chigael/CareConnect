@@ -35,9 +35,6 @@ export const OnboardingScreen: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-bold text-slate-900">{patient.name}</h2>
-                <span className="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-0.5 rounded-full">
-                  Day {patient.recoveryDay} / {patient.totalRecoveryDays}
-                </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">
                 {patient.age} years old • {patient.gender} • Discharged {patient.dischargeDate}
@@ -50,21 +47,13 @@ export const OnboardingScreen: React.FC = () => {
           </div>
 
           {/* Details Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-5">
+          <div className="pt-5">
             <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
               <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
                 Attending Physician
               </span>
               <p className="text-xs font-bold text-slate-800">{patient.doctorName}</p>
               <p className="text-[11px] text-slate-500">{patient.hospitalName}</p>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
-                Recovery Timeline
-              </span>
-              <p className="text-xs font-bold text-slate-800">Day 4 of 14 (Sub-acute post-op phase)</p>
-              <p className="text-[11px] text-slate-500">Incision healing & dietary transition</p>
             </div>
           </div>
         </div>

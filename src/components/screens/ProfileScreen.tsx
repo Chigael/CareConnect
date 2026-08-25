@@ -13,12 +13,12 @@ import {
   ChevronRight, 
   FileText, 
   Lock,
-  HeartHandshake
+  Globe
 } from 'lucide-react';
 
 export const ProfileScreen: React.FC = () => {
   const { user, profile, signOut, isDemoMode } = useAuth();
-  const { patient, setStep, resetDemo } = useDemo();
+  const { patient, selectedLanguage, setStep, resetDemo } = useDemo();
 
   const handleLogout = async () => {
     await signOut();
@@ -97,7 +97,7 @@ export const ProfileScreen: React.FC = () => {
               </div>
               <div className="text-left">
                 <h4 className="font-bold text-slate-900 text-xs sm:text-sm">Recovery Information</h4>
-                <p className="text-[11px] text-slate-500">Post-Op Appendectomy Recovery • Day 4/14</p>
+                <p className="text-[11px] text-slate-500">Post-Op Appendectomy Recovery</p>
               </div>
             </div>
             <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
@@ -135,6 +135,28 @@ export const ProfileScreen: React.FC = () => {
               </div>
             </div>
             <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
+          </button>
+
+          {/* Language Preference */}
+          <button
+            onClick={() => setStep('LANGUAGE_SELECTION')}
+            className="w-full p-4 flex items-center justify-between hover:bg-slate-50 rounded-2xl transition group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center">
+                <Globe className="w-5 h-5" />
+              </div>
+              <div className="text-left">
+                <h4 className="font-bold text-slate-900 text-xs sm:text-sm">Language Preference</h4>
+                <p className="text-[11px] text-slate-500">Active language: <strong className="text-slate-800">{selectedLanguage}</strong></p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-bold text-brand-700 bg-brand-100 px-2.5 py-0.5 rounded-full">
+                {selectedLanguage}
+              </span>
+              <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
+            </div>
           </button>
 
           {/* Privacy & RLS */}
