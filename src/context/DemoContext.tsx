@@ -22,7 +22,6 @@ export type DemoStep =
   | 'SIGN_UP'                 // Create Account Screen
   | 'LOG_IN'                  // Log In Screen
   | 'FORGOT_PASSWORD'         // Password Reset Screen
-  | 'VERIFY_EMAIL'            // Email Verification Screen
   | 'LANGUAGE_SELECTION'      // Post-signup Language Selection
   | 'POST_SIGNUP_SETUP'       // Let's set up your recovery
   | 'MANUAL_MEDICINE_ENTRY'   // Enter Your Medicines (Form)
@@ -42,7 +41,6 @@ export const STEP_ORDER: DemoStep[] = [
   'SIGN_UP',
   'LOG_IN',
   'FORGOT_PASSWORD',
-  'VERIFY_EMAIL',
   'LANGUAGE_SELECTION',
   'POST_SIGNUP_SETUP',
   'MANUAL_MEDICINE_ENTRY',
@@ -63,7 +61,6 @@ export const STEP_LABELS: Record<DemoStep, { title: string; subtitle: string }> 
   SIGN_UP: { title: "Create Account", subtitle: "Sign Up for CareConnect" },
   LOG_IN: { title: "Welcome back", subtitle: "Log In to Your Account" },
   FORGOT_PASSWORD: { title: "Reset Password", subtitle: "Recover Your Account" },
-  VERIFY_EMAIL: { title: "Verify Email", subtitle: "Confirm Email Verification" },
   LANGUAGE_SELECTION: { title: "Language Selection", subtitle: "Choose Preferred Language" },
   POST_SIGNUP_SETUP: { title: "Setup Recovery", subtitle: "Upload or Add Medicines" },
   MANUAL_MEDICINE_ENTRY: { title: "Enter Medicines", subtitle: "Manual Prescription Entry" },
@@ -79,10 +76,38 @@ export const STEP_LABELS: Record<DemoStep, { title: string; subtitle: string }> 
   PROFILE: { title: "Profile & Settings", subtitle: "User Account & Privacy" }
 };
 
+export const STEP_TO_SLUG: Record<DemoStep, string> = {
+  LANDING: 'landing',
+  SIGN_UP: 'sign-up',
+  LOG_IN: 'log-in',
+  FORGOT_PASSWORD: 'forgot-password',
+  LANGUAGE_SELECTION: 'language-selection',
+  POST_SIGNUP_SETUP: 'post-signup-setup',
+  MANUAL_MEDICINE_ENTRY: 'manual-medicine-entry',
+  PRESCRIPTION_UPLOAD: 'prescription-upload',
+  ONBOARDING: 'onboarding',
+  MEDICATIONS: 'medications',
+  DASHBOARD: 'dashboard',
+  SYMPTOM_CHECKIN: 'symptom-checkin',
+  SAFETY_GATE: 'safety-gate',
+  AYURBOOK: 'ayurbook',
+  REMEDY_DETAIL: 'remedy-detail',
+  INTERACTION_RESULT: 'interaction-result',
+  PROFILE: 'profile'
+};
+
+export const SLUG_TO_STEP: Record<string, DemoStep> = Object.entries(STEP_TO_SLUG).reduce(
+  (acc, [step, slug]) => {
+    acc[slug] = step as DemoStep;
+    return acc;
+  },
+  {} as Record<string, DemoStep>
+);
+
 interface DemoContextType {
   currentStep: DemoStep;
   stepIndex: number;
-  setStep: (step: DemoStep) => void;
+  setStep: (step: DemoStep, options?: { replace?: boolean }) => void;
   nextStep: () => void;
   prevStep: () => void;
   selectedLanguage: string;
@@ -147,6 +172,53 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const stepIndex = STEP_ORDER.indexOf(currentStep);
 
+  // Sync currentStep with browser URL and history
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const getStepFromUrl = (): DemoStep | null => {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('step');
+      if (slug && SLUG_TO_STEP[slug]) {
+        return SLUG_TO_STEP[slug];
+      }
+      return null;
+    };
+
+    const initialStepFromUrl = getStepFromUrl();
+    const activeStep = initialStepFromUrl || 'LANDING';
+
+    if (activeStep !== currentStep) {
+      setCurrentStep(activeStep);
+    }
+
+    // Initialize history state
+    const url = new URL(window.location.href);
+    url.searchParams.set('step', STEP_TO_SLUG[activeStep]);
+    window.history.replaceState({ step: activeStep }, '', url.toString());
+
+    // Listen for browser back/forward buttons, trackpad gestures, mobile back gestures
+    const handlePopState = (event: PopStateEvent) => {
+      let targetStep: DemoStep | null = null;
+
+      if (event.state && event.state.step && STEP_ORDER.includes(event.state.step)) {
+        targetStep = event.state.step;
+      } else {
+        targetStep = getStepFromUrl();
+      }
+
+      if (targetStep) {
+        setCurrentStep(targetStep);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
   // Active medications: if Demo Mode -> return Ananya's demo medicines. If Real User -> return realUserMedicines (starts EMPTY).
   const medications = isDemoMode ? DEMO_MEDICATIONS : realUserMedicines;
 
@@ -164,10 +236,21 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     hospitalName: "CareConnect Health"
   };
 
-  const setStep = (step: DemoStep) => {
+  const setStep = (step: DemoStep, options?: { replace?: boolean }) => {
+    if (step === currentStep) return;
+
     setCurrentStep(step);
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const url = new URL(window.location.href);
+      url.searchParams.set('step', STEP_TO_SLUG[step]);
+
+      if (options?.replace) {
+        window.history.replaceState({ step }, '', url.toString());
+      } else {
+        window.history.pushState({ step }, '', url.toString());
+      }
     }
   };
 
@@ -272,7 +355,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setDemoSymptom(DEMO_SYMPTOM);
     setRealUserSymptom(EMPTY_SYMPTOM);
     setSelectedRemedy(AYURBOOK_REMEDIES[0]);
-    setCurrentStep('LANDING');
+    setStep('LANDING', { replace: true });
   };
 
   return (

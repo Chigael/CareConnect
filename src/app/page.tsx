@@ -7,7 +7,6 @@ import { LandingScreen } from '@/components/screens/LandingScreen';
 import { SignUpScreen } from '@/components/screens/SignUpScreen';
 import { LogInScreen } from '@/components/screens/LogInScreen';
 import { ForgotPasswordScreen } from '@/components/screens/ForgotPasswordScreen';
-import { VerifyEmailScreen } from '@/components/screens/VerifyEmailScreen';
 import { LanguageSelectionScreen } from '@/components/screens/LanguageSelectionScreen';
 import { PostSignUpSetupScreen } from '@/components/screens/PostSignUpSetupScreen';
 import { ManualMedicineEntryScreen } from '@/components/screens/ManualMedicineEntryScreen';
@@ -25,15 +24,14 @@ import { DosageReminderModal } from '@/components/modals/DosageReminderModal';
 
 export default function Home() {
   const { currentStep } = useDemo();
-  const { user, profile, isDemoMode, isLoading } = useAuth();
+  const { user, isDemoMode, isLoading } = useAuth();
 
   // Public unauthenticated screens
   const isPublicScreen = 
     currentStep === 'LANDING' || 
     currentStep === 'SIGN_UP' || 
     currentStep === 'LOG_IN' || 
-    currentStep === 'FORGOT_PASSWORD' ||
-    currentStep === 'VERIFY_EMAIL';
+    currentStep === 'FORGOT_PASSWORD';
 
   const renderCurrentScreen = () => {
     switch (currentStep) {
@@ -45,8 +43,6 @@ export default function Home() {
         return <LogInScreen />;
       case 'FORGOT_PASSWORD':
         return <ForgotPasswordScreen />;
-      case 'VERIFY_EMAIL':
-        return <VerifyEmailScreen />;
       case 'LANGUAGE_SELECTION':
         return <LanguageSelectionScreen />;
       case 'POST_SIGNUP_SETUP':
@@ -83,16 +79,6 @@ export default function Home() {
     return (
       <>
         <LogInScreen />
-        <DosageReminderModal />
-      </>
-    );
-  }
-
-  // Verification Guard
-  if (!isPublicScreen && user && profile && !profile.isEmailVerified && !isDemoMode && !isLoading) {
-    return (
-      <>
-        <VerifyEmailScreen />
         <DosageReminderModal />
       </>
     );

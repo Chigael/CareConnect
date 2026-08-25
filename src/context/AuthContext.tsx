@@ -22,8 +22,9 @@ interface AuthContextType {
   isSupabaseConfigured: boolean;
   unverifiedEmail: string | null;
   setUnverifiedEmail: (email: string | null) => void;
-  signUp: (fullName: string, email: string, password: string, age: number) => Promise<{ error: Error | null; isExistingUser?: boolean; isUnverified?: boolean }>;
-  signIn: (email: string, password: string) => Promise<{ error: Error | null; isUnverified?: boolean }>;
+  signUp: (fullName: string, email: string, password: string, age: number) => Promise<{ error: Error | null; isExistingUser?: boolean }>;
+  signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
+  signInWithGoogle: () => Promise<{ error: Error | null }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: Error | null }>;
   checkEmailVerified: () => Promise<boolean>;
@@ -54,7 +55,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(currentUser);
 
       if (currentUser) {
-        const isVerified = Boolean(currentUser.email_confirmed_at);
         const metadata = currentUser.user_metadata || {};
         const fullName = metadata.full_name || metadata.first_name || 'Recovery Patient';
         
@@ -64,20 +64,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           email: currentUser.email || '',
           age: metadata.age ? Number(metadata.age) : undefined,
           userId: currentUser.id,
-          isEmailVerified: isVerified
+          isEmailVerified: true
         });
       }
       setIsLoading(false);
     });
 
-    // Listen to auth state changes (e.g. email verification callback)
+    // Listen to auth state changes (e.g. Google OAuth redirect callback)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       const currentUser = session?.user ?? null;
       setUser(currentUser);
 
       if (currentUser) {
-        const isVerified = Boolean(currentUser.email_confirmed_at);
         const metadata = currentUser.user_metadata || {};
         const fullName = metadata.full_name || metadata.first_name || 'Recovery Patient';
 
@@ -87,7 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           email: currentUser.email || '',
           age: metadata.age ? Number(metadata.age) : undefined,
           userId: currentUser.id,
-          isEmailVerified: isVerified
+          isEmailVerified: true
         });
         setIsDemoMode(false);
       } else {
@@ -101,6 +100,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
+  const signInWithGoogle = async () => {
+    if (!isSupabaseConfigured) {
+      // Offline / Local Dev Mock Google Login
+      const mockUser = {
+        id: `user-google-${Date.now()}`,
+        email: 'google.user@example.com',
+        user_metadata: { full_name: 'Google User', first_name: 'Google' },
+        email_confirmed_at: new Date().toISOString(),
+        app_metadata: {},
+        aud: 'authenticated',
+        created_at: new Date().toISOString()
+      } as unknown as User;
+
+      setUser(mockUser);
+      setProfile({
+        fullName: 'Google User',
+        firstName: 'Google',
+        email: 'google.user@example.com',
+        userId: mockUser.id,
+        isEmailVerified: true
+      });
+      setIsDemoMode(false);
+      return { error: null };
+    }
+
+    const redirectUrl = typeof window !== 'undefined' ? `${window.location.origin}` : undefined;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: redirectUrl
+      }
+    });
+
+    return { error: error ? new Error(error.message) : null };
+  };
+
   const signUp = async (fullName: string, email: string, password: string, age: number) => {
     if (!isSupabaseConfigured) {
       // Offline / Local Dev Mock Signup
@@ -108,7 +144,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         id: `user-${Date.now()}`,
         email,
         user_metadata: { full_name: fullName, first_name: fullName.split(' ')[0], age },
-        email_confirmed_at: new Date().toISOString(), // Mock verified for local dev
+        email_confirmed_at: new Date().toISOString(),
         app_metadata: {},
         aud: 'authenticated',
         created_at: new Date().toISOString()
@@ -124,10 +160,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         isEmailVerified: true
       });
       setIsDemoMode(false);
-      return { error: null, isUnverified: false };
+      return { error: null };
     }
 
-    // Real Supabase Signup with Email Verification
     const redirectUrl = typeof window !== 'undefined' ? `${window.location.origin}` : undefined;
 
     const { data, error } = await supabase.auth.signUp({
@@ -151,19 +186,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return { error: new Error(error.message) };
     }
 
-    // Check duplicate user identity returned by Supabase
     if (data.user && data.user.identities && data.user.identities.length === 0) {
       return { error: null, isExistingUser: true };
     }
 
     if (data.user) {
-      setUnverifiedEmail(email);
-      // Do NOT log user into authenticated state if email is unverified
-      const isConfirmed = Boolean(data.user.email_confirmed_at);
-      if (!isConfirmed) {
-        return { error: null, isUnverified: true };
-      }
-
       setUser(data.user);
       setProfile({
         fullName,
@@ -214,17 +241,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     if (data.user) {
-      // Check if email is verified
-      const isConfirmed = Boolean(data.user.email_confirmed_at);
-      if (!isConfirmed) {
-        setUnverifiedEmail(email);
-        await supabase.auth.signOut(); // Ensure session is unconfirmed
-        setUser(null);
-        setSession(null);
-        setProfile(null);
-        return { error: null, isUnverified: true };
-      }
-
       const metadata = data.user.user_metadata || {};
       const fullName = metadata.full_name || metadata.first_name || 'Recovery Patient';
 
@@ -244,43 +260,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const checkEmailVerified = async (): Promise<boolean> => {
-    if (!isSupabaseConfigured) return true;
-
-    const { data: { session } } = await supabase.auth.getSession();
-    if (session?.user?.email_confirmed_at) {
-      const currentUser = session.user;
-      const metadata = currentUser.user_metadata || {};
-      const fullName = metadata.full_name || metadata.first_name || 'Recovery Patient';
-
-      setUser(currentUser);
-      setSession(session);
-      setProfile({
-        fullName,
-        firstName: fullName.split(' ')[0],
-        email: currentUser.email || '',
-        age: metadata.age ? Number(metadata.age) : undefined,
-        userId: currentUser.id,
-        isEmailVerified: true
-      });
-      setUnverifiedEmail(null);
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  const resendVerificationEmail = async (emailToResend: string) => {
-    if (!isSupabaseConfigured) {
-      return { error: null };
-    }
-    const { error } = await supabase.auth.resend({
-      type: 'signup',
-      email: emailToResend,
-      options: {
-        emailRedirectTo: typeof window !== 'undefined' ? `${window.location.origin}` : undefined
-      }
-    });
-
-    return { error: error ? new Error(error.message) : null };
+  const resendVerificationEmail = async (_emailToResend: string) => {
+    return { error: null };
   };
 
   const signOut = async () => {
@@ -321,6 +305,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUnverifiedEmail,
         signUp,
         signIn,
+        signInWithGoogle,
         signOut,
         resetPassword,
         checkEmailVerified,
