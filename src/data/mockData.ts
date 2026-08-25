@@ -73,57 +73,6 @@ export interface PatientProfile {
   hospitalName: string;
 }
 
-export const DEMO_PATIENT: PatientProfile = {
-  name: "Patient",
-  age: 30,
-  gender: "User",
-  condition: "General Care",
-  dischargeDate: "Today",
-  doctorName: "Attending Physician",
-  hospitalName: "CareConnect Health"
-};
-
-export const DEMO_MEDICATIONS: Medication[] = [
-  {
-    id: "med-a",
-    name: "Amoxicillin",
-    genericName: "Amoxicillin / Clavulanate 500mg",
-    category: "Antibiotic",
-    dosage: "1 capsule (500mg)",
-    frequency: "3 times daily after meals (8:00 AM, 2:00 PM, 8:00 PM)",
-    purpose: "Bacterial infection prevention",
-    instructions: "Finish the complete 7-day prescription course.",
-    status: "Active (Day 4/7)",
-    color: "teal",
-    nextDose: "8:00 PM Today",
-    pillsRemaining: 9
-  },
-  {
-    id: "med-b",
-    name: "Paracetamol",
-    genericName: "Paracetamol 500mg",
-    category: "Analgesic & Antipyretic",
-    dosage: "1 tablet (500mg)",
-    frequency: "Every 6 hours as needed",
-    purpose: "Pain management and fever control",
-    instructions: "Do not exceed 4 tablets (2000mg) in 24 hours.",
-    status: "Active (As needed)",
-    color: "indigo",
-    nextDose: "As Needed",
-    pillsRemaining: 14
-  }
-];
-
-export const DEMO_SYMPTOM: SymptomLog = {
-  id: "",
-  symptom: "",
-  severity: 0,
-  onsetTime: "",
-  notes: "",
-  timestamp: "",
-  isRedFlag: false
-};
-
 export const EMPTY_SYMPTOM: SymptomLog = {
   id: "",
   symptom: "",
@@ -149,7 +98,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     botanicalName: "Zingiber officinale",
     sanskritName: "Shunti / Adrak",
     category: "Digestive & Anti-Nausea",
-    summary: "Time-tested botanical infusion widely used to soothe stomach uneasiness, relieve post-operative nausea, and stimulate gentle digestion.",
+    summary: "Time-tested botanical infusion widely used to soothe stomach uneasiness, relieve nausea, and stimulate gentle digestion.",
     traditionalUses: [
       "Alleviates mild nausea and abdominal motion uneasiness",
       "Enhances digestion (Agni Deepana) without heavy stomach load",
@@ -350,117 +299,15 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
   }
 ];
 
-export const DEMO_INTERACTION_RESULT: {
-  remedy: Remedy;
-  overallStatus: 'SAFE_WITH_CAUTION' | 'COMPATIBLE' | 'CONTRAINDICATED';
-  riskScore: string;
-  details: InteractionDetail[];
-  summary: string;
-  actionableSteps: string[];
-} = {
-  remedy: AYURBOOK_REMEDIES[0], // Ginger Tea
-  overallStatus: 'SAFE_WITH_CAUTION',
-  riskScore: 'Low-to-Moderate Caution',
-  summary: 'Ginger Tea (Zingiber officinale) exhibits NO severe chemical blockage or adverse drug-drug cross-reactions with Demo Medicine A (Amoxicillin) or Demo Medicine B (Paracetamol). However, because antibiotics like Amoxicillin can irritate stomach linings in some patients, consuming ginger tea on an empty stomach might trigger mild acidity. Taking warm ginger tea 30 minutes AFTER food is recommended.',
-  details: [
-    {
-      medicineId: "med-a",
-      medicineName: "Demo Medicine A (Amoxicillin 500mg)",
-      remedyId: "rem-ginger",
-      remedyName: "Ginger Tea",
-      riskLevel: "MODERATE_CAUTION",
-      summary: "Mild potential for stomach lining stimulation when combined.",
-      mechanism: "Gingerols stimulate gastric juice secretion. When paired with oral antibiotics on an empty stomach, stomach acidity may temporarily spike.",
-      actionableAdvice: "Always take your Ginger Tea with or 30 minutes after your meal and antibiotic dose. Do not drink boiling hot."
-    },
-    {
-      medicineId: "med-b",
-      medicineName: "Demo Medicine B (Paracetamol 500mg)",
-      remedyId: "rem-ginger",
-      remedyName: "Ginger Tea",
-      riskLevel: "LOW_RISK",
-      summary: "No metabolic interference detected in standard dietary amounts.",
-      mechanism: "Paracetamol is metabolized primarily via hepatic glucuronidation; mild dietary ginger consumption does not inhibit CYP450 enzymes at therapeutic doses.",
-      actionableAdvice: "Compatible. Maintain normal hydration."
-    }
-  ],
-  actionableSteps: [
-    "Sip warm (not hot) ginger tea 30 minutes after light meals.",
-    "Do not consume concentrated ginger supplements/extract capsules; stick to light culinary tea.",
-    "Maintain a gap of 45-60 minutes between antibiotic intake and herbal tea for optimal stomach absorption.",
-    "Log your response in the Recovery Timeline after 2 hours."
-  ]
-};
-
 export const INITIAL_TIMELINE: TimelineEvent[] = [
   {
     id: "tl-1",
     day: 1,
-    date: "Aug 20, 2026",
-    title: "Hospital Discharge & Recovery Plan Initialized",
-    description: "Discharged following successful laparoscopic appendectomy. Prescribed Demo Medicine A (Antibiotic) & Demo Medicine B (Pain Reliever).",
+    date: "Today",
+    title: "Account Created & Care Plan Initialized",
+    description: "Welcome to CareConnect. Your personalized recovery plan and medication schedule are active.",
     category: "DISCHARGE",
     status: "COMPLETED",
     badgeColor: "emerald"
-  },
-  {
-    id: "tl-2",
-    day: 2,
-    date: "Aug 21, 2026",
-    title: "Post-Op Home Vital Check",
-    description: "Temperature 98.4°F, blood pressure normal. Walking 10 minutes around living room.",
-    category: "MILESTONE",
-    status: "COMPLETED",
-    badgeColor: "teal"
-  },
-  {
-    id: "tl-3",
-    day: 3,
-    date: "Aug 22, 2026",
-    title: "Surgical Dressing & Pain Check",
-    description: "Incision clean and dry. Pain reduced from 6/10 to 3/10. Demo Medicine B taken once.",
-    category: "MEDICATION",
-    status: "COMPLETED",
-    badgeColor: "indigo"
-  },
-  {
-    id: "tl-4",
-    day: 4,
-    date: "Aug 24, 2026 (TODAY)",
-    title: "Symptom Check-in & AyurBook Safety Check",
-    description: "Logged 'Mild Nausea' post-lunch. Passed Red-Flag Safety Gate. Checked Ginger Tea against Demo Medicine A & B (Cleared with mild caution).",
-    category: "REMEDY",
-    status: "CURRENT",
-    badgeColor: "amber"
-  },
-  {
-    id: "tl-5",
-    day: 5,
-    date: "Aug 25, 2026",
-    title: "Post-Op Tele-Check Routine",
-    description: "Follow-up check-in with CareConnect nurse assistant.",
-    category: "MILESTONE",
-    status: "UPCOMING",
-    badgeColor: "slate"
-  },
-  {
-    id: "tl-6",
-    day: 7,
-    date: "Aug 27, 2026",
-    title: "Antibiotic Course Completion",
-    description: "Final dose of Demo Medicine A (Amoxicillin) expected.",
-    category: "MEDICATION",
-    status: "UPCOMING",
-    badgeColor: "slate"
-  },
-  {
-    id: "tl-7",
-    day: 14,
-    date: "Sep 03, 2026",
-    title: "Final Doctor Consultation & Recovery Clearance",
-    description: "Post-operative follow-up clinic visit with Dr. Vikram Malhotra.",
-    category: "MILESTONE",
-    status: "UPCOMING",
-    badgeColor: "slate"
   }
 ];

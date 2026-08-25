@@ -17,8 +17,8 @@ import {
 } from 'lucide-react';
 
 export const ProfileScreen: React.FC = () => {
-  const { user, profile, signOut, isDemoMode } = useAuth();
-  const { patient, selectedLanguage, setStep, resetDemo } = useDemo();
+  const { user, profile, signOut } = useAuth();
+  const { patient, medications, selectedLanguage, setStep, resetDemo } = useDemo();
 
   const handleLogout = async () => {
     await signOut();
@@ -26,11 +26,11 @@ export const ProfileScreen: React.FC = () => {
     setStep('LANDING');
   };
 
-  const displayName = profile?.firstName || user?.user_metadata?.first_name || (isDemoMode ? patient.name : 'CareConnect User');
+  const displayName = profile?.firstName || user?.user_metadata?.first_name || patient.name || 'CareConnect User';
   const displayEmail = profile?.email || user?.email || 'user@careconnect.health';
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 pb-24">
+    <div className="min-h-screen bg-slate-50 py-8 px-4 pb-28">
       <div className="max-w-2xl mx-auto space-y-6">
 
         {/* Header Title */}
@@ -51,11 +51,6 @@ export const ProfileScreen: React.FC = () => {
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-bold text-slate-900">{displayName}</h2>
-                {isDemoMode && (
-                  <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md border border-amber-200">
-                    Demo Mode
-                  </span>
-                )}
               </div>
               <p className="text-xs text-slate-500 mt-0.5 flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-slate-400" />
@@ -63,7 +58,7 @@ export const ProfileScreen: React.FC = () => {
               </p>
               <div className="mt-1 flex items-center gap-1 text-[11px] text-emerald-700 font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Authenticated via Supabase Auth</span>
+                <span>Authenticated Account</span>
               </div>
             </div>
           </div>
@@ -73,7 +68,7 @@ export const ProfileScreen: React.FC = () => {
             <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
               <span className="text-[10px] font-semibold uppercase text-slate-400 block mb-1">User ID</span>
               <span className="font-mono text-slate-700 font-bold truncate block">
-                {user?.id ? user.id.slice(0, 14) + '...' : 'demo-user-id'}
+                {user?.id ? user.id.slice(0, 14) + '...' : 'user-id-active'}
               </span>
             </div>
             <div className="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
@@ -114,7 +109,7 @@ export const ProfileScreen: React.FC = () => {
               </div>
               <div className="text-left">
                 <h4 className="font-bold text-slate-900 text-xs sm:text-sm">My Medicines</h4>
-                <p className="text-[11px] text-slate-500">2 Active Prescriptions (Amoxicillin, Paracetamol)</p>
+                <p className="text-[11px] text-slate-500">{medications.length} Active Prescription{medications.length === 1 ? '' : 's'}</p>
               </div>
             </div>
             <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />

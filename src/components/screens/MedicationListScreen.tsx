@@ -7,7 +7,6 @@ import { Pill, Clock, ArrowRight, ShieldCheck, Info, Camera, PlusCircle, AlertCi
 export const MedicationListScreen: React.FC = () => {
   const { 
     medications, 
-    isDemoMode, 
     updateMedicationReminderTime, 
     setActiveReminderMedication, 
     markDoseAsTaken,
@@ -16,7 +15,7 @@ export const MedicationListScreen: React.FC = () => {
   } = useDemo();
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 pb-24">
+    <div className="min-h-screen bg-slate-50 py-8 px-4 pb-28">
       <div className="max-w-3xl mx-auto space-y-6">
 
         {/* Header */}
@@ -24,19 +23,10 @@ export const MedicationListScreen: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-2.5 py-0.5 rounded-md">
-                Step 2 • Active Prescriptions & Reminders
+                Active Prescriptions & Reminders
               </span>
-              {isDemoMode ? (
-                <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md border border-amber-200">
-                  DEMO MODE — Fictional patient
-                </span>
-              ) : (
-                <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md border border-emerald-200">
-                  Authenticated Real User
-                </span>
-              )}
             </div>
-            <h1 className="text-2xl font-extrabold text-slate-900">Current Hospital Discharge Medications</h1>
+            <h1 className="text-2xl font-extrabold text-slate-900">Current Prescriptions</h1>
             <p className="text-xs text-slate-500">
               {medications.length} active medication{medications.length === 1 ? '' : 's'} logged • Set custom dosage alarm times
             </p>

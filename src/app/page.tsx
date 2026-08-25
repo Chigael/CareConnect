@@ -20,11 +20,12 @@ import { AyurBookScreen } from '@/components/screens/AyurBookScreen';
 import { RemedyDetailScreen } from '@/components/screens/RemedyDetailScreen';
 import { InteractionResultScreen } from '@/components/screens/InteractionResultScreen';
 import { ProfileScreen } from '@/components/screens/ProfileScreen';
+import { TimelineScreen } from '@/components/screens/TimelineScreen';
 import { DosageReminderModal } from '@/components/modals/DosageReminderModal';
 
 export default function Home() {
   const { currentStep } = useDemo();
-  const { user, isDemoMode, isLoading } = useAuth();
+  const { user, isLoading } = useAuth();
 
   // Public unauthenticated screens
   const isPublicScreen = 
@@ -67,6 +68,8 @@ export default function Home() {
         return <RemedyDetailScreen />;
       case 'INTERACTION_RESULT':
         return <InteractionResultScreen />;
+      case 'TIMELINE':
+        return <TimelineScreen />;
       case 'PROFILE':
         return <ProfileScreen />;
       default:
@@ -75,7 +78,7 @@ export default function Home() {
   };
 
   // Protected Route Guard
-  if (!isPublicScreen && !user && !isDemoMode && !isLoading) {
+  if (!isPublicScreen && !user && !isLoading) {
     return (
       <>
         <LogInScreen />

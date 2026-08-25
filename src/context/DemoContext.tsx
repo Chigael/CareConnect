@@ -8,12 +8,8 @@ import {
   SymptomLog,
   Remedy,
   TimelineEvent,
-  DEMO_PATIENT,
-  DEMO_MEDICATIONS,
-  DEMO_SYMPTOM,
   EMPTY_SYMPTOM,
   AYURBOOK_REMEDIES,
-  DEMO_INTERACTION_RESULT,
   INITIAL_TIMELINE
 } from '@/data/mockData';
 
@@ -23,17 +19,18 @@ export type DemoStep =
   | 'LOG_IN'                  // Log In Screen
   | 'FORGOT_PASSWORD'         // Password Reset Screen
   | 'LANGUAGE_SELECTION'      // Post-signup Language Selection
-  | 'POST_SIGNUP_SETUP'       // Let's set up your recovery
+  | 'POST_SIGNUP_SETUP'       // Setup Recovery
   | 'MANUAL_MEDICINE_ENTRY'   // Enter Your Medicines (Form)
   | 'PRESCRIPTION_UPLOAD'     // Add Prescription (Upload & Scan)
   | 'ONBOARDING'              // Patient Overview
   | 'MEDICATIONS'             // Active Medicines
-  | 'DASHBOARD'               // Recovery Hub
+  | 'DASHBOARD'               // Recovery Hub (Home)
   | 'SYMPTOM_CHECKIN'         // Symptom Check-in
   | 'SAFETY_GATE'             // Red-Flag Safety Gate
-  | 'AYURBOOK'                // AyurBook Explorer
+  | 'AYURBOOK'                // AyurBook & Safety Checker
   | 'REMEDY_DETAIL'           // Remedy Detail
   | 'INTERACTION_RESULT'      // Medicine x Remedy Check
+  | 'TIMELINE'                // Recovery Timeline
   | 'PROFILE';                // Profile & Settings
 
 export const STEP_ORDER: DemoStep[] = [
@@ -53,26 +50,28 @@ export const STEP_ORDER: DemoStep[] = [
   'AYURBOOK',
   'REMEDY_DETAIL',
   'INTERACTION_RESULT',
+  'TIMELINE',
   'PROFILE'
 ];
 
 export const STEP_LABELS: Record<DemoStep, { title: string; subtitle: string }> = {
   LANDING: { title: "Welcome", subtitle: "CareConnect Safety Companion" },
   SIGN_UP: { title: "Create Account", subtitle: "Sign Up for CareConnect" },
-  LOG_IN: { title: "Welcome back", subtitle: "Log In to Your Account" },
+  LOG_IN: { title: "Welcome Back", subtitle: "Log In to Your Account" },
   FORGOT_PASSWORD: { title: "Reset Password", subtitle: "Recover Your Account" },
   LANGUAGE_SELECTION: { title: "Language Selection", subtitle: "Choose Preferred Language" },
   POST_SIGNUP_SETUP: { title: "Setup Recovery", subtitle: "Upload or Add Medicines" },
   MANUAL_MEDICINE_ENTRY: { title: "Enter Medicines", subtitle: "Manual Prescription Entry" },
   PRESCRIPTION_UPLOAD: { title: "Scan Prescription", subtitle: "Upload & Extract Medicines" },
   ONBOARDING: { title: "Patient Overview", subtitle: "Recovery Profile" },
-  MEDICATIONS: { title: "Active Medicines", subtitle: "Prescriptions & Dosage" },
-  DASHBOARD: { title: "Recovery Hub", subtitle: "CareConnect Hub" },
+  MEDICATIONS: { title: "Active Medicines", subtitle: "Prescriptions & Dosage Schedule" },
+  DASHBOARD: { title: "Care Dashboard", subtitle: "CareConnect Home" },
   SYMPTOM_CHECKIN: { title: "Symptom Check-in", subtitle: "Log How You Feel" },
   SAFETY_GATE: { title: "Red-Flag Safety Gate", subtitle: "Emergency Triage Check" },
-  AYURBOOK: { title: "AyurBook Explorer", subtitle: "Herbal Remedy Library" },
-  REMEDY_DETAIL: { title: "Remedy Detail", subtitle: "Ginger Tea Profile" },
+  AYURBOOK: { title: "AyurBook Library", subtitle: "Herbal Remedies & Safety Checks" },
+  REMEDY_DETAIL: { title: "Remedy Detail", subtitle: "Herbal Remedy Profile" },
   INTERACTION_RESULT: { title: "Interaction Matrix", subtitle: "Medicine × Remedy Check" },
+  TIMELINE: { title: "Recovery Timeline", subtitle: "Care History & Milestones" },
   PROFILE: { title: "Profile & Settings", subtitle: "User Account & Privacy" }
 };
 
@@ -93,6 +92,7 @@ export const STEP_TO_SLUG: Record<DemoStep, string> = {
   AYURBOOK: 'ayurbook',
   REMEDY_DETAIL: 'remedy-detail',
   INTERACTION_RESULT: 'interaction-result',
+  TIMELINE: 'timeline',
   PROFILE: 'profile'
 };
 
@@ -135,10 +135,9 @@ interface DemoContextType {
   ayurbookLockUntil: number | null;
   submitRemedyConfirmation: (remedyId: string, isDoing: boolean, response: string, notes?: string) => void;
   unlockAyurbook: () => void;
-  interactionResult: typeof DEMO_INTERACTION_RESULT;
+  timelineEvents: TimelineEvent[];
+  addTimelineEvent: (event: Omit<TimelineEvent, 'id'>) => void;
   resetDemo: () => void;
-  isDemoMode: boolean;
-  setIsDemoMode: (val: boolean) => void;
 }
 
 const DemoContext = createContext<DemoContextType | undefined>(undefined);
@@ -146,7 +145,6 @@ const DemoContext = createContext<DemoContextType | undefined>(undefined);
 export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { profile } = useAuth();
   const [currentStep, setCurrentStep] = useState<DemoStep>('LANDING');
-  const [isDemoMode, setIsDemoMode] = useState(false);
 
   // Selected Language preference - defaults to English
   const [selectedLanguage, setSelectedLanguage] = useState<string>('English');
@@ -154,21 +152,18 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Treatment condition (e.g. Diabetes, Diarrhea, Post-Op Recovery)
   const [treatedCondition, setTreatedCondition] = useState<string>('');
 
-  // Real user medications list - starts completely EMPTY!
+  // Real user medications list
   const [realUserMedicines, setRealUserMedicines] = useState<Medication[]>([]);
 
   // Active triggering reminder medication for Modal
   const [activeReminderMedication, setActiveReminderMedication] = useState<Medication | null>(null);
 
-  // Demo vs Real User Symptoms
-  const [demoSymptom, setDemoSymptom] = useState<SymptomLog>(DEMO_SYMPTOM);
+  // User Logged Symptoms
   const [realUserSymptom, setRealUserSymptom] = useState<SymptomLog>(EMPTY_SYMPTOM);
-
-  // Active symptom: return real user logged symptom if logged, otherwise demo symptom if in demo mode
-  const symptom = realUserSymptom.symptom ? realUserSymptom : (isDemoMode ? demoSymptom : EMPTY_SYMPTOM);
+  const symptom = realUserSymptom;
 
   const [selectedRemedy, setSelectedRemedy] = useState<Remedy>(AYURBOOK_REMEDIES[0]);
-  const [interactionResult] = useState(DEMO_INTERACTION_RESULT);
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>(INITIAL_TIMELINE);
 
   const stepIndex = STEP_ORDER.indexOf(currentStep);
 
@@ -219,18 +214,17 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
-  // Active medications: if Demo Mode -> return sample medicines. If Real User -> return realUserMedicines (starts EMPTY).
-  const medications = isDemoMode && realUserMedicines.length === 0 ? DEMO_MEDICATIONS : realUserMedicines;
+  const medications = realUserMedicines;
 
   // Missed medications list (status === 'SKIPPED')
   const missedMedications = medications.filter(m => m.reminderStatus === 'SKIPPED');
 
   // Active patient profile: Real User Profile or generic fallback
   const patient: PatientProfile = {
-    name: profile?.fullName || profile?.firstName || (isDemoMode ? "Demo Patient" : "Patient"),
+    name: profile?.fullName || profile?.firstName || "Patient",
     age: profile?.age || 30,
     gender: "User",
-    condition: treatedCondition.trim() || "General Care",
+    condition: treatedCondition.trim() || "General Recovery",
     dischargeDate: "Today",
     doctorName: "Attending Physician",
     hospitalName: "CareConnect Health"
@@ -266,6 +260,14 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const addTimelineEvent = (eventData: Omit<TimelineEvent, 'id'>) => {
+    const newEvent: TimelineEvent = {
+      ...eventData,
+      id: `tl-${Date.now()}`
+    };
+    setTimelineEvents(prev => [newEvent, ...prev]);
+  };
+
   const addUserMedicine = (newMedData: Omit<Medication, 'id'>) => {
     const id = `user-med-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
     const newMed: Medication = {
@@ -275,6 +277,16 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       reminderStatus: 'PENDING'
     };
     setRealUserMedicines(prev => [...prev, newMed]);
+
+    addTimelineEvent({
+      day: 1,
+      date: 'Today',
+      title: `Added Medication: ${newMedData.name}`,
+      description: `Prescribed dosage: ${newMedData.dosage || 'Standard'} (${newMedData.frequency || 'Daily'})`,
+      category: 'MEDICATION',
+      status: 'COMPLETED',
+      badgeColor: 'teal'
+    });
   };
 
   const deleteUserMedicine = (id: string) => {
@@ -300,6 +312,19 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
       return m;
     }));
+
+    const med = realUserMedicines.find(m => m.id === id);
+    if (med) {
+      addTimelineEvent({
+        day: 1,
+        date: 'Today',
+        title: `Dose ${status === 'TAKEN' ? 'Taken' : status === 'SKIPPED' ? 'Skipped' : 'Snoozed'}: ${med.name}`,
+        description: `Scheduled for ${med.reminderTime || 'Today'}`,
+        category: 'MEDICATION',
+        status: status === 'TAKEN' ? 'COMPLETED' : 'CURRENT',
+        badgeColor: status === 'TAKEN' ? 'emerald' : status === 'SKIPPED' ? 'rose' : 'amber'
+      });
+    }
     setActiveReminderMedication(null);
   };
 
@@ -312,7 +337,6 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const verifyAndSaveMedicines = () => {
-    // Navigate to Recovery Dashboard after verifying
     setStep('DASHBOARD');
   };
 
@@ -327,20 +351,35 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
       isRedFlag: false
     };
 
-    if (isDemoMode) {
-      setDemoSymptom(updatedSymptom);
-    } else {
-      setRealUserSymptom(updatedSymptom);
-    }
+    setRealUserSymptom(updatedSymptom);
+
+    addTimelineEvent({
+      day: 1,
+      date: 'Today',
+      title: `Logged Symptom: ${symptomName}`,
+      description: `Severity: ${severity}/10. ${notes || ''}`,
+      category: 'SYMPTOM',
+      status: 'COMPLETED',
+      badgeColor: 'amber'
+    });
   };
 
   // AyurBook 25-minute Lock / Cooldown state
   const [ayurbookLockUntil, setAyurbookLockUntil] = useState<number | null>(null);
 
   const submitRemedyConfirmation = (remedyId: string, isDoing: boolean, response: string, notes?: string) => {
-    // SECTION 8: Lock/freeze AyurBook search feature for 25 minutes (25 * 60 * 1000 ms)
     const lockExpiry = Date.now() + 25 * 60 * 1000;
     setAyurbookLockUntil(lockExpiry);
+
+    addTimelineEvent({
+      day: 1,
+      date: 'Today',
+      title: `Checked Remedy: ${selectedRemedy.name}`,
+      description: `User action: ${response}`,
+      category: 'REMEDY',
+      status: 'COMPLETED',
+      badgeColor: 'indigo'
+    });
   };
 
   const unlockAyurbook = () => {
@@ -348,13 +387,12 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const resetDemo = () => {
-    setIsDemoMode(false);
     setRealUserMedicines([]);
     setTreatedCondition('');
     setAyurbookLockUntil(null);
-    setDemoSymptom(DEMO_SYMPTOM);
     setRealUserSymptom(EMPTY_SYMPTOM);
     setSelectedRemedy(AYURBOOK_REMEDIES[0]);
+    setTimelineEvents(INITIAL_TIMELINE);
     setStep('LANDING', { replace: true });
   };
 
@@ -391,10 +429,9 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
         ayurbookLockUntil,
         submitRemedyConfirmation,
         unlockAyurbook,
-        interactionResult,
-        resetDemo,
-        isDemoMode,
-        setIsDemoMode
+        timelineEvents,
+        addTimelineEvent,
+        resetDemo
       }}
     >
       {children}

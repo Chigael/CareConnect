@@ -5,7 +5,6 @@ import { DemoProvider } from '@/context/DemoContext';
 import { Header } from '@/components/layout/Header';
 import { MobileNav } from '@/components/layout/MobileNav';
 import { DisclaimerBanner } from '@/components/common/DisclaimerBanner';
-import { FlowStepper } from '@/components/common/FlowStepper';
 
 export const metadata: Metadata = {
   title: 'CareConnect | Post-Discharge Safety & Recovery Companion',
@@ -30,7 +29,6 @@ export default function RootLayout({
           <DemoProvider>
             <DisclaimerBanner />
             <Header />
-            <FlowStepper />
             <main className="flex-1">
               {children}
             </main>

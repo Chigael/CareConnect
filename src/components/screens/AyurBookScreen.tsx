@@ -16,7 +16,9 @@ export const AyurBookScreen: React.FC = () => {
     ayurbookLockUntil,
     unlockAyurbook
   } = useDemo();
+  const [activeTab, setActiveTab] = useState<'REMEDIES' | 'SAFETY_CHECK'>('REMEDIES');
   const [symptomSearch, setSymptomSearch] = useState('');
+  const [selectedRemedyForCheck, setSelectedRemedyForCheck] = useState<string>(AYURBOOK_REMEDIES[0].id);
 
   const quickSymptoms = [
     'Nausea',
@@ -111,24 +113,111 @@ export const AyurBookScreen: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 pb-24">
+    <div className="min-h-screen bg-slate-50 py-8 px-4 pb-28">
       <div className="max-w-3xl mx-auto space-y-6">
 
         {/* Header */}
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-md">
-              AyurBook • Symptom Remedy Finder
+              AyurBook • Remedy & Safety Hub
             </span>
-            <span className="text-xs text-emerald-700 font-medium">Safety-Screened</span>
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900">AyurBook Search by Symptom</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900">AyurBook Remedies & Safety</h1>
           <p className="text-xs text-slate-500">
-            Search remedies for symptoms safe alongside your logged condition (<em>{activeConditionName}</em>) & prescriptions.
+            Explore safe herbal remedies and check potential interaction risks against your active prescriptions.
           </p>
         </div>
 
-        {/* SECTION 7: Symptom Search Bar */}
+        {/* Sub-Tab Segmented Control */}
+        <div className="bg-slate-200/80 p-1 rounded-2xl flex items-center gap-1 border border-slate-300/50">
+          <button
+            onClick={() => setActiveTab('REMEDIES')}
+            className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center gap-2 transition ${
+              activeTab === 'REMEDIES'
+                ? 'bg-white text-slate-900 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <BookOpen className="w-4 h-4 text-emerald-600" />
+            <span>🌿 Remedy Finder</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('SAFETY_CHECK')}
+            className={`flex-1 py-2.5 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center gap-2 transition ${
+              activeTab === 'SAFETY_CHECK'
+                ? 'bg-white text-slate-900 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <ShieldCheck className="w-4 h-4 text-brand-600" />
+            <span>🛡️ Safety & Interaction Checker</span>
+          </button>
+        </div>
+
+        {activeTab === 'SAFETY_CHECK' ? (
+          /* Folded Safety & Interaction Checker UI */
+          <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-soft space-y-6">
+            <div className="space-y-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-2.5 py-1 rounded-md">
+                Safety Screening Tool
+              </span>
+              <h2 className="text-lg font-extrabold text-slate-900">Medicine × Remedy Interaction Checker</h2>
+              <p className="text-xs text-slate-500">
+                Select an Ayurvedic remedy to evaluate cross-reaction risks against your {medications.length} active prescription{medications.length === 1 ? '' : 's'}.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Select Herbal Remedy to Check:
+                </label>
+                <select
+                  value={selectedRemedyForCheck}
+                  onChange={(e) => setSelectedRemedyForCheck(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-bold text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                >
+                  {AYURBOOK_REMEDIES.map((r) => (
+                    <option key={r.id} value={r.id}>
+                      {r.name} ({r.sanskritName}) — {r.category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Active Prescriptions Summary */}
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+                <span className="text-[10px] font-bold uppercase text-slate-400 block">Screening Against Prescriptions:</span>
+                {medications.length === 0 ? (
+                  <p className="text-xs text-slate-500 italic">No active prescriptions logged yet. Safety score: Clear (No drug interactions).</p>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    {medications.map((m) => (
+                      <span key={m.id} className="text-xs font-bold text-brand-800 bg-brand-50 px-2.5 py-1 rounded-lg border border-brand-200">
+                        💊 {m.name} ({m.genericName || m.dosage})
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button
+                onClick={() => {
+                  const targetRemedy = AYURBOOK_REMEDIES.find(r => r.id === selectedRemedyForCheck) || AYURBOOK_REMEDIES[0];
+                  setSelectedRemedy(targetRemedy);
+                  setStep('INTERACTION_RESULT');
+                }}
+                className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-teal-600 hover:from-brand-700 hover:to-teal-700 text-white font-extrabold text-xs py-3.5 px-4 rounded-xl shadow-md transition"
+              >
+                <ShieldCheck className="w-4 h-4" />
+                <span>Run Interaction & Safety Check</span>
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* SECTION 7: Symptom Search Bar & Remedy Finder */
+          <>
         <div className="bg-white rounded-3xl p-5 border border-slate-200 shadow-soft space-y-3">
           <label className="block text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
             <Search className="w-4 h-4 text-emerald-600" />
@@ -258,6 +347,8 @@ export const AyurBookScreen: React.FC = () => {
               </div>
             ))}
           </div>
+        )}
+        </>
         )}
 
       </div>

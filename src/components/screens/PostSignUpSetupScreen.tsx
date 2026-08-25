@@ -6,14 +6,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Camera, FileUp, PlusCircle, ArrowRight, ShieldCheck, Pill, Sparkles } from 'lucide-react';
 
 export const PostSignUpSetupScreen: React.FC = () => {
-  const { setStep, setIsDemoMode } = useDemo();
-  const { enableDemoMode } = useAuth();
-
-  const handleStartDemo = () => {
-    setIsDemoMode(true);
-    enableDemoMode();
-    setStep('DASHBOARD');
-  };
+  const { setStep } = useDemo();
 
   return (
     <div className="min-h-screen bg-slate-50 py-10 px-4 flex items-center justify-center">
@@ -22,7 +15,7 @@ export const PostSignUpSetupScreen: React.FC = () => {
         {/* Header */}
         <div className="text-center space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">
-            Account Verified & Ready
+            Account Ready
           </span>
           <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
             Choose Your CareConnect Setup Path
@@ -32,7 +25,7 @@ export const PostSignUpSetupScreen: React.FC = () => {
           </p>
         </div>
 
-        {/* 4 Onboarding Options Grid */}
+        {/* 3 Setup Options Grid */}
         <div className="space-y-4">
           
           {/* Option 1: Take Photo */}
@@ -119,35 +112,6 @@ export const PostSignUpSetupScreen: React.FC = () => {
             >
               <Pill className="w-4 h-4" />
               <span>Enter Medicines Manually</span>
-            </button>
-          </div>
-
-          {/* Option 4: Try Demo Version */}
-          <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-5 rounded-3xl border-2 border-amber-300 shadow-soft space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <span className="w-7 h-7 rounded-xl bg-amber-200 text-amber-900 flex items-center justify-center font-extrabold text-xs">
-                  4
-                </span>
-                <h3 className="font-extrabold text-amber-950 text-sm">
-                  ✨ Try Demo Version
-                </h3>
-              </div>
-              <span className="text-[10px] font-bold text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded-md">
-                Sample Patient Data
-              </span>
-            </div>
-
-            <p className="text-xs text-slate-700 leading-relaxed">
-              Explore CareConnect using pre-filled sample prescription data. Your personal account data remains separate.
-            </p>
-
-            <button
-              onClick={handleStartDemo}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-xs py-3.5 px-4 rounded-xl shadow-md transition"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>Explore Sample Demo Experience</span>
             </button>
           </div>
 

@@ -3,11 +3,10 @@
 import React from 'react';
 import { useDemo, DemoStep } from '@/context/DemoContext';
 import { 
-  Activity, 
+  Home, 
   Pill, 
   BookOpen, 
-  ShieldCheck, 
-  User
+  Clock 
 } from 'lucide-react';
 
 export const MobileNav: React.FC = () => {
@@ -17,21 +16,40 @@ export const MobileNav: React.FC = () => {
     return null;
   }
 
-  const navItems: { step: DemoStep; label: string; icon: React.ReactNode }[] = [
-    { step: 'DASHBOARD', label: 'Home', icon: <Activity className="w-5 h-5" /> },
-    { step: 'MEDICATIONS', label: 'Meds', icon: <Pill className="w-5 h-5" /> },
-    { step: 'AYURBOOK', label: 'AyurBook', icon: <BookOpen className="w-5 h-5" /> },
-    { step: 'SAFETY_GATE', label: 'Safety', icon: <ShieldCheck className="w-5 h-5" /> },
-    { step: 'PROFILE', label: 'Profile', icon: <User className="w-5 h-5" /> },
+  const navItems: { step: DemoStep; label: string; icon: React.ReactNode; matchSteps: DemoStep[] }[] = [
+    { 
+      step: 'DASHBOARD', 
+      label: 'Home', 
+      icon: <Home className="w-5 h-5" />,
+      matchSteps: ['DASHBOARD', 'SYMPTOM_CHECKIN'] 
+    },
+    { 
+      step: 'MEDICATIONS', 
+      label: 'Medicines', 
+      icon: <Pill className="w-5 h-5" />,
+      matchSteps: ['MEDICATIONS', 'MANUAL_MEDICINE_ENTRY', 'PRESCRIPTION_UPLOAD', 'ONBOARDING'] 
+    },
+    { 
+      step: 'AYURBOOK', 
+      label: 'AyurBook', 
+      icon: <BookOpen className="w-5 h-5" />,
+      matchSteps: ['AYURBOOK', 'SAFETY_GATE', 'INTERACTION_RESULT', 'REMEDY_DETAIL'] 
+    },
+    { 
+      step: 'TIMELINE', 
+      label: 'Timeline', 
+      icon: <Clock className="w-5 h-5" />,
+      matchSteps: ['TIMELINE'] 
+    },
   ];
 
   return (
     <>
-      {/* Mobile Fixed Bottom Tab Bar */}
+      {/* Mobile Fixed 4-Tab Bottom Bar */}
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-50 shadow-lg px-2 py-1.5">
         <div className="flex justify-around items-center">
           {navItems.map((item) => {
-            const isActive = currentStep === item.step || (item.step === 'SAFETY_GATE' && currentStep === 'INTERACTION_RESULT');
+            const isActive = item.matchSteps.includes(currentStep);
             return (
               <button
                 key={item.step}
@@ -50,10 +68,10 @@ export const MobileNav: React.FC = () => {
         </div>
       </nav>
 
-      {/* Desktop Centered Floating Bottom Dock Tab Bar */}
-      <nav className="hidden sm:flex fixed bottom-5 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-slate-200/90 z-50 shadow-xl rounded-full px-5 py-2 items-center gap-2 transition-all">
+      {/* Desktop Centered Floating 4-Tab Bottom Dock */}
+      <nav className="hidden sm:flex fixed bottom-5 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-slate-200/90 z-50 shadow-xl rounded-full px-5 py-2 items-center gap-3 transition-all">
         {navItems.map((item) => {
-          const isActive = currentStep === item.step || (item.step === 'SAFETY_GATE' && currentStep === 'INTERACTION_RESULT');
+          const isActive = item.matchSteps.includes(currentStep);
           return (
             <button
               key={item.step}

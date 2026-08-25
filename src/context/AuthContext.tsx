@@ -18,7 +18,6 @@ interface AuthContextType {
   session: Session | null;
   profile: UserProfileData | null;
   isLoading: boolean;
-  isDemoMode: boolean;
   isSupabaseConfigured: boolean;
   unverifiedEmail: string | null;
   setUnverifiedEmail: (email: string | null) => void;
@@ -29,7 +28,6 @@ interface AuthContextType {
   resetPassword: (email: string) => Promise<{ error: Error | null }>;
   checkEmailVerified: () => Promise<boolean>;
   resendVerificationEmail: (email: string) => Promise<{ error: Error | null }>;
-  enableDemoMode: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -39,7 +37,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<UserProfileData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDemoMode, setIsDemoMode] = useState(false);
   const [unverifiedEmail, setUnverifiedEmail] = useState<string | null>(null);
 
   useEffect(() => {
@@ -56,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (currentUser) {
         const metadata = currentUser.user_metadata || {};
-        const fullName = metadata.full_name || metadata.first_name || 'Recovery Patient';
+        const fullName = metadata.full_name || metadata.first_name || 'Care Patient';
         
         setProfile({
           fullName,
@@ -70,7 +67,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsLoading(false);
     });
 
-    // Listen to auth state changes (e.g. Google OAuth redirect callback)
+    // Listen to auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       const currentUser = session?.user ?? null;
@@ -78,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (currentUser) {
         const metadata = currentUser.user_metadata || {};
-        const fullName = metadata.full_name || metadata.first_name || 'Recovery Patient';
+        const fullName = metadata.full_name || metadata.first_name || 'Care Patient';
 
         setProfile({
           fullName,
@@ -88,7 +85,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           userId: currentUser.id,
           isEmailVerified: true
         });
-        setIsDemoMode(false);
       } else {
         setProfile(null);
       }
@@ -121,7 +117,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         userId: mockUser.id,
         isEmailVerified: true
       });
-      setIsDemoMode(false);
       return { error: null };
     }
 
@@ -159,7 +154,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         userId: mockUser.id,
         isEmailVerified: true
       });
-      setIsDemoMode(false);
       return { error: null };
     }
 
@@ -200,7 +194,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         userId: data.user.id,
         isEmailVerified: true
       });
-      setIsDemoMode(false);
     }
 
     return { error: null };
@@ -227,7 +220,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         userId: mockUser.id,
         isEmailVerified: true
       });
-      setIsDemoMode(false);
       return { error: null };
     }
 
@@ -242,7 +234,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     if (data.user) {
       const metadata = data.user.user_metadata || {};
-      const fullName = metadata.full_name || metadata.first_name || 'Recovery Patient';
+      const fullName = metadata.full_name || metadata.first_name || 'Care Patient';
 
       setUser(data.user);
       setProfile({
@@ -253,7 +245,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         userId: data.user.id,
         isEmailVerified: true
       });
-      setIsDemoMode(false);
     }
 
     return { error: null };
@@ -274,7 +265,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
     setSession(null);
     setProfile(null);
-    setIsDemoMode(false);
     setUnverifiedEmail(null);
   };
 
@@ -288,10 +278,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return { error: error ? new Error(error.message) : null };
   };
 
-  const enableDemoMode = () => {
-    setIsDemoMode(true);
-  };
-
   return (
     <AuthContext.Provider
       value={{
@@ -299,7 +285,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         session,
         profile,
         isLoading,
-        isDemoMode,
         isSupabaseConfigured,
         unverifiedEmail,
         setUnverifiedEmail,
@@ -309,8 +294,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         signOut,
         resetPassword,
         checkEmailVerified,
-        resendVerificationEmail,
-        enableDemoMode
+        resendVerificationEmail
       }}
     >
       {children}
