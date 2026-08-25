@@ -139,7 +139,7 @@ export const PostSignUpSetupScreen: React.FC = () => {
             </div>
 
             <p className="text-xs text-slate-700 leading-relaxed">
-              Explore CareConnect using Ananya Sharma's pre-filled post-op recovery demo data. Your personal account data remains separate.
+              Explore CareConnect using pre-filled sample prescription data. Your personal account data remains separate.
             </p>
 
             <button
@@ -147,7 +147,7 @@ export const PostSignUpSetupScreen: React.FC = () => {
               className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-bold text-xs py-3.5 px-4 rounded-xl shadow-md transition"
             >
               <Sparkles className="w-4 h-4" />
-              <span>Explore Demo Experience (Ananya Sharma)</span>
+              <span>Explore Sample Demo Experience</span>
             </button>
           </div>
 

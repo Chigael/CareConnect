@@ -27,7 +27,7 @@ export const ProfileScreen: React.FC = () => {
   };
 
   const displayName = profile?.firstName || user?.user_metadata?.first_name || (isDemoMode ? patient.name : 'CareConnect User');
-  const displayEmail = profile?.email || user?.email || (isDemoMode ? 'ananya.demo@careconnect.health' : 'user@careconnect.health');
+  const displayEmail = profile?.email || user?.email || 'user@careconnect.health';
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4 pb-24">
@@ -53,7 +53,7 @@ export const ProfileScreen: React.FC = () => {
                 <h2 className="text-xl font-bold text-slate-900">{displayName}</h2>
                 {isDemoMode && (
                   <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md border border-amber-200">
-                    Fictional Demo Mode
+                    Demo Mode
                   </span>
                 )}
               </div>
@@ -86,7 +86,7 @@ export const ProfileScreen: React.FC = () => {
         {/* Profile Sections List */}
         <div className="bg-white rounded-3xl p-2 border border-slate-200 shadow-soft divide-y divide-slate-100">
           
-          {/* Recovery Information */}
+          {/* Care Plan Information */}
           <button
             onClick={() => setStep('ONBOARDING')}
             className="w-full p-4 flex items-center justify-between hover:bg-slate-50 rounded-2xl transition group"
@@ -96,8 +96,8 @@ export const ProfileScreen: React.FC = () => {
                 <FileText className="w-5 h-5" />
               </div>
               <div className="text-left">
-                <h4 className="font-bold text-slate-900 text-xs sm:text-sm">Recovery Information</h4>
-                <p className="text-[11px] text-slate-500">Post-Op Appendectomy Recovery</p>
+                <h4 className="font-bold text-slate-900 text-xs sm:text-sm">Patient Care Plan</h4>
+                <p className="text-[11px] text-slate-500">{patient.condition}</p>
               </div>
             </div>
             <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />

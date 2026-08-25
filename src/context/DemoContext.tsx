@@ -164,8 +164,8 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [demoSymptom, setDemoSymptom] = useState<SymptomLog>(DEMO_SYMPTOM);
   const [realUserSymptom, setRealUserSymptom] = useState<SymptomLog>(EMPTY_SYMPTOM);
 
-  // Active symptom: if Demo Mode -> return demoSymptom ("Nausea"). If Real User -> return realUserSymptom (starts EMPTY).
-  const symptom = isDemoMode ? demoSymptom : realUserSymptom;
+  // Active symptom: return real user logged symptom if logged, otherwise demo symptom if in demo mode
+  const symptom = realUserSymptom.symptom ? realUserSymptom : (isDemoMode ? demoSymptom : EMPTY_SYMPTOM);
 
   const [selectedRemedy, setSelectedRemedy] = useState<Remedy>(AYURBOOK_REMEDIES[0]);
   const [interactionResult] = useState(DEMO_INTERACTION_RESULT);
@@ -219,18 +219,18 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
   }, []);
 
-  // Active medications: if Demo Mode -> return Ananya's demo medicines. If Real User -> return realUserMedicines (starts EMPTY).
-  const medications = isDemoMode ? DEMO_MEDICATIONS : realUserMedicines;
+  // Active medications: if Demo Mode -> return sample medicines. If Real User -> return realUserMedicines (starts EMPTY).
+  const medications = isDemoMode && realUserMedicines.length === 0 ? DEMO_MEDICATIONS : realUserMedicines;
 
   // Missed medications list (status === 'SKIPPED')
   const missedMedications = medications.filter(m => m.reminderStatus === 'SKIPPED');
 
-  // Active patient profile: if Demo Mode -> Ananya Sharma. If Real User -> Real User Profile.
-  const patient: PatientProfile = isDemoMode ? DEMO_PATIENT : {
-    name: profile?.fullName || profile?.firstName || "Patient",
-    age: profile?.age || 29,
+  // Active patient profile: Real User Profile or generic fallback
+  const patient: PatientProfile = {
+    name: profile?.fullName || profile?.firstName || (isDemoMode ? "Demo Patient" : "Patient"),
+    age: profile?.age || 30,
     gender: "User",
-    condition: treatedCondition.trim() || "Not specified",
+    condition: treatedCondition.trim() || "General Care",
     dischargeDate: "Today",
     doctorName: "Attending Physician",
     hospitalName: "CareConnect Health"

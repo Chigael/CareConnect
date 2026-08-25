@@ -8,10 +8,13 @@ export const FlowStepper: React.FC = () => {
   const { currentStep, stepIndex, setStep, nextStep, prevStep } = useDemo();
   const [isOpen, setIsOpen] = useState(false);
 
-  if (currentStep === 'LANDING') return null;
+  // Show top step bar ONLY for true one-time sequential signup/setup flows
+  const setupSteps: DemoStep[] = ['SIGN_UP', 'LOG_IN', 'FORGOT_PASSWORD', 'LANGUAGE_SELECTION', 'POST_SIGNUP_SETUP'];
+  if (!setupSteps.includes(currentStep)) return null;
 
-  const total = STEP_ORDER.length;
-  const progressPercent = Math.round(((stepIndex + 1) / total) * 100);
+  const total = setupSteps.length;
+  const currentSetupIndex = setupSteps.indexOf(currentStep);
+  const progressPercent = Math.round(((currentSetupIndex + 1) / total) * 100);
 
   return (
     <div className="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-40 shadow-md">

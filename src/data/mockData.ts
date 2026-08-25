@@ -74,25 +74,25 @@ export interface PatientProfile {
 }
 
 export const DEMO_PATIENT: PatientProfile = {
-  name: "Ananya Sharma",
-  age: 32,
-  gender: "Female",
-  condition: "Post-Op Appendectomy Recovery",
-  dischargeDate: "Aug 20, 2026",
-  doctorName: "Dr. Vikram Malhotra (General Surgery)",
-  hospitalName: "CareConnect City Hospital"
+  name: "Patient",
+  age: 30,
+  gender: "User",
+  condition: "General Care",
+  dischargeDate: "Today",
+  doctorName: "Attending Physician",
+  hospitalName: "CareConnect Health"
 };
 
 export const DEMO_MEDICATIONS: Medication[] = [
   {
     id: "med-a",
-    name: "Demo Medicine A",
+    name: "Amoxicillin",
     genericName: "Amoxicillin / Clavulanate 500mg",
     category: "Antibiotic",
     dosage: "1 capsule (500mg)",
     frequency: "3 times daily after meals (8:00 AM, 2:00 PM, 8:00 PM)",
-    purpose: "Prevent surgical site bacterial infection post-appendectomy",
-    instructions: "Finish the complete 7-day prescription course even if feeling better.",
+    purpose: "Bacterial infection prevention",
+    instructions: "Finish the complete 7-day prescription course.",
     status: "Active (Day 4/7)",
     color: "teal",
     nextDose: "8:00 PM Today",
@@ -100,27 +100,27 @@ export const DEMO_MEDICATIONS: Medication[] = [
   },
   {
     id: "med-b",
-    name: "Demo Medicine B",
+    name: "Paracetamol",
     genericName: "Paracetamol 500mg",
     category: "Analgesic & Antipyretic",
     dosage: "1 tablet (500mg)",
-    frequency: "Every 6 hours as needed for mild-to-moderate incision pain",
-    purpose: "Post-operative pain management and mild fever control",
-    instructions: "Do not exceed 4 tablets (2000mg) in 24 hours. Take with a full glass of water.",
+    frequency: "Every 6 hours as needed",
+    purpose: "Pain management and fever control",
+    instructions: "Do not exceed 4 tablets (2000mg) in 24 hours.",
     status: "Active (As needed)",
     color: "indigo",
-    nextDose: "As Needed (Last taken 6h ago)",
+    nextDose: "As Needed",
     pillsRemaining: 14
   }
 ];
 
 export const DEMO_SYMPTOM: SymptomLog = {
-  id: "symp-01",
-  symptom: "Mild Nausea",
-  severity: 2,
-  onsetTime: "3 hours ago (Post-lunch)",
-  notes: "Slight stomach uneasiness after lunch dose of antibiotic.",
-  timestamp: "Today at 2:30 PM",
+  id: "",
+  symptom: "",
+  severity: 0,
+  onsetTime: "",
+  notes: "",
+  timestamp: "",
   isRedFlag: false
 };
 

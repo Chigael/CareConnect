@@ -80,25 +80,25 @@ export const LandingScreen: React.FC = () => {
 
           </div>
 
-          {/* Demo Patient Highlight Card */}
+          {/* Sample Patient Highlight Card */}
           <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-brand-200 p-6 max-w-xl mx-auto shadow-card text-left">
             <div className="flex items-center justify-between mb-3">
               <span className="text-[10px] font-extrabold uppercase tracking-wider text-brand-700 bg-brand-100 px-2.5 py-1 rounded-md">
-                Fictional Judge Demo Patient
+                CareConnect Sample Patient
               </span>
-              <span className="text-xs text-slate-500 font-medium">Demo Patient</span>
+              <span className="text-xs text-slate-500 font-medium">Sample Overview</span>
             </div>
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 font-bold text-lg flex items-center justify-center shrink-0">
-                AS
+                PS
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 text-base">Ananya Sharma (32)</h3>
+                <h3 className="font-bold text-slate-900 text-base">Priya S. (32)</h3>
                 <p className="text-xs text-slate-600 mt-0.5">
-                  <strong className="text-slate-800">Condition:</strong> Post-Op Appendectomy Recovery • <strong className="text-slate-800">Meds:</strong> Demo Medicine A (Antibiotic) & Demo Medicine B (Pain Reliever)
+                  <strong className="text-slate-800">Condition:</strong> Active Care Plan • <strong className="text-slate-800">Meds:</strong> Amoxicillin (Antibiotic) & Paracetamol (Pain Reliever)
                 </p>
-                <div className="mt-2 text-xs font-semibold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200 inline-block">
-                  Current Symptom: Mild Nausea post-lunch
+                <div className="mt-2 text-xs font-semibold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-200 inline-block">
+                  Symptom Status: Ready for daily check-in
                 </div>
               </div>
             </div>
