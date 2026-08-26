@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://api.fontshare.com/v2/css?f[]=clash-grotesk@200,300,400,500,600,700&display=swap");
+
+:root {
+  --font-sans: "Clash Grotesk", sans-serif;
+}
+
+html,
+body {
+  font-family: "Clash Grotesk", sans-serif;
+}
+
 @layer base {
   body {
     @apply bg-slate-50 text-slate-900 antialiased selection:bg-brand-100 selection:text-brand-900;
