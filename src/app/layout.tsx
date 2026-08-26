@@ -10,9 +10,12 @@ export const metadata: Metadata = {
   title: 'CareConnect | Post-Discharge Safety & Recovery Companion',
   description: 'Post-discharge safety companion bridging prescription medications with traditional herbal remedies.',
   icons: {
-    icon: '/CareConnect Logo.png',
-    shortcut: '/CareConnect Logo.png',
-    apple: '/CareConnect Logo.png',
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/icon.png',
   },
 };
 
