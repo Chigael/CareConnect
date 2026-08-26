@@ -10,11 +10,11 @@ export const hi: TranslationType = {
     login: "लॉग इन",
     signup: "खाता बनाएं",
     logout: "लॉग आउट",
-    subtitle: "अस्पताल के बाद रिकवरी साथी"
+    subtitle: "Your Recovery. Understood."
   },
   home: {
     title: "केयर डैशबोर्ड",
-    subtitle: "आपकी दैनिक रिकवरी स्थिति, दवाएं और सुरक्षा जांच",
+    subtitle: "Your Recovery. Understood.",
     welcome: "पुनः स्वागत है",
     recoveryStatus: "रिकवरी स्थिति",
     activeCondition: "सक्रिय स्थिति",

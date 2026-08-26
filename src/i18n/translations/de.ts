@@ -10,11 +10,11 @@ export const de: TranslationType = {
     login: "Anmelden",
     signup: "Konto erstellen",
     logout: "Abmelden",
-    subtitle: "Begleiter nach dem Krankenhausaufenthalt"
+    subtitle: "Your Recovery. Understood."
   },
   home: {
     title: "Pflege-Dashboard",
-    subtitle: "Ihr täglicher Genesungsstatus, Medikamente und Sicherheitschecks",
+    subtitle: "Your Recovery. Understood.",
     welcome: "Willkommen zurück",
     recoveryStatus: "Genesungsstatus",
     activeCondition: "Aktueller Zustand",

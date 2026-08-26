@@ -10,11 +10,11 @@ export const te: TranslationType = {
     login: "లాగిన్",
     signup: "ఖాతా తెరవండి",
     logout: "లాగ్ అవుట్",
-    subtitle: "డిశ్చార్జ్ తరువాతి కోలుకునే తోడ్పాటు"
+    subtitle: "Your Recovery. Understood."
   },
   home: {
     title: "కేర్ డాష్‌బోర్డ్",
-    subtitle: "మీ దైనందిన కోలుకునే స్థితి, మందులు మరియు భద్రతా తనిఖీలు",
+    subtitle: "Your Recovery. Understood.",
     welcome: "తిరిగి స్వాగతం",
     recoveryStatus: "కోలుకునే స్థితి",
     activeCondition: "ప్రస్తుత ఆరోగ్యం",

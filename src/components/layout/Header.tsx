@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
           title="Go to Home"
         >
           <img
-            src="/logo.svg"
+            src="/CareConnect Logo.png"
             alt="CareConnect Logo"
             className="h-8 sm:h-9 w-auto object-contain dark:hidden group-hover:scale-102 transition-transform duration-200"
           />

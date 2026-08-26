@@ -8,11 +8,11 @@ export const en = {
     login: "Log In",
     signup: "Create Account",
     logout: "Log Out",
-    subtitle: "Post-Discharge Recovery Companion"
+    subtitle: "Your Recovery. Understood."
   },
   home: {
     title: "Care Dashboard",
-    subtitle: "Your daily recovery status, medications, and safety checks",
+    subtitle: "Your Recovery. Understood.",
     welcome: "Welcome back",
     recoveryStatus: "Recovery Status",
     activeCondition: "Active Condition",

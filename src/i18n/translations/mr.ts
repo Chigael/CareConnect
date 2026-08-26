@@ -10,11 +10,11 @@ export const mr: TranslationType = {
     login: "लॉग इन",
     signup: "खाते तयार करा",
     logout: "लॉग आउट",
-    subtitle: "डिस्चार्ज नंतरचा रिकव्हरी साथी"
+    subtitle: "Your Recovery. Understood."
   },
   home: {
     title: "केअर डॅशबोर्ड",
-    subtitle: "तुमची दैनंदिन रिकव्हरी स्थिती, औषधे आणि सुरक्षितता तपासणी",
+    subtitle: "Your Recovery. Understood.",
     welcome: "पुन्हा स्वागत आहे",
     recoveryStatus: "रिकव्हरी स्थिती",
     activeCondition: "सक्रिय स्थिती",

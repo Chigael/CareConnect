@@ -10,11 +10,11 @@ export const ja: TranslationType = {
     login: "ログイン",
     signup: "アカウント作成",
     logout: "ログアウト",
-    subtitle: "退院後リカバリーパートナー"
+    subtitle: "Your Recovery. Understood."
   },
   home: {
     title: "ケアダッシュボード",
-    subtitle: "毎日の回復状況、服薬スケジュール、安全チェック",
+    subtitle: "Your Recovery. Understood.",
     welcome: "おかえりなさい",
     recoveryStatus: "回復状況",
     activeCondition: "現在の状態",

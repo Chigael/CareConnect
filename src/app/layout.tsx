@@ -11,7 +11,7 @@ import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
 import { MobileNav } from "@/components/layout/MobileNav";
 
 export const metadata: Metadata = {
-  title: "CareConnect | Post-Discharge Safety & Recovery Companion",
+  title: "CareConnect | Your Recovery. Understood.",
   description:
     "Post-discharge safety companion bridging prescription medications with traditional herbal remedies.",
   icons: {

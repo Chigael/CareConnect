@@ -10,11 +10,11 @@ export const ig: TranslationType = {
     login: "Banye",
     signup: "Mepụta Akụntụugwu",
     logout: "Pụọ",
-    subtitle: "Onye enyemaka ahụike mgbe a pụtara n'ụlọ ọgwụ"
+    subtitle: "Your Recovery. Understood."
   },
   home: {
     title: "Daboodu Nlekọta",
-    subtitle: "Ọnọdụ ahụike gị kwa ụbọchị, ọgwụ na nyocha nchekwa",
+    subtitle: "Your Recovery. Understood.",
     welcome: "Nnọọ ọzọ",
     recoveryStatus: "Ọnọdụ Nnweghachi Ahụike",
     activeCondition: "Ọnọdụ Ahụike Ugbu a",
