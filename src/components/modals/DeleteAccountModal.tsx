@@ -12,12 +12,13 @@ interface DeleteAccountModalProps {
 }
 
 export const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, onClose }) => {
-  const { signOut } = useAuth();
-  const { resetDemo, setStep } = useDemo();
+  const { session, isSupabaseConfigured, signOut } = useAuth();
+  const { resetDemo } = useDemo();
   const { t } = useLanguage();
 
   const [confirmInput, setConfirmInput] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
@@ -25,13 +26,31 @@ export const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, 
     if (confirmInput.trim().toUpperCase() !== 'DELETE') return;
 
     setIsDeleting(true);
+    setDeleteError(null);
+
     try {
+      if (isSupabaseConfigured && session?.access_token) {
+        const res = await fetch('/api/delete-account', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`
+          }
+        });
+
+        const data = await res.json();
+        if (!res.ok || data.error) {
+          throw new Error(data.error || 'Failed to delete user account from Supabase Auth.');
+        }
+      }
+
       await signOut();
-      resetDemo();
-      setStep('LANDING');
+      resetDemo('LANDING');
+      setConfirmInput('');
       onClose();
-    } catch (e) {
+    } catch (e: any) {
       console.error('Error deleting account:', e);
+      setDeleteError(e.message || 'Failed to delete account. Please try again.');
     } finally {
       setIsDeleting(false);
     }
@@ -66,6 +85,13 @@ export const DeleteAccountModal: React.FC<DeleteAccountModalProps> = ({ isOpen, 
         <div className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 rounded-2xl p-4 text-xs text-rose-900 dark:text-rose-200 leading-relaxed">
           <p>{t.deleteModal.warning}</p>
         </div>
+
+        {/* Error Alert */}
+        {deleteError && (
+          <div className="bg-rose-100 dark:bg-rose-950 border border-rose-300 dark:border-rose-800 rounded-2xl p-3 text-xs text-rose-900 dark:text-rose-200 font-medium">
+            ⚠️ {deleteError}
+          </div>
+        )}
 
         {/* Confirmation Form */}
         <div className="space-y-2 text-xs">

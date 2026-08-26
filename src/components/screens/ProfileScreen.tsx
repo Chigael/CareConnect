@@ -32,8 +32,7 @@ export const ProfileScreen: React.FC = () => {
 
   const handleLogout = async () => {
     await signOut();
-    resetDemo();
-    setStep('LANDING');
+    resetDemo('LOG_IN');
   };
 
   const handleLanguageChange = (newLang: string) => {

@@ -137,7 +137,7 @@ interface DemoContextType {
   unlockAyurbook: () => void;
   timelineEvents: TimelineEvent[];
   addTimelineEvent: (event: Omit<TimelineEvent, 'id'>) => void;
-  resetDemo: () => void;
+  resetDemo: (targetStep?: DemoStep) => void;
 }
 
 const DemoContext = createContext<DemoContextType | undefined>(undefined);
@@ -390,14 +390,14 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setAyurbookLockUntil(null);
   };
 
-  const resetDemo = () => {
+  const resetDemo = (targetStep: DemoStep = 'LANDING') => {
     setRealUserMedicines([]);
     setTreatedCondition('');
     setAyurbookLockUntil(null);
     setRealUserSymptom(EMPTY_SYMPTOM);
     setSelectedRemedy(AYURBOOK_REMEDIES[0]);
     setTimelineEvents(INITIAL_TIMELINE);
-    setStep('LANDING', { replace: true });
+    setStep(targetStep, { replace: true });
   };
 
   return (
