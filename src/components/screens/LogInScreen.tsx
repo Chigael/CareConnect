@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useDemo } from '@/context/DemoContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { HeartHandshake, Mail, Lock, AlertCircle, ArrowRight } from 'lucide-react';
 
 export const LogInScreen: React.FC = () => {
   const { signIn, signInWithGoogle } = useAuth();
-  const { setStep, realUserMedicines } = useDemo();
+  const { setStep } = useDemo();
+  const { t } = useLanguage();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,11 +26,7 @@ export const LogInScreen: React.FC = () => {
     if (result.error) {
       setError(result.error.message);
     } else {
-      if (realUserMedicines.length > 0) {
-        setStep('DASHBOARD');
-      } else {
-        setStep('POST_SIGNUP_SETUP');
-      }
+      setStep('DASHBOARD');
     }
   };
 
@@ -48,17 +46,12 @@ export const LogInScreen: React.FC = () => {
     if (result.error) {
       setError(result.error.message);
     } else {
-      // Returning user: if medicines already set, go straight to DASHBOARD, else POST_SIGNUP_SETUP
-      if (realUserMedicines.length > 0) {
-        setStep('DASHBOARD');
-      } else {
-        setStep('POST_SIGNUP_SETUP');
-      }
+      setStep('DASHBOARD');
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4 flex items-center justify-center">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-10 px-4 flex items-center justify-center">
       <div className="max-w-md w-full space-y-6">
 
         {/* Header */}
@@ -66,20 +59,20 @@ export const LogInScreen: React.FC = () => {
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 via-teal-500 to-emerald-400 flex items-center justify-center text-white shadow-lg mx-auto">
             <HeartHandshake className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
-            Welcome back 👋
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
+            {t.auth.loginTitle}
           </h1>
-          <p className="text-xs text-slate-500">
-            Log in to manage your post-discharge recovery companion
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            {t.auth.loginSubtitle}
           </p>
         </div>
 
         {/* Form Card */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-card space-y-5">
+        <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-card space-y-5">
           
           {error && (
-            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4 text-xs text-rose-900 flex items-start gap-2.5 animate-in fade-in duration-150">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+            <div className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 rounded-2xl p-4 text-xs text-rose-900 dark:text-rose-200 flex items-start gap-2.5 animate-in fade-in duration-150">
+              <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
               <span>{error}</span>
             </div>
           )}
@@ -90,7 +83,7 @@ export const LogInScreen: React.FC = () => {
               type="button"
               onClick={handleGoogleSignIn}
               disabled={isSubmittingGoogle || isSubmitting}
-              className="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm py-3.5 px-4 rounded-xl border border-slate-300 shadow-sm hover:shadow transition disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-3 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-650 text-slate-700 dark:text-slate-200 font-bold text-sm py-3.5 px-4 rounded-xl border border-slate-300 dark:border-slate-600 shadow-sm hover:shadow transition disabled:opacity-50"
             >
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                 <path
@@ -110,14 +103,14 @@ export const LogInScreen: React.FC = () => {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
                 />
               </svg>
-              <span>{isSubmittingGoogle ? 'Connecting to Google...' : 'Continue with Google'}</span>
+              <span>{isSubmittingGoogle ? 'Connecting to Google...' : t.auth.continueGoogle}</span>
             </button>
 
             {/* Divider */}
             <div className="relative flex items-center justify-center my-3">
-              <div className="border-t border-slate-200 w-full" />
-              <span className="bg-white px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider absolute">
-                Or with email
+              <div className="border-t border-slate-200 dark:border-slate-700 w-full" />
+              <span className="bg-white dark:bg-slate-800 px-3 text-[11px] font-bold text-slate-400 uppercase tracking-wider absolute">
+                {t.auth.orEmail}
               </span>
             </div>
           </div>
@@ -126,8 +119,8 @@ export const LogInScreen: React.FC = () => {
             
             {/* Email */}
             <div>
-              <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
-                Email Address
+              <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider mb-1.5">
+                {t.auth.email}
               </label>
               <div className="relative">
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
@@ -137,7 +130,7 @@ export const LogInScreen: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@example.com"
-                  className="w-full text-xs pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 transition"
+                  className="w-full text-xs pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl focus:bg-white dark:focus:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition text-slate-900 dark:text-slate-100"
                 />
               </div>
             </div>
@@ -145,15 +138,15 @@ export const LogInScreen: React.FC = () => {
             {/* Password */}
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Password
+                <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                  {t.auth.password}
                 </label>
                 <button
                   type="button"
                   onClick={() => setStep('FORGOT_PASSWORD')}
-                  className="text-[11px] text-brand-600 hover:text-brand-700 font-semibold"
+                  className="text-[11px] text-brand-600 dark:text-brand-400 hover:text-brand-700 font-semibold"
                 >
-                  Forgot password?
+                  {t.auth.forgotPassword}
                 </button>
               </div>
               <div className="relative">
@@ -164,7 +157,7 @@ export const LogInScreen: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
-                  className="w-full text-xs pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 transition"
+                  className="w-full text-xs pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl focus:bg-white dark:focus:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition text-slate-900 dark:text-slate-100"
                 />
               </div>
             </div>
@@ -175,20 +168,20 @@ export const LogInScreen: React.FC = () => {
               disabled={isSubmitting || isSubmittingGoogle}
               className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-teal-600 hover:from-brand-700 hover:to-teal-700 text-white font-bold text-sm py-4 rounded-xl shadow-lg shadow-brand-500/20 transition disabled:opacity-50 mt-2"
             >
-              <span>{isSubmitting ? 'Logging in...' : 'Log In'}</span>
+              <span>{isSubmitting ? 'Logging in...' : t.nav.login}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
 
           {/* Switch to SignUp */}
-          <div className="text-center pt-2 border-t border-slate-100">
-            <p className="text-xs text-slate-500">
-              Don't have an account?{' '}
+          <div className="text-center pt-2 border-t border-slate-100 dark:border-slate-700">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {t.auth.noAccount}{' '}
               <button
                 onClick={() => setStep('SIGN_UP')}
-                className="text-brand-600 hover:text-brand-700 font-bold underline"
+                className="text-brand-600 dark:text-brand-400 hover:text-brand-700 font-bold underline"
               >
-                Create one
+                {t.nav.signup}
               </button>
             </p>
           </div>
@@ -199,3 +192,4 @@ export const LogInScreen: React.FC = () => {
     </div>
   );
 };
+

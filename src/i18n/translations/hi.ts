@@ -1,0 +1,105 @@
+import { TranslationType } from './en';
+
+export const hi: TranslationType = {
+  nav: {
+    home: "मुख्य पृष्ठ",
+    medicines: "दवाएं",
+    ayurbook: "आयुर्वेद ज्ञान",
+    timeline: "टाइमलाइन",
+    profile: "प्रोफाइल",
+    login: "लॉग इन",
+    signup: "खाता बनाएं",
+    logout: "लॉग आउट",
+    subtitle: "अस्पताल के बाद रिकवरी साथी"
+  },
+  home: {
+    title: "केयर डैशबोर्ड",
+    subtitle: "आपकी दैनिक रिकवरी स्थिति, दवाएं और सुरक्षा जांच",
+    welcome: "पुनः स्वागत है",
+    recoveryStatus: "रिकवरी स्थिति",
+    activeCondition: "सक्रिय स्थिति",
+    todaysMedicines: "आज की निर्धारित दवाएं",
+    takeDose: "खुराक लें",
+    taken: "ली गई",
+    skipped: "छोड़ी गई",
+    snoozed: "स्थगित",
+    logSymptom: "लक्षण दर्ज करें",
+    checkAyurbook: "आयुर्वेद सुरक्षा जांच",
+    recentTimeline: "हाल की रिकवरी टाइमलाइन",
+    viewAll: "सभी देखें",
+    noMedicines: "अभी तक कोई सक्रिय प्रिस्क्रिप्टिव दवाएं नहीं जोड़ी गई हैं।"
+  },
+  medicines: {
+    title: "सक्रिय दवाएं",
+    subtitle: "अपनी दवाओं, खुराक के समय और रिमाइंडर का प्रबंधन करें",
+    addMedicine: "दवा जोड़ें",
+    scanPrescription: "पर्चा स्कैन करें",
+    doseSchedule: "खुराक समय सारिणी",
+    frequency: "आवृत्ति",
+    instructions: "निर्देश",
+    reminderTime: "रिमाइंडर समय",
+    delete: "हटाएं"
+  },
+  ayurbook: {
+    title: "आयुर्वेद लाइब्रेरी",
+    subtitle: "पारंपरिक आयुर्वेदिक उपचार और दवा-जड़ी-बूटी इंटरैक्शन सुरक्षा",
+    searchPlaceholder: "जड़ी-बूटियों, स्थिति या घरेलू उपचार खोजें...",
+    checkInteraction: "दवा और जड़ी-बूटी तालमेल जांचें",
+    safe: "उपयोग के लिए सुरक्षित",
+    caution: "सावधानी बरतें",
+    avoid: "साथ में न लें",
+    viewRemedy: "विवरण देखें"
+  },
+  timeline: {
+    title: "रिकवरी टाइमलाइन",
+    subtitle: "अपनी रिकवरी मील के पत्थर, दर्ज लक्षण और दवाओं का इतिहास देखें",
+    allEvents: "सभी घटनाएं",
+    medications: "दवाएं",
+    symptoms: "लक्षण",
+    remedies: "उपचार",
+    today: "आज"
+  },
+  profile: {
+    title: "प्रोफाइल और सेटिंग्स",
+    subtitle: "अपने उपयोगकर्ता खाते, ऐप भाषा, थीम और डेटा सेटिंग्स का प्रबंधन करें",
+    userAccount: "उपयोगकर्ता खाता",
+    authenticated: "प्रमाणित खाता",
+    rlsActive: "रो-लेवल सुरक्षा सक्रिय",
+    settings: "ऐप सेटिंग्स",
+    changeLanguage: "ऐप की भाषा",
+    selectLanguage: "भाषा चुनें",
+    theme: "थीम और स्वरूप",
+    lightMode: "लाइट मोड",
+    darkMode: "डार्क मोड",
+    dangerZone: "खतरा क्षेत्र",
+    deleteAccount: "खाता हटाएं",
+    deleteAccountDesc: "अपना उपयोगकर्ता खाता और सभी सहेजी गई दवाएं स्थायी रूप से हटाएं।",
+    patientCarePlan: "मरीज की देखभाल योजना",
+    myMedicines: "मेरी दवाएं",
+    myRecovery: "मेरी रिकवरी",
+    privacySecurity: "गोपनीयता और डेटा सुरक्षा"
+  },
+  auth: {
+    loginTitle: "पुनः स्वागत है 👋",
+    loginSubtitle: "अपने पोस्ट-डिस्चार्ज रिकवरी साथी को प्रबंधित करने के लिए लॉग इन करें",
+    signupTitle: "अपना CareConnect खाता बनाएं",
+    signupSubtitle: "पोस्ट-डिस्चार्ज रिकवरी प्लेटफॉर्म से जुड़ें",
+    email: "ईमेल पता",
+    password: "पासवर्ड",
+    fullName: "पूरा नाम",
+    age: "उम्र",
+    confirmPassword: "पासवर्ड की पुष्टि करें",
+    continueGoogle: "गूगल के साथ जारी रखें",
+    orEmail: "या ईमेल के साथ",
+    noAccount: "खाता नहीं है?",
+    alreadyAccount: "पहले से खाता है?",
+    forgotPassword: "पासवर्ड भूल गए?"
+  },
+  deleteModal: {
+    title: "उपयोगकर्ता खाता हटाएं?",
+    warning: "यह कार्रवाई स्थायी है और इसे वापस नहीं लिया जा सकता। आपकी सभी दवाएं और डेटा हमेशा के लिए हटा दिए जाएंगे।",
+    confirmText: 'पुष्टि के लिए "DELETE" टाइप करें:',
+    cancel: "रद्द करें",
+    confirmDelete: "खाता स्थायी रूप से हटाएं"
+  }
+};

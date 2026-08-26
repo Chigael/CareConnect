@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { DemoProvider } from '@/context/DemoContext';
+import { LanguageProvider } from '@/context/LanguageContext';
 import { Header } from '@/components/layout/Header';
 import { MobileNav } from '@/components/layout/MobileNav';
-import { DisclaimerBanner } from '@/components/common/DisclaimerBanner';
 
 export const metadata: Metadata = {
   title: 'CareConnect | Post-Discharge Safety & Recovery Companion',
@@ -24,18 +24,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans antialiased">
+      <body className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans antialiased transition-colors">
         <AuthProvider>
-          <DemoProvider>
-            <DisclaimerBanner />
-            <Header />
-            <main className="flex-1">
-              {children}
-            </main>
-            <MobileNav />
-          </DemoProvider>
+          <LanguageProvider>
+            <DemoProvider>
+              <Header />
+              <main className="flex-1">
+                {children}
+              </main>
+              <MobileNav />
+            </DemoProvider>
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>
   );
 }
+

@@ -3,18 +3,20 @@
 import React from 'react';
 import { useDemo } from '@/context/DemoContext';
 import { useAuth } from '@/context/AuthContext';
+import { useLanguage } from '@/context/LanguageContext';
 import { HeartHandshake, User } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const { currentStep, setStep } = useDemo();
   const { profile, user } = useAuth();
+  const { t } = useLanguage();
 
   const displayName = profile?.firstName || user?.user_metadata?.first_name || 'Patient';
   const isLoggedIn = Boolean(user || profile);
   const isAuthScreen = currentStep === 'LANDING' || currentStep === 'SIGN_UP' || currentStep === 'LOG_IN' || currentStep === 'FORGOT_PASSWORD';
 
   return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-40 shadow-xs">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         {/* Brand logo & name */}
         <button
@@ -26,9 +28,9 @@ export const Header: React.FC = () => {
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-lg text-slate-900 tracking-tight">CareConnect</span>
+              <span className="font-extrabold text-lg text-slate-900 dark:text-slate-100 tracking-tight">CareConnect</span>
             </div>
-            <p className="text-[11px] text-slate-500 hidden sm:block">Post-Discharge Recovery Companion</p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:block">{t.nav.subtitle}</p>
           </div>
         </button>
 
@@ -38,8 +40,8 @@ export const Header: React.FC = () => {
             onClick={() => setStep('PROFILE')}
             className={`flex items-center gap-2.5 px-3 py-1.5 rounded-full border transition shadow-xs ${
               currentStep === 'PROFILE'
-                ? 'bg-brand-50 border-brand-300 text-brand-700 font-bold ring-2 ring-brand-400/20'
-                : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                ? 'bg-brand-50 dark:bg-brand-950 border-brand-300 dark:border-brand-700 text-brand-700 dark:text-brand-300 font-bold ring-2 ring-brand-400/20'
+                : 'bg-slate-50 dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-650 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200'
             }`}
             title="View Profile & Account Settings"
           >
@@ -49,21 +51,21 @@ export const Header: React.FC = () => {
             <span className="text-xs font-bold hidden sm:inline max-w-[120px] truncate">
               {displayName}
             </span>
-            <User className="w-4 h-4 text-slate-500 sm:hidden" />
+            <User className="w-4 h-4 text-slate-500 dark:text-slate-400 sm:hidden" />
           </button>
         ) : (
           <div className="flex items-center gap-2">
             <button
               onClick={() => setStep('LOG_IN')}
-              className="text-xs font-bold text-slate-700 hover:text-brand-600 px-3 py-2 rounded-lg transition"
+              className="text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 px-3 py-2 rounded-lg transition"
             >
-              Log In
+              {t.nav.login}
             </button>
             <button
               onClick={() => setStep('SIGN_UP')}
               className="bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-xs transition"
             >
-              Create Account
+              {t.nav.signup}
             </button>
           </div>
         )}
@@ -71,3 +73,4 @@ export const Header: React.FC = () => {
     </header>
   );
 };
+

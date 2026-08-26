@@ -143,7 +143,7 @@ interface DemoContextType {
 const DemoContext = createContext<DemoContextType | undefined>(undefined);
 
 export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { profile } = useAuth();
+  const { user, profile } = useAuth();
   const [currentStep, setCurrentStep] = useState<DemoStep>('LANDING');
 
   // Selected Language preference - defaults to English
@@ -181,7 +181,11 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     const initialStepFromUrl = getStepFromUrl();
-    const activeStep = initialStepFromUrl || 'LANDING';
+    let activeStep = initialStepFromUrl || (user ? 'DASHBOARD' : 'LANDING');
+
+    if (user && (activeStep === 'LANDING' || activeStep === 'LOG_IN' || activeStep === 'SIGN_UP' || activeStep === 'FORGOT_PASSWORD')) {
+      activeStep = 'DASHBOARD';
+    }
 
     if (activeStep !== currentStep) {
       setCurrentStep(activeStep);
@@ -212,7 +216,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, []);
+  }, [user]);
 
   const medications = realUserMedicines;
 
