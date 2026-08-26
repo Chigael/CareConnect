@@ -15,9 +15,12 @@ export const metadata: Metadata = {
   description:
     "Post-discharge safety companion bridging prescription medications with traditional herbal remedies.",
   icons: {
-    icon: "/logo.svg",
-    shortcut: "/logo.svg",
-    apple: "/logo.svg",
+    icon: [
+      { url: '/logo.svg', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/icon.png',
   },
 };
 

@@ -30,6 +30,17 @@ export const LandingScreen: React.FC = () => {
             {/* <img
               src="/CareConnect Logo.png"
               alt="CareConnect Logo"
+              className="h-20 sm:h-24 w-auto object-contain drop-shadow-md dark:hidden"
+            />
+            <img
+              src="/CareConnect Logo Dark.png"
+              alt="CareConnect Logo"
+              className="h-20 sm:h-24 w-auto object-contain drop-shadow-md hidden dark:block"
+            />
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium -mt-1">
+              {t.nav.subtitle}
+            </p>
+            <div className="inline-flex items-center gap-2 bg-brand-100/80 dark:bg-brand-950 border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-300 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs uppercase tracking-wider mt-1">
               className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md"
             /> */}
             <div className="inline-flex items-center gap-2 bg-brand-100/80 dark:bg-brand-950 border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-300 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs uppercase tracking-wider">
