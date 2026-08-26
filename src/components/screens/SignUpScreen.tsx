@@ -98,8 +98,8 @@ export const SignUpScreen: React.FC = () => {
         <div className="text-center space-y-2">
           <img
             src="/CareConnect Logo.png"
-            alt="CareConnect Logo"
-            className="w-16 h-16 object-contain mx-auto drop-shadow-md"
+            alt="CareConnect Symbol"
+            className="h-16 sm:h-18 w-auto object-contain mx-auto drop-shadow-md shrink-0 mb-1"
           />
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             {t.auth.signupTitle}
