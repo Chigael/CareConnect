@@ -62,7 +62,7 @@ export const AyurBookScreen: React.FC = () => {
   if (isLocked) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-10 px-4 flex items-center justify-center">
-        <div className="max-w-lg w-full bg-white dark:bg-slate-800 rounded-3xl p-8 border-2 border-amber-300 dark:border-amber-700 shadow-xl text-center space-y-6 animate-in zoom-in-95 duration-200">
+        <div className="max-w-lg w-full bg-white dark:bg-slate-800 rounded-3xl py-8 border-2 border-amber-300 dark:border-amber-700 shadow-xl text-center space-y-6 animate-in zoom-in-95 duration-200">
           
           <div className="relative mx-auto w-20 h-20 rounded-3xl bg-amber-500 text-white flex items-center justify-center shadow-lg shadow-amber-500/30">
             <Lock className="w-10 h-10 animate-pulse" />
@@ -115,7 +115,7 @@ export const AyurBookScreen: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8 px-4 pb-28">
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-3xl lg:max-w-full mx-auto space-y-6">
 
         {/* Header */}
         <div>

@@ -51,7 +51,7 @@ export const TimelineScreen: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8 px-4 pb-28">
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-3xl lg:max-w-full mx-auto space-y-6">
 
         {/* Page Header */}
         <div>

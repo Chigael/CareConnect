@@ -17,14 +17,14 @@ export const Header: React.FC = () => {
 
   return (
     <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-40 shadow-xs">
-      <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-full mx-6 px-4 h-16 flex items-center justify-between gap-4">
         {/* Brand logo & name */}
         <button
           onClick={() => setStep(isLoggedIn ? 'DASHBOARD' : 'LANDING')}
           className="flex items-center gap-2.5 text-left group focus:outline-none"
         >
           <img
-            src="/CareConnect Logo.png"
+            src="/logo.svg"
             alt="CareConnect Logo"
             className="w-10 h-10 object-contain rounded-xl shadow-xs group-hover:scale-105 transition-transform"
           />

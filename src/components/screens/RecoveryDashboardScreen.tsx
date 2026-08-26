@@ -86,7 +86,7 @@ export const RecoveryDashboardScreen: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8 px-4 pb-28">
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="lg:max-w-full mx-auto space-y-6">
 
         {/* Header Title & Status */}
         <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-soft space-y-4">
