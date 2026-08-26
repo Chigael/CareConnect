@@ -23,9 +23,11 @@ export const Header: React.FC = () => {
           onClick={() => setStep(isLoggedIn ? 'DASHBOARD' : 'LANDING')}
           className="flex items-center gap-2.5 text-left group focus:outline-none"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-teal-500 to-emerald-400 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
-            <HeartHandshake className="w-6 h-6" />
-          </div>
+          <img
+            src="/CareConnect Logo.png"
+            alt="CareConnect Logo"
+            className="w-10 h-10 object-contain rounded-xl shadow-xs group-hover:scale-105 transition-transform"
+          />
           <div>
             <div className="flex items-center gap-1.5">
               <span className="font-extrabold text-lg text-slate-900 dark:text-slate-100 tracking-tight">CareConnect</span>

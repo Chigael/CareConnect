@@ -9,6 +9,11 @@ import { MobileNav } from '@/components/layout/MobileNav';
 export const metadata: Metadata = {
   title: 'CareConnect | Post-Discharge Safety & Recovery Companion',
   description: 'Post-discharge safety companion bridging prescription medications with traditional herbal remedies.',
+  icons: {
+    icon: '/CareConnect Logo.png',
+    shortcut: '/CareConnect Logo.png',
+    apple: '/CareConnect Logo.png',
+  },
 };
 
 export const viewport: Viewport = {

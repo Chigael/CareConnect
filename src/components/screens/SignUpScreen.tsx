@@ -96,9 +96,11 @@ export const SignUpScreen: React.FC = () => {
 
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-brand-600 via-teal-500 to-emerald-400 flex items-center justify-center text-white shadow-lg mx-auto">
-            <HeartHandshake className="w-8 h-8" />
-          </div>
+          <img
+            src="/CareConnect Logo.png"
+            alt="CareConnect Logo"
+            className="w-16 h-16 object-contain mx-auto drop-shadow-md"
+          />
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             {t.auth.signupTitle}
           </h1>
