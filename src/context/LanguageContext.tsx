@@ -25,14 +25,12 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         setLanguageState(savedLang);
       }
 
-      const savedTheme = localStorage.getItem('careconnect_theme') as 'light' | 'dark' | null;
-      if (savedTheme) {
-        setThemeState(savedTheme);
-        if (savedTheme === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
+      const savedTheme = (localStorage.getItem('careconnect_theme') as 'light' | 'dark') || 'light';
+      setThemeState(savedTheme);
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
       }
     }
   }, []);

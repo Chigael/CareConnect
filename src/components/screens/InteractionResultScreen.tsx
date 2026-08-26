@@ -56,82 +56,82 @@ export const InteractionResultScreen: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4 pb-28">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 py-8 px-4 pb-28">
       <div className="max-w-3xl mx-auto space-y-6">
 
         {/* Header */}
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-2.5 py-1 rounded-md">
+          <span className="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-brand-300 bg-brand-100 dark:bg-brand-950 px-2.5 py-1 rounded-md border border-brand-200 dark:border-brand-800">
             Safety Assessment Result
           </span>
-          <h1 className="text-2xl font-extrabold text-slate-900 mt-2">Medicine × Remedy Interaction Result</h1>
-          <p className="text-xs text-slate-500">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 mt-2">Medicine × Remedy Interaction Result</h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Safety analysis: {selectedRemedy.name} vs Active Prescriptions
           </p>
         </div>
 
         {/* Prototype Disclaimer Banner */}
-        <div className="bg-amber-500/10 border border-amber-300 rounded-2xl p-4 flex items-start gap-3 text-xs text-amber-900">
-          <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+        <div className="bg-amber-500/10 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 rounded-2xl p-4 flex items-start gap-3 text-xs text-amber-900 dark:text-amber-200">
+          <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
           <div className="space-y-1">
-            <h4 className="font-extrabold text-amber-950 uppercase tracking-wider text-[11px]">
+            <h4 className="font-extrabold text-amber-950 dark:text-amber-200 uppercase tracking-wider text-[11px]">
               Safety Screening Notice
             </h4>
-            <p className="text-slate-700 leading-relaxed text-[11px]">
+            <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-[11px]">
               These interaction results provide general pharmacological guidance for educational review. Always consult your attending physician before starting new herbal remedies.
             </p>
           </div>
         </div>
 
         {/* Overall Status Banner */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-card space-y-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-card space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-700 pb-4">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-emerald-600 text-white flex items-center justify-center font-bold shadow-md shrink-0">
                 <FileCheck2 className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-md">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded-md">
                   Overall Status Verdict
                 </span>
-                <h2 className="text-xl font-extrabold text-slate-900 mt-0.5">
+                <h2 className="text-xl font-extrabold text-slate-900 dark:text-slate-100 mt-0.5">
                   {interactionResult.riskScore}
                 </h2>
               </div>
             </div>
 
-            <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-300 flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-600" />
+            <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-3.5 py-1.5 rounded-full border border-emerald-300 dark:border-emerald-800 flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>Safe with Guidance</span>
             </span>
           </div>
 
-          <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-200">
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl border border-slate-200 dark:border-slate-600">
             {interactionResult.summary}
           </p>
         </div>
 
         {/* Breakdown per Medication */}
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
             Detailed Pairwise Drug Breakdown
           </h3>
 
           {interactionResult.details.map((detail: any, idx: number) => (
-            <div key={idx} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft space-y-3">
-              <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div key={idx} className="bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700 shadow-soft space-y-3">
+              <div className="flex items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-700 pb-3">
                 <div className="flex items-center gap-2">
-                  <Pill className="w-4 h-4 text-brand-600" />
-                  <span className="font-bold text-xs text-slate-900">{detail.medicineName}</span>
+                  <Pill className="w-4 h-4 text-brand-600 dark:text-brand-400" />
+                  <span className="font-bold text-xs text-slate-900 dark:text-slate-100">{detail.medicineName}</span>
                   <span className="text-slate-400">×</span>
-                  <Coffee className="w-4 h-4 text-amber-600" />
-                  <span className="font-bold text-xs text-slate-900">{detail.remedyName}</span>
+                  <Coffee className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                  <span className="font-bold text-xs text-slate-900 dark:text-slate-100">{detail.remedyName}</span>
                 </div>
 
                 <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${
                   detail.riskLevel === 'MODERATE_CAUTION'
-                    ? 'bg-amber-100 border-amber-300 text-amber-900'
-                    : 'bg-emerald-100 border-emerald-300 text-emerald-800'
+                    ? 'bg-amber-100 dark:bg-amber-950 border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-300'
+                    : 'bg-emerald-100 dark:bg-emerald-950 border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300'
                 }`}>
                   {detail.riskLevel === 'MODERATE_CAUTION' ? 'Moderate Caution' : 'Low Risk / Safe'}
                 </span>
@@ -139,11 +139,11 @@ export const InteractionResultScreen: React.FC = () => {
 
               <div className="space-y-2 text-xs">
                 <div>
-                  <span className="font-semibold text-slate-700">Interaction Mechanism: </span>
-                  <span className="text-slate-600">{detail.mechanism}</span>
+                  <span className="font-semibold text-slate-700 dark:text-slate-300">Interaction Mechanism: </span>
+                  <span className="text-slate-600 dark:text-slate-400">{detail.mechanism}</span>
                 </div>
-                <div className="bg-brand-50/60 p-3 rounded-xl border border-brand-200/60 text-brand-950 font-medium">
-                  <span className="font-bold text-brand-900">Actionable Advice: </span>
+                <div className="bg-brand-50/60 dark:bg-brand-950/40 p-3 rounded-xl border border-brand-200/60 dark:border-brand-800/60 text-brand-950 dark:text-brand-200 font-medium">
+                  <span className="font-bold text-brand-900 dark:text-brand-300">Actionable Advice: </span>
                   {detail.actionableAdvice}
                 </div>
               </div>
@@ -152,16 +152,16 @@ export const InteractionResultScreen: React.FC = () => {
         </div>
 
         {/* Actionable Steps Checklist */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-soft space-y-3">
-          <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-brand-600" />
+        <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-soft space-y-3">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
             <span>Recommended Action Plan</span>
           </h3>
 
-          <ul className="space-y-2.5 text-xs text-slate-700">
+          <ul className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
             {interactionResult.actionableSteps.map((step: string, idx: number) => (
-              <li key={idx} className="flex items-start gap-2.5 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+              <li key={idx} className="flex items-start gap-2.5 bg-slate-50 dark:bg-slate-700/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                 <span className="font-medium">{step}</span>
               </li>
             ))}
