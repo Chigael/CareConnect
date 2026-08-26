@@ -27,7 +27,12 @@ export const Header: React.FC = () => {
           <img
             src="/CareConnect Logo.png"
             alt="CareConnect Logo"
-            className="h-8 sm:h-9 w-auto object-contain group-hover:scale-102 transition-transform duration-200"
+            className="h-8 sm:h-9 w-auto object-contain dark:hidden group-hover:scale-102 transition-transform duration-200"
+          />
+          <img
+            src="/CareConnect Logo Dark.png"
+            alt="CareConnect Logo"
+            className="h-8 sm:h-9 w-auto object-contain hidden dark:block group-hover:scale-102 transition-transform duration-200"
           />
           <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-1">
             {t.nav.subtitle}
