@@ -27,11 +27,11 @@ export const LandingScreen: React.FC = () => {
           
           {/* Brand Header */}
           <div className="flex flex-col items-center gap-3">
-            <img
+            {/* <img
               src="/CareConnect Logo.png"
               alt="CareConnect Logo"
               className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md"
-            />
+            /> */}
             <div className="inline-flex items-center gap-2 bg-brand-100/80 dark:bg-brand-950 border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-300 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs uppercase tracking-wider">
               <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
               <span>WELCOME TO CARECONNECT</span>
