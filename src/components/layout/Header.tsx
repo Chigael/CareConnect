@@ -18,22 +18,20 @@ export const Header: React.FC = () => {
   return (
     <header className="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-40 shadow-xs">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        {/* Brand logo & name */}
+        {/* Brand logo & tagline */}
         <button
           onClick={() => setStep(isLoggedIn ? 'DASHBOARD' : 'LANDING')}
-          className="flex items-center gap-3 sm:gap-3.5 text-left group focus:outline-none py-1"
+          className="flex flex-col items-start justify-center group focus:outline-none py-1 text-left"
+          title="Go to Home"
         >
           <img
             src="/CareConnect Logo.png"
-            alt="CareConnect Symbol"
-            className="h-11 sm:h-12 w-auto max-h-12 object-contain group-hover:scale-105 transition-transform duration-200 shrink-0"
+            alt="CareConnect Logo"
+            className="h-8 sm:h-9 w-auto object-contain group-hover:scale-102 transition-transform duration-200"
           />
-          <div className="flex flex-col justify-center">
-            <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-slate-100 tracking-tight leading-none">CareConnect</span>
-            </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium hidden sm:block leading-none mt-1">{t.nav.subtitle}</p>
-          </div>
+          <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-1">
+            {t.nav.subtitle}
+          </p>
         </button>
 
         {/* Top-Right Profile Icon Button */}
