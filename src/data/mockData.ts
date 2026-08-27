@@ -291,10 +291,282 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
       "Replenishes gut flora lost due to antibiotic treatments",
       "Firms loose stools and soothes hyperactive intestines"
     ],
-    preparation: "Whisk 1 font cup fresh light curd/yogurt with 1 cup water, a pinch of roasted cumin powder, and rock salt.",
+    preparation: "Whisk 1 cup fresh light curd/yogurt with 1 cup water, a pinch of roasted cumin powder, and rock salt.",
     activeCompounds: ["Probiotic Lactobacilli", "Cuminaldehyde"],
     safetyRating: "Safe",
     recommendedFor: ["Diarrhea", "Loose Stools", "Antibiotic Stomach Upset"],
+    iconName: "Coffee"
+  },
+  {
+    id: "rem-tulsi-pepper",
+    name: "Tulsi & Black Pepper Decoction",
+    botanicalName: "Ocimum sanctum & Piper nigrum",
+    sanskritName: "Tulsi-Maricha Kwath",
+    category: "Cold & Respiratory Relief",
+    summary: "Revered Ayurvedic immunity tea that opens congested airways, soothes sinus pressure, and clears head cold.",
+    traditionalUses: [
+      "Clears nasal blockage and sinus congestion",
+      "Relieves acute cold symptoms and runny nose"
+    ],
+    preparation: "Simmer 8-10 fresh Holy Basil (Tulsi) leaves and 3 crushed black peppercorns in 1.5 cups of water for 7 minutes. Strain, add 1 tsp raw honey, and drink warm.",
+    activeCompounds: ["Eugenol", "Piperine", "Ursolic acid"],
+    safetyRating: "Safe",
+    recommendedFor: ["Cold", "Nasal Congestion", "Head Cold", "Sinus"],
+    iconName: "Leaf"
+  },
+  {
+    id: "rem-adulsa",
+    name: "Vasaka (Adulsa) & Honey Syrup",
+    botanicalName: "Justicia adhatoda",
+    sanskritName: "Vasaka / Adulsa",
+    category: "Cough & Bronchial Care",
+    summary: "Potent natural bronchodilator and expectorant that thins stubborn chest phlegm and calms persistent cough fits.",
+    traditionalUses: [
+      "Liquefies bronchial secretions for easier coughing",
+      "Soothes irritated air passages and dry cough"
+    ],
+    preparation: "Extract 1 tsp fresh Vasaka leaf juice or steep 1/2 tsp dried Vasaka powder in hot water for 5 minutes. Mix with 1 tsp honey after cooling slightly.",
+    activeCompounds: ["Vasicine", "Vasicinone"],
+    safetyRating: "Safe",
+    recommendedFor: ["Cough", "Dry Cough", "Chest Congestion", "Bronchial Irritation"],
+    iconName: "Shield"
+  },
+  {
+    id: "rem-mulethi",
+    name: "Mulethi (Licorice) Throat Elixir",
+    botanicalName: "Glycyrrhiza glabra",
+    sanskritName: "Yashtimadhu / Mulethi",
+    category: "Sore Throat & Vocal Care",
+    summary: "Demulcent sweet root tea that coats inflamed pharyngeal mucosa, instantly easing raw throat pain and hoarseness.",
+    traditionalUses: [
+      "Instantly cools burning and raw pain in sore throat",
+      "Protects vocal cords and reduces throat tickle"
+    ],
+    preparation: "Gently boil a 1-inch piece of crushed Mulethi root in 1 cup water for 5 minutes. Sip warm slowly.",
+    activeCompounds: ["Glycyrrhizin", "Liquiritigenin"],
+    safetyRating: "Safe",
+    recommendedFor: ["Sore Throat", "Throat Pain", "Hoarseness", "Cough"],
+    iconName: "Coffee"
+  },
+  {
+    id: "rem-turmeric-golden-milk",
+    name: "Golden Turmeric Pepper Milk",
+    botanicalName: "Curcuma longa",
+    sanskritName: "Haridra Ksheera",
+    category: "Fever & Immunity Boost",
+    summary: "Classic Ayurvedic golden brew packed with anti-inflammatory curcumin to lower low-grade fever and speed recovery.",
+    traditionalUses: [
+      "Promotes mild diaphoresis to break low-grade fever",
+      "Calms systemic inflammation and muscular aches"
+    ],
+    preparation: "Warm 1 cup milk (or oat milk) with 1/2 tsp organic turmeric powder and a pinch of black pepper for 5 minutes.",
+    activeCompounds: ["Curcumin", "Demethoxycurcumin", "Piperine"],
+    safetyRating: "Safe",
+    recommendedFor: ["Fever", "Mild Fever", "Body Ache", "Immunity"],
+    iconName: "Sparkles"
+  },
+  {
+    id: "rem-giloy",
+    name: "Giloy (Guduchi) Immunity Tea",
+    botanicalName: "Tinospora cordifolia",
+    sanskritName: "Guduchi / Amrita",
+    category: "Fever & Convalescence",
+    summary: "Known as the nectar of life in Ayurveda, Giloy pacifies recurrent fevers, detoxifies blood, and restores energy.",
+    traditionalUses: [
+      "Reduces chronic low-grade fever (Jwarahara)",
+      "Restores vitality and immune stamina after illness"
+    ],
+    preparation: "Steep 1/2 tsp Giloy powder or crushed stem in 1 cup boiling water for 8 minutes. Strain and drink once daily.",
+    activeCompounds: ["Tinosporoside", "Cordifolioside A"],
+    safetyRating: "Safe",
+    recommendedFor: ["Fever", "Fatigue", "Post-Illness Weakness", "Body Ache"],
+    iconName: "Shield"
+  },
+  {
+    id: "rem-triphala-gargle",
+    name: "Triphala Warm Gargle",
+    botanicalName: "Phyllanthus emblica, Terminalia chebula, Terminalia bellirica",
+    sanskritName: "Triphala Kwath",
+    category: "Cold Sores & Oral Care",
+    summary: "Antimicrobial astringent wash that speeds healing of cold sores, mouth ulcers, and inflamed gums.",
+    traditionalUses: [
+      "Dries out and heals oral cold sores and aphthous ulcers",
+      "Tightens spongy gums and eliminates oral bacteria"
+    ],
+    preparation: "Boil 1/2 tsp Triphala powder in 1 cup water for 3 minutes. Allow to cool to warm room temperature, add a pinch of rock salt, and gargle/rinse mouth.",
+    activeCompounds: ["Tannic acid", "Gallic acid", "Chebulic acid"],
+    safetyRating: "Safe",
+    recommendedFor: ["Cold Sores", "Mouth Ulcers", "Sore Throat", "Gum Swelling"],
+    iconName: "Leaf"
+  },
+  {
+    id: "rem-shatavari-ashwagandha",
+    name: "Shatavari & Ashwagandha Rejuvenator",
+    botanicalName: "Asparagus racemosus & Withania somnifera",
+    sanskritName: "Rasayana Ksheera",
+    category: "Fatigue & Physical Weakness",
+    summary: "Nourishing revitalizing tonic designed to combat post-viral exhaustion, weakness, and muscular fatigue.",
+    traditionalUses: [
+      "Rebuilds physical tissue strength (Dhatu Poshana)",
+      "Combats chronic fatigue and daily physical exhaustion"
+    ],
+    preparation: "Mix 1/2 tsp Shatavari and 1/4 tsp Ashwagandha powder in 1 cup warm milk or warm water.",
+    activeCompounds: ["Shatavarins", "Withanolides"],
+    safetyRating: "Safe",
+    recommendedFor: ["Fatigue", "Weakness", "Low Energy", "Body Ache"],
+    iconName: "Sparkles"
+  },
+  {
+    id: "rem-eucalyptus-compress",
+    name: "Eucalyptus & Mint Steam Compress",
+    botanicalName: "Eucalyptus globulus & Mentha arvensis",
+    sanskritName: "Nilgiri-Pudina Vasp",
+    category: "Headaches & Sinus Tension",
+    summary: "Soothing aromatic inhalant that relieves throbbing vascular headaches, forehead tightness, and sinus heaviness.",
+    traditionalUses: [
+      "Relieves general tension headaches and forehead pressure",
+      "Opens blocked sinuses and refreshes heavy head feeling"
+    ],
+    preparation: "Add 2 drops eucalyptus oil or fresh crushed mint leaves to a bowl of hot steaming water. Inhale steam with towel overhead for 5 minutes.",
+    activeCompounds: ["Eucalyptol (1,8-cineole)", "Menthol"],
+    safetyRating: "Safe",
+    recommendedFor: ["Headache", "Headaches", "Sinus Headache", "Tension"],
+    iconName: "Coffee"
+  },
+  {
+    id: "rem-nirgundi-ginger",
+    name: "Nirgundi & Ginger Warm Compress",
+    botanicalName: "Vitex negundo & Zingiber officinale",
+    sanskritName: "Nirgundi Kwath",
+    category: "Body Ache & Joint Stiffness",
+    summary: "Time-tested analgesic herbal infusion that soothes general body pain, back stiffness, and joint soreness.",
+    traditionalUses: [
+      "Pacifies Vata aggravated muscular body aches and back pain",
+      "Reduces joint inflammation and morning stiffness"
+    ],
+    preparation: "Simmer 1/2 tsp Nirgundi leaf powder and 1/4 tsp ginger in 1.5 cups water until reduced to 1 cup. Drink warm.",
+    activeCompounds: ["Nishindoside", "Gingerols", "Sabinenes"],
+    safetyRating: "Safe",
+    recommendedFor: ["Body Ache", "Back Pain", "Muscle Soreness", "Joint Pain"],
+    iconName: "Leaf"
+  },
+  {
+    id: "rem-ajwain-water",
+    name: "Ajwain (Carom) & Salt Water",
+    botanicalName: "Trachyspermum ammi",
+    sanskritName: "Yavani / Ajwain",
+    category: "Indigestion & Gas Relief",
+    summary: "Fast-acting carminative remedy that breaks down trapped intestinal gas, relieves stomach heaviness, and cures indigestion.",
+    traditionalUses: [
+      "Provides rapid relief from gas, abdominal fullness, and indigestion",
+      "Stops stomach rumbling and sluggish digestion"
+    ],
+    preparation: "Boil 1/2 tsp crushed Ajwain seeds in 1 cup water with a small pinch of rock salt for 4 minutes. Drink warm after meals.",
+    activeCompounds: ["Thymol", "p-Cymene"],
+    safetyRating: "Safe",
+    recommendedFor: ["Indigestion", "Gas", "Bloating", "Stomach Upset"],
+    iconName: "Coffee"
+  },
+  {
+    id: "rem-hingastak",
+    name: "Hingastak & Warm Water",
+    botanicalName: "Ferula foetida & Herbal Digestives",
+    sanskritName: "Hingashtak Churna",
+    category: "Bloating & Flatulence",
+    summary: "Classic Ayurvedic digestive formula that dissipates stomach abdominal distension, cramps, and severe bloating.",
+    traditionalUses: [
+      "Disperses painful abdominal bloating and distension",
+      "Kindles digestive fire (Agni) for heavy meals"
+    ],
+    preparation: "Take 1/4 tsp Hingastak powder with 1/2 glass of warm water or ghee with the first bite of meals.",
+    activeCompounds: ["Ferulic acid", "Umbelliferone"],
+    safetyRating: "Safe",
+    recommendedFor: ["Bloating", "Abdominal Cramps", "Flatulence", "Indigestion"],
+    iconName: "Shield"
+  },
+  {
+    id: "rem-fenugreek-ajwain",
+    name: "Methi (Fenugreek) & Ajwain Infusion",
+    botanicalName: "Trigonella foenum-graecum & Trachyspermum ammi",
+    sanskritName: "Methi-Ajwain Water",
+    category: "Cramps & Abdominal Pain",
+    summary: "Antispasmodic warm herbal water that relaxes smooth muscle spasms, easing bowel cramps and menstrual tightness.",
+    traditionalUses: [
+      "Relieves spasmodic stomach cramps and intestinal colicky pain",
+      "Soothes lower abdominal tightness and menstrual cramps"
+    ],
+    preparation: "Soak 1/2 tsp fenugreek seeds and 1/4 tsp ajwain in 1 cup hot water for 10 minutes. Strain and sip warm.",
+    activeCompounds: ["Diosgenin", "Thymol", "Trigonelline"],
+    safetyRating: "Safe",
+    recommendedFor: ["Cramps", "Stomach Cramps", "Abdominal Pain", "Bloating"],
+    iconName: "Leaf"
+  },
+  {
+    id: "rem-jatamansi-tea",
+    name: "Jatamansi & Shankhpushpi Tea",
+    botanicalName: "Nardostachys jatamansi & Convolvulus pluricaulis",
+    sanskritName: "Jatamansi-Shankhpushpi",
+    category: "Stress & Anxiety Tension",
+    summary: "Tranquilizing nervine tonic that calms nervous tension, racing thoughts, and stress-induced muscle tightness.",
+    traditionalUses: [
+      "Reduces acute nervous stress, irritability, and anxiety",
+      "Relieves stress-induced neck tension and mental restlessness"
+    ],
+    preparation: "Steep 1/4 tsp Jatamansi powder or tea blend in 1 cup hot water for 5 minutes. Drink in the late afternoon or evening.",
+    activeCompounds: ["Jatamansone", "Shankhpushpine"],
+    safetyRating: "Safe",
+    recommendedFor: ["Stress", "Anxiety", "Tension", "Nervous Restlessness"],
+    iconName: "Sparkles"
+  },
+  {
+    id: "rem-neem-turmeric-wash",
+    name: "Neem & Turmeric Soothing Wash",
+    botanicalName: "Azadirachta indica & Curcuma longa",
+    sanskritName: "Nimba-Haridra Kwath",
+    category: "Mild Skin Irritation & Rash",
+    summary: "Purifying botanical wash that soothes minor skin itching, red rashes, and mild cutaneous irritations.",
+    traditionalUses: [
+      "Cools itching skin, hives, and redness",
+      "Purifies skin surface against environmental irritants"
+    ],
+    preparation: "Boil 10 clean Neem leaves and 1/2 tsp turmeric powder in 2 cups water for 8 minutes. Cool completely and dab gently on affected skin with clean cotton.",
+    activeCompounds: ["Nimbin", "Azadirachtin", "Curcumin"],
+    safetyRating: "Safe",
+    recommendedFor: ["Mild Skin Irritation", "Skin Rash", "Itching", "Redness"],
+    iconName: "Shield"
+  },
+  {
+    id: "rem-aloe-sandalwood",
+    name: "Aloe Vera & Sandalwood Gel",
+    botanicalName: "Aloe barbadensis & Santalum album",
+    sanskritName: "Kumari-Chandana Gel",
+    category: "Skin Irritation & Sunburn",
+    summary: "Ultra-cooling herbal gel that cools inflamed skin, sunburns, and localized heat rash.",
+    traditionalUses: [
+      "Instantly cools burning sensation and skin heat",
+      "Hydrates and repairs dry irritated skin tissue"
+    ],
+    preparation: "Mix 1 tbsp fresh aloe vera gel with a pinch of pure Sandalwood (Chandan) powder. Apply topically.",
+    activeCompounds: ["Aloin", "Acomannan", "Santalol"],
+    safetyRating: "Safe",
+    recommendedFor: ["Mild Skin Irritation", "Sunburn", "Heat Rash", "Skin Inflammation"],
+    iconName: "Sparkles"
+  },
+  {
+    id: "rem-tagara-night-tea",
+    name: "Tagara (Valerian) Night Tea",
+    botanicalName: "Valeriana wallichii",
+    sanskritName: "Tagara Churna",
+    category: "Poor Sleep & Restlessness",
+    summary: "Calming bedtime infusion that promotes natural sleep onset for people suffering from poor sleep quality or nocturnal waking.",
+    traditionalUses: [
+      "Shortens time to fall asleep and reduces tossing and turning",
+      "Restores peaceful sleep architecture without morning grogginess"
+    ],
+    preparation: "Steep 1/4 tsp Tagara root powder in 1 cup hot water for 5 minutes before bed.",
+    activeCompounds: ["Valepotriates", "Valerenic acid"],
+    safetyRating: "Safe",
+    recommendedFor: ["Poor Sleep", "Insomnia", "Restlessness", "Night Waking"],
     iconName: "Coffee"
   }
 ];

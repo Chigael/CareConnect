@@ -1,7 +1,9 @@
-import { TranslationType } from './en';
+import { en, TranslationType } from './en';
 
 export const mr: TranslationType = {
+  ...en,
   nav: {
+    ...en.nav,
     home: "मुख्यपृष्ठ",
     medicines: "औषधे",
     ayurbook: "आयुर्वेद ज्ञान",
@@ -13,6 +15,7 @@ export const mr: TranslationType = {
     subtitle: "Your Recovery. Understood."
   },
   home: {
+    ...en.home,
     title: "केअर डॅशबोर्ड",
     subtitle: "Your Recovery. Understood.",
     welcome: "पुन्हा स्वागत आहे",
@@ -30,6 +33,7 @@ export const mr: TranslationType = {
     noMedicines: "अद्याप कोणतीही औषधे जोडलेली नाहीत."
   },
   medicines: {
+    ...en.medicines,
     title: "सक्रिय औषधे",
     subtitle: "तुमच्या औषधांचे वेळापत्रक आणि स्मरणपत्रे व्यवस्थापित करा",
     addMedicine: "औषध जोडा",
@@ -41,6 +45,7 @@ export const mr: TranslationType = {
     delete: "काढून टाका"
   },
   ayurbook: {
+    ...en.ayurbook,
     title: "आयुर्वेद ग्रंथ",
     subtitle: "पारंपारिक आयुर्वेदिक उपाय आणि औषध-वनस्पती सुरक्षितता",
     searchPlaceholder: "वनस्पती किंवा उपाय शोधा...",
@@ -51,6 +56,7 @@ export const mr: TranslationType = {
     viewRemedy: "तपशील पहा"
   },
   timeline: {
+    ...en.timeline,
     title: "रिकव्हरी टाइमलाइन",
     subtitle: "तुमच्या आरोग्याचा इतिहास आणि औषधांची नोंद पहा",
     allEvents: "सर्व नोंदी",
@@ -60,6 +66,7 @@ export const mr: TranslationType = {
     today: "आज"
   },
   profile: {
+    ...en.profile,
     title: "प्रोफाइल आणि सेटिंग्ज",
     subtitle: "तुमचे खाते, ॲपची भाषा, थीम आणि डेटा सेटिंग्ज व्यवस्थापित करा",
     userAccount: "वापरकर्ता खाते",
@@ -80,6 +87,7 @@ export const mr: TranslationType = {
     privacySecurity: "गोपनीयता आणि डेटा सुरक्षा"
   },
   auth: {
+    ...en.auth,
     loginTitle: "पुन्हा स्वागत आहे 👋",
     loginSubtitle: "तुमच्या खात्यात लॉग इन करा",
     signupTitle: "CareConnect खाते तयार करा",

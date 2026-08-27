@@ -55,17 +55,15 @@ export const LogInScreen: React.FC = () => {
       <div className="max-w-md w-full space-y-6">
 
         {/* Header */}
-        <div className="text-center space-y-2">
+        <div className="text-center space-y-1.5">
           <img
-            src="/CareConnect Logo.png"
-            alt="CareConnect Logo"
-            className="h-16 sm:h-18 w-auto object-contain mx-auto drop-shadow-md shrink-0 mb-1 dark:hidden"
+            src="/logo.svg"
+            alt="CareConnect Icon"
+            className="h-12 sm:h-14 w-auto object-contain mx-auto drop-shadow-md shrink-0 mb-1"
           />
-          <img
-            src="/CareConnect Logo Dark.png"
-            alt="CareConnect Logo"
-            className="h-16 sm:h-18 w-auto object-contain mx-auto drop-shadow-md shrink-0 mb-1 hidden dark:block"
-          />
+          <h2 className="text-lg font-black text-slate-900 dark:text-slate-100 tracking-tight">
+            CareConnect
+          </h2>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
             {t.auth.loginTitle}
           </h1>

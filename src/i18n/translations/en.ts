@@ -25,7 +25,16 @@ export const en = {
     checkAyurbook: "AyurBook Safety Check",
     recentTimeline: "Recent Recovery Timeline",
     viewAll: "View All",
-    noMedicines: "No active prescription medicines added yet."
+    noMedicines: "No active prescription medicines added yet.",
+    todaysStatus: "Today's Status",
+    carePlanActive: "Care Plan Active",
+    save: "Save",
+    saved: "Saved",
+    missedDosageAlert: "Missed Dosage Alert",
+    missedDosageDesc: "You skipped or missed a scheduled prescription dose today.",
+    oneClearNextAction: "One Clear Next Action",
+    managePrescriptions: "Manage Prescriptions",
+    addPrescription: "+ Add Prescription"
   },
   medicines: {
     title: "Active Medicines",
@@ -36,7 +45,14 @@ export const en = {
     frequency: "Frequency",
     instructions: "Instructions",
     reminderTime: "Reminder Time",
-    delete: "Delete"
+    delete: "Delete",
+    activePrescriptions: "Active Prescriptions",
+    addPrescriptionBtn: "+ Add Prescription",
+    scanSummaryBtn: "Scan Discharge Summary",
+    manualEntryBtn: "Manual Entry",
+    noMedicinesLogged: "No active prescription medicines added yet.",
+    pillsRemaining: "pills remaining",
+    nextDose: "Next Dose"
   },
   ayurbook: {
     title: "AyurBook Library",
@@ -46,7 +62,17 @@ export const en = {
     safe: "Safe to use",
     caution: "Exercise caution",
     avoid: "Avoid combination",
-    viewRemedy: "View Details"
+    viewRemedy: "View Details",
+    remedyFinder: "Remedy Finder",
+    searchBySymptom: "Search Remedies by Symptom",
+    quickSearch: "Quick Search",
+    showingResults: "Showing Safe Options for",
+    clearFilter: "Clear Filter",
+    remedyDetails: "Remedy Details",
+    targetSymptoms: "Target Symptoms",
+    preparationInstructions: "Preparation Instructions",
+    activeCompounds: "Active Compounds",
+    safetyRating: "Safety Rating"
   },
   timeline: {
     title: "Recovery Timeline",
@@ -55,7 +81,8 @@ export const en = {
     medications: "Medications",
     symptoms: "Symptoms",
     remedies: "Remedies",
-    today: "Today"
+    today: "Today",
+    noEvents: "No timeline events logged yet."
   },
   profile: {
     title: "Profile & Settings",
@@ -91,7 +118,11 @@ export const en = {
     orEmail: "Or with email",
     noAccount: "Don't have an account?",
     alreadyAccount: "Already have an account?",
-    forgotPassword: "Forgot password?"
+    forgotPassword: "Forgot password?",
+    welcomeToCareConnect: "WELCOME TO CARECONNECT",
+    heroTitle1: "Recover with confidence.",
+    heroTitle2: "Check safety before you try.",
+    heroDesc: "Your personal post-discharge safety companion bridging prescription medications with traditional & herbal remedies."
   },
   deleteModal: {
     title: "Delete User Account?",

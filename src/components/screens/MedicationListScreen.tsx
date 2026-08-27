@@ -25,12 +25,12 @@ export const MedicationListScreen: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <span className="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-brand-300 bg-brand-100 dark:bg-brand-950 px-2.5 py-0.5 rounded-md border border-brand-200 dark:border-brand-800">
-                Active Prescriptions & Reminders
+                {t.medicines.activePrescriptions}
               </span>
             </div>
             <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100">{t.medicines.title}</h1>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              {medications.length} active medication{medications.length === 1 ? '' : 's'} logged • Set custom dosage alarm times
+              {medications.length} {t.medicines.subtitle}
             </p>
           </div>
 

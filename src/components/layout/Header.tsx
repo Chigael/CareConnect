@@ -21,22 +21,22 @@ export const Header: React.FC = () => {
         {/* Brand logo & name */}
         <button
           onClick={() => setStep(isLoggedIn ? 'DASHBOARD' : 'LANDING')}
-          className="flex flex-col items-start justify-center group focus:outline-none py-1 text-left"
+          className="flex items-center gap-2.5 group focus:outline-none py-1 text-left"
           title="Go to Home"
         >
           <img
-            src="/CareConnect Logo.png"
-            alt="CareConnect Logo"
-            className="h-8 sm:h-9 w-auto object-contain dark:hidden group-hover:scale-102 transition-transform duration-200"
+            src="/logo.svg"
+            alt="CareConnect Icon"
+            className="h-8 sm:h-9 w-auto object-contain shrink-0 group-hover:scale-105 transition-transform duration-200"
           />
-          <img
-            src="/CareConnect Logo Dark.png"
-            alt="CareConnect Logo"
-            className="h-8 sm:h-9 w-auto object-contain hidden dark:block group-hover:scale-102 transition-transform duration-200"
-          />
-          <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-1">
-            {t.nav.subtitle}
-          </p>
+          <div className="flex flex-col">
+            <span className="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100 tracking-tight leading-none">
+              CareConnect
+            </span>
+            <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium leading-none mt-1">
+              {t.nav.subtitle}
+            </p>
+          </div>
         </button>
 
         {/* Top-Right Profile Icon Button */}

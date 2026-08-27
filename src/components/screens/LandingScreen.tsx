@@ -26,23 +26,21 @@ export const LandingScreen: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10 space-y-6">
           
           {/* Brand Header */}
-          <div className="flex flex-col items-center gap-3">
+          <div className="flex flex-col items-center gap-2">
             <img
-              src="/CareConnect Logo.png"
-              alt="CareConnect Logo"
-              className="h-20 sm:h-24 w-auto object-contain drop-shadow-md dark:hidden"
+              src="/logo.svg"
+              alt="CareConnect Icon"
+              className="h-16 sm:h-20 w-auto object-contain drop-shadow-md"
             />
-            <img
-              src="/CareConnect Logo Dark.png"
-              alt="CareConnect Logo"
-              className="h-20 sm:h-24 w-auto object-contain drop-shadow-md hidden dark:block"
-            />
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium -mt-1">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
+              CareConnect
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
               {t.nav.subtitle}
             </p>
             <div className="inline-flex items-center gap-2 bg-brand-100/80 dark:bg-brand-950 border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-300 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs uppercase tracking-wider mt-1">
               <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
-              <span>WELCOME TO CARECONNECT</span>
+              <span>{t.auth.welcomeToCareConnect || 'WELCOME TO CARECONNECT'}</span>
             </div>
           </div>
 
