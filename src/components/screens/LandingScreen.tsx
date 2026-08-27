@@ -40,7 +40,7 @@ export const LandingScreen: React.FC = () => {
             </p>
             <div className="inline-flex items-center gap-2 bg-brand-100/80 dark:bg-brand-950 border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-300 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs uppercase tracking-wider mt-1">
               <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
-              <span>{t.auth.welcomeToCareConnect || 'WELCOME TO CARECONNECT'}</span>
+              <span>POST-DISCHARGE SAFETY COMPANION</span>
             </div>
           </div>
 

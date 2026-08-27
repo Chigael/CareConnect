@@ -29,13 +29,16 @@ export const AyurBookScreen: React.FC = () => {
     'Fever',
     'Sore Throat',
     'Fatigue',
+    'Headaches',
     'Body Ache',
+    'Back Pain',
     'Indigestion',
     'Bloating',
     'Cramps',
+    'Poor Sleep',
+    'Stress',
     'Skin Irritation',
     'Cold Sores',
-    'Headaches',
     'Acidity',
     'Insomnia',
     'Constipation',
@@ -53,10 +56,11 @@ export const AyurBookScreen: React.FC = () => {
     const query = symptomSearch.toLowerCase().trim();
     
     const matchesRecommendedSymptom = rem.recommendedFor?.some(s => s.toLowerCase().includes(query));
-    const matchesName = rem.name.toLowerCase().includes(query) || rem.sanskritName.toLowerCase().includes(query);
+    const matchesName = rem.name.toLowerCase().includes(query) || rem.sanskritName.toLowerCase().includes(query) || rem.botanicalName.toLowerCase().includes(query);
     const matchesCategory = rem.category.toLowerCase().includes(query) || rem.summary.toLowerCase().includes(query);
+    const matchesUses = rem.traditionalUses?.some(u => u.toLowerCase().includes(query));
 
-    return matchesRecommendedSymptom || matchesName || matchesCategory;
+    return matchesRecommendedSymptom || matchesName || matchesCategory || matchesUses;
   });
 
   const displayedRemedies = filteredRemedies;
@@ -308,7 +312,7 @@ export const AyurBookScreen: React.FC = () => {
           <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 text-center space-y-2">
             <BookOpen className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto" />
             <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">No remedies found for "{symptomSearch}"</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Try searching for Nausea, Headaches, Acidity, Insomnia, or Constipation.</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Try searching for Cold, Cough, Fever, Sore Throat, Fatigue, Headaches, Back Pain, or Indigestion.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

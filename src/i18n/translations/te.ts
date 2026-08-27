@@ -109,7 +109,7 @@ export const te: TranslationType = {
   auth: {
     loginTitle: "తిరిగి స్వాగతం 👋",
     loginSubtitle: "మీ కేర్ ఖాతాలోకి లాగిన్ అవ్వండి",
-    signupTitle: "CareConnect ఖాతాను సృష్టించండి",
+    signupTitle: "కొత్త ఖాతాను సృష్టించండి",
     signupSubtitle: "పోస్ట్-డిశ్చార్జ్ రికవరీ ప్లాట్‌ఫారమ్‌లో చేరండి",
     email: "ఈమెయిల్ చిరునామా",
     password: "పాస్‌వర్డ్",

@@ -90,7 +90,7 @@ export const ig: TranslationType = {
     ...en.auth,
     loginTitle: "Nnọọ ọzọ 👋",
     loginSubtitle: "Banye ka ị jikwaa mgbake gị",
-    signupTitle: "Meepụta Akụntụgụ CareConnect",
+    signupTitle: "Meepụta Akụntụgụ Ọhụrụ",
     signupSubtitle: "Sonye na ikpo okwu nchekwa mgbake",
     email: "Adreesị Email",
     password: "Okwuntughe",

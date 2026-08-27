@@ -107,7 +107,7 @@ export const en = {
   auth: {
     loginTitle: "Welcome back 👋",
     loginSubtitle: "Log in to manage your post-discharge recovery companion",
-    signupTitle: "Create your CareConnect account",
+    signupTitle: "Create your account",
     signupSubtitle: "Join the post-discharge safety companion platform",
     email: "Email Address",
     password: "Password",

@@ -90,7 +90,7 @@ export const de: TranslationType = {
     ...en.auth,
     loginTitle: "Willkommen zurück 👋",
     loginSubtitle: "Melden Sie sich an, um Ihre Genesung zu verwalten",
-    signupTitle: "CareConnect Konto erstellen",
+    signupTitle: "Neues Konto erstellen",
     signupSubtitle: "Werden Sie Teil der Genesungsplattform",
     email: "E-Mail-Adresse",
     password: "Passwort",

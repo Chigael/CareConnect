@@ -107,7 +107,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Gently simmer 1/2 tsp fresh crushed ginger root in 1 cup of boiling water for 5 minutes. Strain and sip warm.",
     activeCompounds: ["Gingerols", "Shogaols", "Zingerone"],
     safetyRating: "Safe",
-    recommendedFor: ["Nausea", "Mild Nausea", "Morning sickness", "Stomach Upset"],
+    recommendedFor: ["Nausea", "Mild Nausea", "Morning sickness", "Stomach Upset", "Indigestion"],
     iconName: "Coffee"
   },
   {
@@ -124,7 +124,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Crush 2 green cardamom pods in 1 cup warm water with a drop of fresh lemon juice. Sip slowly.",
     activeCompounds: ["Cineole", "Terpinyl acetate"],
     safetyRating: "Safe",
-    recommendedFor: ["Nausea", "Vomiting", "Indigestion"],
+    recommendedFor: ["Nausea", "Vomiting", "Indigestion", "Motion Sickness"],
     iconName: "Sparkles"
   },
   {
@@ -158,7 +158,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Steep 1/2 tsp Brahmi powder or tea bag in hot water for 5 minutes.",
     activeCompounds: ["Bacosides", "Apigenin"],
     safetyRating: "Safe",
-    recommendedFor: ["Headaches", "Headache", "Stress", "Fatigue"],
+    recommendedFor: ["Headaches", "Headache", "Stress", "Fatigue", "Brain Fog"],
     iconName: "Sparkles"
   },
   {
@@ -175,7 +175,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Steep 1 tsp bruised fennel seeds in a glass of hot water for 7 minutes. Sip warm after meals.",
     activeCompounds: ["Anethole", "Fenchone"],
     safetyRating: "Safe",
-    recommendedFor: ["Acidity", "Heartburn", "GERD", "Gastritis"],
+    recommendedFor: ["Acidity", "Heartburn", "GERD", "Gastritis", "Bloating"],
     iconName: "Shield"
   },
   {
@@ -192,7 +192,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Mix 1/2 tsp organic Amla powder with 1 tsp pure honey or warm water.",
     activeCompounds: ["Emblicanin", "Ellagic acid", "Ascorbic acid"],
     safetyRating: "Safe",
-    recommendedFor: ["Acidity", "Acid Reflux", "Indigestion"],
+    recommendedFor: ["Acidity", "Acid Reflux", "Indigestion", "Immunity"],
     iconName: "Shield"
   },
   {
@@ -209,7 +209,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Add a small pinch (1/8 tsp) of freshly ground nutmeg to 1 cup of warm milk (or almond milk) 30 minutes before sleep.",
     activeCompounds: ["Myristicin", "Elemicin"],
     safetyRating: "Safe",
-    recommendedFor: ["Insomnia", "Sleep Disturbance", "Restlessness", "Anxiety"],
+    recommendedFor: ["Insomnia", "Sleep Disturbance", "Restlessness", "Anxiety", "Poor Sleep"],
     iconName: "Coffee"
   },
   {
@@ -226,7 +226,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Simmer 1/2 tsp Ashwagandha root powder in warm milk with a pinch of cardamom for 5 minutes.",
     activeCompounds: ["Withanolides", "Withaferin A"],
     safetyRating: "Safe",
-    recommendedFor: ["Insomnia", "Sleep", "Fatigue", "Stress"],
+    recommendedFor: ["Insomnia", "Sleep", "Fatigue", "Stress", "Poor Sleep", "Weakness"],
     iconName: "Sparkles"
   },
   {
@@ -277,7 +277,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Boil a piece of clean dry pomegranate peel in 1 cup water for 5 minutes. Strain and drink warm.",
     activeCompounds: ["Punicalagins", "Ellagitannins"],
     safetyRating: "Safe",
-    recommendedFor: ["Diarrhea", "Loose Stools", "Stomach Cramps"],
+    recommendedFor: ["Diarrhea", "Loose Stools", "Stomach Cramps", "Cramps"],
     iconName: "Shield"
   },
   {
@@ -294,7 +294,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Whisk 1 cup fresh light curd/yogurt with 1 cup water, a pinch of roasted cumin powder, and rock salt.",
     activeCompounds: ["Probiotic Lactobacilli", "Cuminaldehyde"],
     safetyRating: "Safe",
-    recommendedFor: ["Diarrhea", "Loose Stools", "Antibiotic Stomach Upset"],
+    recommendedFor: ["Diarrhea", "Loose Stools", "Antibiotic Stomach Upset", "Indigestion"],
     iconName: "Coffee"
   },
   {
@@ -311,8 +311,25 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Simmer 8-10 fresh Holy Basil (Tulsi) leaves and 3 crushed black peppercorns in 1.5 cups of water for 7 minutes. Strain, add 1 tsp raw honey, and drink warm.",
     activeCompounds: ["Eugenol", "Piperine", "Ursolic acid"],
     safetyRating: "Safe",
-    recommendedFor: ["Cold", "Nasal Congestion", "Head Cold", "Sinus"],
+    recommendedFor: ["Cold", "Nasal Congestion", "Head Cold", "Sinus", "Runny Nose"],
     iconName: "Leaf"
+  },
+  {
+    id: "rem-cinnamon-honey",
+    name: "Cinnamon & Honey Warm Infusion",
+    botanicalName: "Cinnamomum verum",
+    sanskritName: "Twak & Madhu",
+    category: "Cold & Sinus Care",
+    summary: "Warming antibacterial spice elixir that breaks up nasal congestion, soothes sinus irritation, and combats early cold onset.",
+    traditionalUses: [
+      "Relieves head cold, nasal drip, and early chills",
+      "Stimulates circulation and warms cold extremities"
+    ],
+    preparation: "Mix 1/4 tsp organic Ceylon cinnamon powder in 1 cup warm water with 1 tsp raw honey. Sip twice daily.",
+    activeCompounds: ["Cinnamaldehyde", "Eugenol"],
+    safetyRating: "Safe",
+    recommendedFor: ["Cold", "Head Cold", "Sinus", "Chills", "Runny Nose"],
+    iconName: "Sparkles"
   },
   {
     id: "rem-adulsa",
@@ -332,6 +349,23 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     iconName: "Shield"
   },
   {
+    id: "rem-sitopaladi",
+    name: "Sitopaladi Churna with Honey",
+    botanicalName: "Bambusa arundinacea & Piper longum",
+    sanskritName: "Sitopaladi Churna",
+    category: "Cough & Throat Care",
+    summary: "Classic Ayurvedic respiratory powder that pacifies chest tightness, relieves wet or dry cough, and eases throat irritation.",
+    traditionalUses: [
+      "Calms acute cough bouts and throat tickle",
+      "Clears mucous congestion from respiratory tract"
+    ],
+    preparation: "Mix 1/2 tsp Sitopaladi powder with 1 tsp organic honey. Lick slowly twice daily after meals.",
+    activeCompounds: ["Piperine", "Bambusa Silica", "Gingerols"],
+    safetyRating: "Safe",
+    recommendedFor: ["Cough", "Wet Cough", "Dry Cough", "Chest Congestion", "Cold"],
+    iconName: "Sparkles"
+  },
+  {
     id: "rem-mulethi",
     name: "Mulethi (Licorice) Throat Elixir",
     botanicalName: "Glycyrrhiza glabra",
@@ -345,8 +379,25 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Gently boil a 1-inch piece of crushed Mulethi root in 1 cup water for 5 minutes. Sip warm slowly.",
     activeCompounds: ["Glycyrrhizin", "Liquiritigenin"],
     safetyRating: "Safe",
-    recommendedFor: ["Sore Throat", "Throat Pain", "Hoarseness", "Cough"],
+    recommendedFor: ["Sore Throat", "Throat Pain", "Hoarseness", "Cough", "Throat Irritation"],
     iconName: "Coffee"
+  },
+  {
+    id: "rem-salt-turmeric-gargle",
+    name: "Salt & Turmeric Warm Gargle",
+    botanicalName: "Curcuma longa & Rock Salt",
+    sanskritName: "Haridra-Lavana Jala",
+    category: "Sore Throat & Oral Hygiene",
+    summary: "Simple, highly effective anti-inflammatory salt gargle that reduces pharyngeal tissue swelling and kills sore throat pathogens.",
+    traditionalUses: [
+      "Reduces tonsil swelling and scratchy throat raw pain",
+      "Flushes out bacteria and mucus from back of throat"
+    ],
+    preparation: "Dissolve 1/4 tsp turmeric powder and 1/2 tsp rock salt in 1 cup warm water. Gargle thoroughly for 60 seconds twice daily.",
+    activeCompounds: ["Curcumin", "Sodium Chloride"],
+    safetyRating: "Safe",
+    recommendedFor: ["Sore Throat", "Throat Pain", "Tonsil Swelling", "Hoarseness"],
+    iconName: "Shield"
   },
   {
     id: "rem-turmeric-golden-milk",
@@ -362,7 +413,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Warm 1 cup milk (or oat milk) with 1/2 tsp organic turmeric powder and a pinch of black pepper for 5 minutes.",
     activeCompounds: ["Curcumin", "Demethoxycurcumin", "Piperine"],
     safetyRating: "Safe",
-    recommendedFor: ["Fever", "Mild Fever", "Body Ache", "Immunity"],
+    recommendedFor: ["Fever", "Mild Fever", "Body Ache", "Immunity", "Chills"],
     iconName: "Sparkles"
   },
   {
@@ -379,8 +430,25 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Steep 1/2 tsp Giloy powder or crushed stem in 1 cup boiling water for 8 minutes. Strain and drink once daily.",
     activeCompounds: ["Tinosporoside", "Cordifolioside A"],
     safetyRating: "Safe",
-    recommendedFor: ["Fever", "Fatigue", "Post-Illness Weakness", "Body Ache"],
+    recommendedFor: ["Fever", "Fatigue", "Post-Illness Weakness", "Body Ache", "Weakness"],
     iconName: "Shield"
+  },
+  {
+    id: "rem-dashamula",
+    name: "Dashamula Warm Kwath",
+    botanicalName: "Ten Sacred Roots Blend",
+    sanskritName: "Dashamula Kwath",
+    category: "Fever & Body Pain",
+    summary: "Revered Ayurvedic formulation of ten roots that pacifies Vata disorders, relieving post-fever body aches and deep stiffness.",
+    traditionalUses: [
+      "Relieves generalized body pain, malaise, and post-fever exhaustion",
+      "Pacifies neural and musculoskeletal aches"
+    ],
+    preparation: "Boil 1 tsp Dashamula coarse powder in 2 cups water until reduced to 1/2 cup. Strain and drink warm.",
+    activeCompounds: ["Lupeol", "β-Sitosterol", "Flavonoids"],
+    safetyRating: "Safe",
+    recommendedFor: ["Fever", "Body Ache", "Back Pain", "Joint Stiffness", "Fatigue"],
+    iconName: "Leaf"
   },
   {
     id: "rem-triphala-gargle",
@@ -396,8 +464,25 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Boil 1/2 tsp Triphala powder in 1 cup water for 3 minutes. Allow to cool to warm room temperature, add a pinch of rock salt, and gargle/rinse mouth.",
     activeCompounds: ["Tannic acid", "Gallic acid", "Chebulic acid"],
     safetyRating: "Safe",
-    recommendedFor: ["Cold Sores", "Mouth Ulcers", "Sore Throat", "Gum Swelling"],
+    recommendedFor: ["Cold Sores", "Mouth Ulcers", "Sore Throat", "Gum Swelling", "Lip Blisters"],
     iconName: "Leaf"
+  },
+  {
+    id: "rem-coconut-turmeric-paste",
+    name: "Virgin Coconut Oil & Turmeric Paste",
+    botanicalName: "Cocos nucifera & Curcuma longa",
+    sanskritName: "Narikela-Haridra Lepa",
+    category: "Cold Sores & Skin Sores",
+    summary: "Cooling antimicrobial paste that soothes stinging cold sores, blistered lips, and painful skin redness.",
+    traditionalUses: [
+      "Provides antiviral protective shield over cold sores",
+      "Relieves burning pain and accelerates skin barrier repair"
+    ],
+    preparation: "Mix 1/2 tsp pure cold-pressed coconut oil with 1/4 tsp organic turmeric powder. Dab gently on cold sore 3 times daily.",
+    activeCompounds: ["Lauric Acid", "Curcumin"],
+    safetyRating: "Safe",
+    recommendedFor: ["Cold Sores", "Lip Blisters", "Mouth Ulcers", "Mild Skin Irritation"],
+    iconName: "Shield"
   },
   {
     id: "rem-shatavari-ashwagandha",
@@ -413,7 +498,24 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Mix 1/2 tsp Shatavari and 1/4 tsp Ashwagandha powder in 1 cup warm milk or warm water.",
     activeCompounds: ["Shatavarins", "Withanolides"],
     safetyRating: "Safe",
-    recommendedFor: ["Fatigue", "Weakness", "Low Energy", "Body Ache"],
+    recommendedFor: ["Fatigue", "Weakness", "Low Energy", "Body Ache", "Exhaustion"],
+    iconName: "Sparkles"
+  },
+  {
+    id: "rem-chyawanprash",
+    name: "Chyawanprash Herbal Elixir",
+    botanicalName: "Amalaki & 40+ Convalescent Herbs",
+    sanskritName: "Chyawanprash",
+    category: "Fatigue & Stamina Boost",
+    summary: "Ancient Ayurvedic rasayana jam formulated to boost vital life energy (Ojas), rebuild stamina, and eliminate fatigue.",
+    traditionalUses: [
+      "Restores energy and tissue vitality after illness",
+      "Enhances immunity and respiratory strength"
+    ],
+    preparation: "Take 1 tsp Chyawanprash twice daily followed by a warm cup of milk or water.",
+    activeCompounds: ["Ascorbic Acid", "Polyphenols", "Piperine"],
+    safetyRating: "Safe",
+    recommendedFor: ["Fatigue", "Weakness", "Low Energy", "Immunity", "Exhaustion"],
     iconName: "Sparkles"
   },
   {
@@ -430,8 +532,25 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Add 2 drops eucalyptus oil or fresh crushed mint leaves to a bowl of hot steaming water. Inhale steam with towel overhead for 5 minutes.",
     activeCompounds: ["Eucalyptol (1,8-cineole)", "Menthol"],
     safetyRating: "Safe",
-    recommendedFor: ["Headache", "Headaches", "Sinus Headache", "Tension"],
+    recommendedFor: ["Headache", "Headaches", "Sinus Headache", "Tension", "Forehead Pressure"],
     iconName: "Coffee"
+  },
+  {
+    id: "rem-chandan-paste",
+    name: "Sandalwood & Camphor Cooling Paste",
+    botanicalName: "Santalum album & Cinnamomum camphora",
+    sanskritName: "Chandana Lepa",
+    category: "Headaches & Heat Relief",
+    summary: "Cooling forehead paste that calms throbbing temples, heat-induced migraines, and stress headaches.",
+    traditionalUses: [
+      "Rapidly cools burning head heat and temple throbbing",
+      "Relieves tension around eyes and forehead"
+    ],
+    preparation: "Mix 1/2 tsp sandalwood powder with a drop of water and a tiny pinch of natural camphor. Apply to forehead and temples.",
+    activeCompounds: ["Santalol", "Camphor"],
+    safetyRating: "Safe",
+    recommendedFor: ["Headache", "Headaches", "Migraine", "Tension"],
+    iconName: "Sparkles"
   },
   {
     id: "rem-nirgundi-ginger",
@@ -447,8 +566,25 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Simmer 1/2 tsp Nirgundi leaf powder and 1/4 tsp ginger in 1.5 cups water until reduced to 1 cup. Drink warm.",
     activeCompounds: ["Nishindoside", "Gingerols", "Sabinenes"],
     safetyRating: "Safe",
-    recommendedFor: ["Body Ache", "Back Pain", "Muscle Soreness", "Joint Pain"],
+    recommendedFor: ["Body Ache", "Back Pain", "Muscle Soreness", "Joint Pain", "Lower Back Pain"],
     iconName: "Leaf"
+  },
+  {
+    id: "rem-shallaki",
+    name: "Shallaki (Boswellia) Herbal Tea",
+    botanicalName: "Boswellia serrata",
+    sanskritName: "Shallaki",
+    category: "Back Pain & Joint Relief",
+    summary: "Potent anti-inflammatory resin tea that improves joint mobility, eases chronic back pain, and reduces spinal stiffness.",
+    traditionalUses: [
+      "Reduces inflammatory degradation of spinal and joint cartilage",
+      "Eases lower back soreness and stiffness upon standing"
+    ],
+    preparation: "Steep 1/2 tsp Shallaki extract powder in 1 cup hot water for 5 minutes. Take after meals.",
+    activeCompounds: ["Boswellic Acids", "AKBA"],
+    safetyRating: "Safe",
+    recommendedFor: ["Back Pain", "Joint Pain", "Body Ache", "Muscle Soreness", "Stiffness"],
+    iconName: "Shield"
   },
   {
     id: "rem-ajwain-water",
@@ -468,6 +604,23 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     iconName: "Coffee"
   },
   {
+    id: "rem-trikatu",
+    name: "Trikatu & Honey Digestive Paste",
+    botanicalName: "Black Pepper, Long Pepper & Ginger",
+    sanskritName: "Trikatu Churna",
+    category: "Indigestion & Metabolism",
+    summary: "Pungent three-spice blend that ignites sluggish digestive fire (Agni), clears heavy post-meal fullness, and aids nutrient absorption.",
+    traditionalUses: [
+      "Kindles low digestive capacity and eliminates stomach heaviness",
+      "Reduces excessive mucus and sluggishness in gut"
+    ],
+    preparation: "Mix 1/4 tsp Trikatu powder with 1 tsp honey 15 minutes before meals.",
+    activeCompounds: ["Piperine", "Gingerols"],
+    safetyRating: "Safe",
+    recommendedFor: ["Indigestion", "Stomach Upset", "Sluggish Digestion", "Bloating"],
+    iconName: "Sparkles"
+  },
+  {
     id: "rem-hingastak",
     name: "Hingastak & Warm Water",
     botanicalName: "Ferula foetida & Herbal Digestives",
@@ -481,7 +634,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Take 1/4 tsp Hingastak powder with 1/2 glass of warm water or ghee with the first bite of meals.",
     activeCompounds: ["Ferulic acid", "Umbelliferone"],
     safetyRating: "Safe",
-    recommendedFor: ["Bloating", "Abdominal Cramps", "Flatulence", "Indigestion"],
+    recommendedFor: ["Bloating", "Abdominal Cramps", "Flatulence", "Indigestion", "Cramps"],
     iconName: "Shield"
   },
   {
@@ -498,7 +651,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Soak 1/2 tsp fenugreek seeds and 1/4 tsp ajwain in 1 cup hot water for 10 minutes. Strain and sip warm.",
     activeCompounds: ["Diosgenin", "Thymol", "Trigonelline"],
     safetyRating: "Safe",
-    recommendedFor: ["Cramps", "Stomach Cramps", "Abdominal Pain", "Bloating"],
+    recommendedFor: ["Cramps", "Stomach Cramps", "Abdominal Pain", "Bloating", "Menstrual Cramps"],
     iconName: "Leaf"
   },
   {
@@ -519,6 +672,23 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     iconName: "Sparkles"
   },
   {
+    id: "rem-shankhpushpi",
+    name: "Shankhpushpi Calming Syrup",
+    botanicalName: "Convolvulus pluricaulis",
+    sanskritName: "Shankhpushpi Syrup",
+    category: "Stress & Mental Fatigue",
+    summary: "Premier Medhya Rasayana (brain tonic) that lowers nervous excitability, eases stress tension, and promotes calm focus.",
+    traditionalUses: [
+      "Quiets mental chatter and stress-induced anxiety",
+      "Soothes tension headaches caused by mental overwork"
+    ],
+    preparation: "Take 1-2 tsp Shankhpushpi syrup or powder with warm water after meals.",
+    activeCompounds: ["Convolvine", "Microphyllic Acid"],
+    safetyRating: "Safe",
+    recommendedFor: ["Stress", "Anxiety", "Tension", "Brain Fog", "Fatigue"],
+    iconName: "Shield"
+  },
+  {
     id: "rem-neem-turmeric-wash",
     name: "Neem & Turmeric Soothing Wash",
     botanicalName: "Azadirachta indica & Curcuma longa",
@@ -532,7 +702,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Boil 10 clean Neem leaves and 1/2 tsp turmeric powder in 2 cups water for 8 minutes. Cool completely and dab gently on affected skin with clean cotton.",
     activeCompounds: ["Nimbin", "Azadirachtin", "Curcumin"],
     safetyRating: "Safe",
-    recommendedFor: ["Mild Skin Irritation", "Skin Rash", "Itching", "Redness"],
+    recommendedFor: ["Mild Skin Irritation", "Skin Rash", "Itching", "Redness", "Skin Irritation"],
     iconName: "Shield"
   },
   {
@@ -549,7 +719,7 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     preparation: "Mix 1 tbsp fresh aloe vera gel with a pinch of pure Sandalwood (Chandan) powder. Apply topically.",
     activeCompounds: ["Aloin", "Acomannan", "Santalol"],
     safetyRating: "Safe",
-    recommendedFor: ["Mild Skin Irritation", "Sunburn", "Heat Rash", "Skin Inflammation"],
+    recommendedFor: ["Mild Skin Irritation", "Sunburn", "Heat Rash", "Skin Inflammation", "Skin Irritation", "Itching"],
     iconName: "Sparkles"
   },
   {
@@ -568,6 +738,40 @@ export const AYURBOOK_REMEDIES: Remedy[] = [
     safetyRating: "Safe",
     recommendedFor: ["Poor Sleep", "Insomnia", "Restlessness", "Night Waking"],
     iconName: "Coffee"
+  },
+  {
+    id: "rem-chamomile-tulsi",
+    name: "Chamomile & Tulsi Evening Brew",
+    botanicalName: "Matricaria chamomilla & Ocimum sanctum",
+    sanskritName: "Pudina-Tulsi Peya",
+    category: "Poor Sleep & Relaxation",
+    summary: "Gentle evening herbal tea that releases physical muscle tension, relaxes neural excitability, and prepares the mind for deep sleep.",
+    traditionalUses: [
+      "Relieves evening stress and restlessness",
+      "Promotes serene transition into deep restorative sleep"
+    ],
+    preparation: "Steep 1 tea bag or 1 tsp dried chamomile flowers and 5 tulsi leaves in hot water for 6 minutes before sleep.",
+    activeCompounds: ["Apigenin", "Eugenol", "Bisabolol"],
+    safetyRating: "Safe",
+    recommendedFor: ["Poor Sleep", "Insomnia", "Restlessness", "Stress", "Anxiety"],
+    iconName: "Coffee"
+  },
+  {
+    id: "rem-triphala-eyewash",
+    name: "Cool Triphala Eye Compress",
+    botanicalName: "Haritaki, Bibhitaki, Amalaki",
+    sanskritName: "Triphala Netra Tarpana",
+    category: "Eye Strain & Fatigue",
+    summary: "Traditional cooling ocular wash that refreshes dry, irritated eyes from screen fatigue, reading strain, or heat exposure.",
+    traditionalUses: [
+      "Relieves ocular burning, dryness, and screen fatigue",
+      "Cools Pitta heat around the eyes"
+    ],
+    preparation: "Soak 1/4 tsp Triphala in 1 cup water overnight. Filter twice through fine cloth until crystal clear. Use as a gentle eye rinse or cool eye pad compress.",
+    activeCompounds: ["Gallic acid", "Tannins", "Vitamin C"],
+    safetyRating: "Safe",
+    recommendedFor: ["Eye Strain", "Tired Eyes", "Eye Irritation", "Screen Fatigue", "Fatigue"],
+    iconName: "Sparkles"
   }
 ];
 

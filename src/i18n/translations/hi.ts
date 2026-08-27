@@ -109,7 +109,7 @@ export const hi: TranslationType = {
   auth: {
     loginTitle: "पुनः स्वागत है 👋",
     loginSubtitle: "अपने पोस्ट-डिस्चार्ज रिकवरी साथी को प्रबंधित करने के लिए लॉग इन करें",
-    signupTitle: "अपना CareConnect खाता बनाएं",
+    signupTitle: "अपना नया खाता बनाएं",
     signupSubtitle: "पोस्ट-डिस्चार्ज रिकवरी प्लेटफॉर्म से जुड़ें",
     email: "ईमेल पता",
     password: "पासवर्ड",

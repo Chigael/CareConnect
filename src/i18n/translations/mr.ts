@@ -90,7 +90,7 @@ export const mr: TranslationType = {
     ...en.auth,
     loginTitle: "पुन्हा स्वागत आहे 👋",
     loginSubtitle: "तुमच्या खात्यात लॉग इन करा",
-    signupTitle: "CareConnect खाते तयार करा",
+    signupTitle: "नवीन खाते तयार करा",
     signupSubtitle: "आरोग्य रिकव्हरी प्लॅटफॉर्मवर सामील व्हा",
     email: "ईमेल पत्ता",
     password: "पासवर्ड",

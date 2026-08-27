@@ -90,7 +90,7 @@ export const ja: TranslationType = {
     ...en.auth,
     loginTitle: "おかえりなさい 👋",
     loginSubtitle: "退院後の回復サポートにログイン",
-    signupTitle: "CareConnectアカウントを作成",
+    signupTitle: "新しいアカウントを作成",
     signupSubtitle: "退院後サポートプラットフォームに参加",
     email: "メールアドレス",
     password: "パスワード",
