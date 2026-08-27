@@ -26,19 +26,11 @@ export const LandingScreen: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center relative z-10 space-y-6">
           
           {/* Brand Header */}
-<<<<<<< HEAD
           <div className="flex flex-col items-center gap-2">
             <img
               src="/logo.svg"
               alt="CareConnect Icon"
               className="h-16 sm:h-20 w-auto object-contain drop-shadow-md"
-=======
-          <div className="flex flex-col items-center gap-3">
-            {/* <img
-              src="/CareConnect Logo.png"
-              alt="CareConnect Logo"
-              className="h-20 sm:h-24 w-auto object-contain drop-shadow-md dark:hidden"
->>>>>>> 9af9923546445b8b3b491ef6e58ca2d7fb8fc56b
             />
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 tracking-tight">
               CareConnect
@@ -47,9 +39,6 @@ export const LandingScreen: React.FC = () => {
               {t.nav.subtitle}
             </p>
             <div className="inline-flex items-center gap-2 bg-brand-100/80 dark:bg-brand-950 border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-300 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs uppercase tracking-wider mt-1">
-              className="w-20 h-20 sm:w-24 sm:h-24 object-contain drop-shadow-md"
-            /> */}
-            <div className="inline-flex items-center gap-2 bg-brand-100/80 dark:bg-brand-950 border border-brand-200 dark:border-brand-800 text-brand-800 dark:text-brand-300 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs uppercase tracking-wider">
               <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
               <span>POST-DISCHARGE SAFETY COMPANION</span>
             </div>
