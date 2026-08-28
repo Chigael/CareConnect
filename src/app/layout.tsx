@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
+
 import { AuthProvider } from "@/context/AuthContext";
 import { DemoProvider } from "@/context/DemoContext";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -62,6 +64,7 @@ export default function RootLayout({
             </DemoProvider>
           </LanguageProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
