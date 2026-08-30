@@ -56,7 +56,7 @@ export const TimelineScreen: React.FC = () => {
         {/* Page Header */}
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-brand-700 dark:text-brand-300 bg-brand-100 dark:bg-brand-950 px-2.5 py-1 rounded-md border border-brand-200 dark:border-brand-800">
-            Care History
+            {t.timeline.title}
           </span>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 mt-2">{t.timeline.title}</h1>
           <p className="text-xs text-slate-500 dark:text-slate-400">{t.timeline.subtitle}</p>

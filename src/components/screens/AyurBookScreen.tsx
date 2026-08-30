@@ -24,8 +24,21 @@ export const AyurBookScreen: React.FC = () => {
   const [selectedRemedyForCheck, setSelectedRemedyForCheck] = useState<string>(AYURBOOK_REMEDIES[0].id);
 
   const quickSymptoms = [
-    'Nausea',
+    'Cold',
+    'Cough',
+    'Fever',
+    'Sore Throat',
+    'Fatigue',
     'Headaches',
+    'Body Ache',
+    'Back Pain',
+    'Indigestion',
+    'Bloating',
+    'Cramps',
+    'Poor Sleep',
+    'Stress',
+    'Skin Irritation',
+    'Cold Sores',
     'Acidity',
     'Insomnia',
     'Constipation',
@@ -43,13 +56,14 @@ export const AyurBookScreen: React.FC = () => {
     const query = symptomSearch.toLowerCase().trim();
     
     const matchesRecommendedSymptom = rem.recommendedFor?.some(s => s.toLowerCase().includes(query));
-    const matchesName = rem.name.toLowerCase().includes(query) || rem.sanskritName.toLowerCase().includes(query);
+    const matchesName = rem.name.toLowerCase().includes(query) || rem.sanskritName.toLowerCase().includes(query) || rem.botanicalName.toLowerCase().includes(query);
     const matchesCategory = rem.category.toLowerCase().includes(query) || rem.summary.toLowerCase().includes(query);
+    const matchesUses = rem.traditionalUses?.some(u => u.toLowerCase().includes(query));
 
-    return matchesRecommendedSymptom || matchesName || matchesCategory;
+    return matchesRecommendedSymptom || matchesName || matchesCategory || matchesUses;
   });
 
-  const displayedRemedies = symptomSearch.trim() ? filteredRemedies.slice(0, 2) : filteredRemedies;
+  const displayedRemedies = filteredRemedies;
 
   const handleSelectRemedy = (remedy: Remedy) => {
     setSelectedRemedy(remedy);
@@ -270,7 +284,7 @@ export const AyurBookScreen: React.FC = () => {
               <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <div>
                 <h4 className="font-extrabold text-xs">
-                  Showing 2 Safe Options for "{symptomSearch}"
+                  Showing {filteredRemedies.length} Safe Option{filteredRemedies.length === 1 ? '' : 's'} for "{symptomSearch}"
                 </h4>
                 <p className="text-[11px] text-emerald-800 dark:text-emerald-300 mt-0.5">
                   Screened safe alongside <strong>{activeConditionName}</strong> and your {medications.length} active prescription{medications.length === 1 ? '' : 's'}.
@@ -288,7 +302,7 @@ export const AyurBookScreen: React.FC = () => {
           <div className="bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-4 flex items-center gap-3 text-xs text-emerald-950 dark:text-emerald-200">
             <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <p className="font-semibold">
-              Tap a quick symptom chip above or type any symptom to get 2 safe, tailored Ayurvedic remedies.
+              Tap a quick symptom chip above or type any symptom to explore {AYURBOOK_REMEDIES.length} safe, tailored Ayurvedic remedies.
             </p>
           </div>
         )}
@@ -298,7 +312,7 @@ export const AyurBookScreen: React.FC = () => {
           <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 text-center space-y-2">
             <BookOpen className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto" />
             <h3 className="text-sm font-extrabold text-slate-900 dark:text-slate-100">No remedies found for "{symptomSearch}"</h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Try searching for Nausea, Headaches, Acidity, Insomnia, or Constipation.</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Try searching for Cold, Cough, Fever, Sore Throat, Fatigue, Headaches, Back Pain, or Indigestion.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

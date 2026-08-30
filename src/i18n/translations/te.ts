@@ -10,11 +10,11 @@ export const te: TranslationType = {
     login: "లాగిన్",
     signup: "ఖాతా తెరవండి",
     logout: "లాగ్ అవుట్",
-    subtitle: "డిశ్చార్జ్ తరువాతి కోలుకునే తోడ్పాటు"
+    subtitle: "మీ రికవరీ. మా అవగాహన."
   },
   home: {
     title: "కేర్ డాష్‌బోర్డ్",
-    subtitle: "మీ దైనందిన కోలుకునే స్థితి, మందులు మరియు భద్రతా తనిఖీలు",
+    subtitle: "మీ రికవరీ. మా అవగాహన.",
     welcome: "తిరిగి స్వాగతం",
     recoveryStatus: "కోలుకునే స్థితి",
     activeCondition: "ప్రస్తుత ఆరోగ్యం",
@@ -27,7 +27,16 @@ export const te: TranslationType = {
     checkAyurbook: "ఆయుర్వేద భద్రతా తనిఖీ",
     recentTimeline: "ఇటీవలి కోలుకునే టైమ్‌లైన్",
     viewAll: "అన్నీ చూడండి",
-    noMedicines: "ఇంకా మందులు ఏవీ జోడించబడలేదు."
+    noMedicines: "ఇంకా మందులు ఏవీ జోడించబడలేదు.",
+    todaysStatus: "నేటి స్థితి",
+    carePlanActive: "కేర్ ప్లాన్ యాక్టివ్",
+    save: "సేవ్ చేయి",
+    saved: "సేవ్ చేయబడింది",
+    missedDosageAlert: "మిస్ అయిన మందుల అలర్ట్",
+    missedDosageDesc: "మీరు ఈ రోజు మీ మందు మోతాదును మిస్ అయ్యారు.",
+    oneClearNextAction: "ముఖ్యమైన తదుపరి చర్య",
+    managePrescriptions: "మందులను నిర్వహించండి",
+    addPrescription: "+ మందును జోడించండి"
   },
   medicines: {
     title: "ప్రస్తుత మందులు",
@@ -38,7 +47,14 @@ export const te: TranslationType = {
     frequency: "ఫ్రీక్వెన్సీ",
     instructions: "సూచనలు",
     reminderTime: "జ్ఞాపిక సమయం",
-    delete: "తొలగించు"
+    delete: "తొలగించు",
+    activePrescriptions: "ప్రస్తుత ప్రిస్క్రిప్షన్‌లు",
+    addPrescriptionBtn: "+ మందును జోడించండి",
+    scanSummaryBtn: "డిశ్చార్జ్ సమ్మరీ స్కాన్",
+    manualEntryBtn: "మాన్యువల్ ఎంట్రీ",
+    noMedicinesLogged: "ఇంకా మందులు ఏవీ నమోదు కాలేదు.",
+    pillsRemaining: "మాత్రలు మిగిలి ఉన్నాయి",
+    nextDose: "తదుపరి డోస్"
   },
   ayurbook: {
     title: "ఆయుర్వేద లైబ్రరీ",
@@ -48,7 +64,17 @@ export const te: TranslationType = {
     safe: "వాడకానికి సురక్షితం",
     caution: "జాగ్రత్త వహించండి",
     avoid: "కలిపి వాడకండి",
-    viewRemedy: "వివరాలు చూడండి"
+    viewRemedy: "వివరాలు చూడండి",
+    remedyFinder: "నివారణ శోధన",
+    searchBySymptom: "లక్షణాల ఆధారంగా వెతకండి",
+    quickSearch: "త్వరిత శోధన",
+    showingResults: "సురక్షిత ఎంపికలు చూపిస్తోంది:",
+    clearFilter: "ఫిల్టర్ తొలగించు",
+    remedyDetails: "నివారణ వివరాలు",
+    targetSymptoms: "లక్ష్య లక్షణాలు",
+    preparationInstructions: "తయారీ విధానం",
+    activeCompounds: "క్రియాశీల అంశాలు",
+    safetyRating: "భద్రతా రేటింగ్"
   },
   timeline: {
     title: "కోలుకునే టైమ్‌లైన్",
@@ -57,14 +83,15 @@ export const te: TranslationType = {
     medications: "మందులు",
     symptoms: "లక్షణాలు",
     remedies: "నివారణలు",
-    today: "ఈ రోజు"
+    today: "ఈ రోజు",
+    noEvents: "ఇంకా ఎలాంటి ఈవెంట్‌లు నమోదు కాలేదు."
   },
   profile: {
     title: "ప్రొఫైల్ & సెట్టింగ్‌లు",
     subtitle: "మీ ఖాతా, యాప్ భాష, థీమ్ మరియు డేటా సెట్టింగ్‌లను నిర్వహించండి",
     userAccount: "యూజర్ ఖాతా",
     authenticated: "ధృవీకరించబడిన ఖాతా",
-    rlsActive: "రో-లెవెల్ సెక్యూరిటీ యాక్టివ్",
+    rlsActive: "రో-లేవెల్ సెక్యూరిటీ యాక్టివ్",
     settings: "యాప్ సెట్టింగ్‌లు",
     changeLanguage: "యాప్ భాష",
     selectLanguage: "భాషను ఎంచుకోండి",
@@ -82,7 +109,7 @@ export const te: TranslationType = {
   auth: {
     loginTitle: "తిరిగి స్వాగతం 👋",
     loginSubtitle: "మీ కేర్ ఖాతాలోకి లాగిన్ అవ్వండి",
-    signupTitle: "CareConnect ఖాతాను సృష్టించండి",
+    signupTitle: "కొత్త ఖాతాను సృష్టించండి",
     signupSubtitle: "పోస్ట్-డిశ్చార్జ్ రికవరీ ప్లాట్‌ఫారమ్‌లో చేరండి",
     email: "ఈమెయిల్ చిరునామా",
     password: "పాస్‌వర్డ్",
@@ -93,7 +120,11 @@ export const te: TranslationType = {
     orEmail: "లేదా ఈమెయిల్‌తో",
     noAccount: "ఖాతా లేదా?",
     alreadyAccount: "ఇప్పటికే ఖాతా ఉందా?",
-    forgotPassword: "పాస్‌వర్డ్ మర్చిపోయారా?"
+    forgotPassword: "పాస్‌వర్డ్ మర్చిపోయారా?",
+    welcomeToCareConnect: "CareConnect కి స్వాగతం",
+    heroTitle1: "నమ్మకంతో కోలుకోండి.",
+    heroTitle2: "వాడే ముందు భద్రత చూడండి.",
+    heroDesc: "మందులు మరియు సాంప్రదాయ నివారణల మధ్య సురక్షితమైన కలయికను అందించే మీ కేర్ తోడు."
   },
   deleteModal: {
     title: "ఖాతాను తొలగించాలా?",

@@ -10,14 +10,14 @@ export const hi: TranslationType = {
     login: "लॉग इन",
     signup: "खाता बनाएं",
     logout: "लॉग आउट",
-    subtitle: "अस्पताल के बाद रिकवरी साथी"
+    subtitle: "आपकी रिकवरी। हमारी समझ।"
   },
   home: {
     title: "केयर डैशबोर्ड",
-    subtitle: "आपकी दैनिक रिकवरी स्थिति, दवाएं और सुरक्षा जांच",
+    subtitle: "आपकी रिकवरी। हमारी समझ।",
     welcome: "पुनः स्वागत है",
     recoveryStatus: "रिकवरी स्थिति",
-    activeCondition: "सक्रिय स्थिति",
+    activeCondition: "सक्रिय स्वास्थ्य स्थिति",
     todaysMedicines: "आज की निर्धारित दवाएं",
     takeDose: "खुराक लें",
     taken: "ली गई",
@@ -27,7 +27,16 @@ export const hi: TranslationType = {
     checkAyurbook: "आयुर्वेद सुरक्षा जांच",
     recentTimeline: "हाल की रिकवरी टाइमलाइन",
     viewAll: "सभी देखें",
-    noMedicines: "अभी तक कोई सक्रिय प्रिस्क्रिप्टिव दवाएं नहीं जोड़ी गई हैं।"
+    noMedicines: "अभी तक कोई सक्रिय प्रिस्क्रिप्टिव दवाएं नहीं जोड़ी गई हैं।",
+    todaysStatus: "आज की स्थिति",
+    carePlanActive: "केयर प्लान सक्रिय",
+    save: "सहेजें",
+    saved: "सहेजा गया",
+    missedDosageAlert: "छूटी हुई खुराक अलर्ट",
+    missedDosageDesc: "आपने आज अपनी निर्धारित दवा की खुराक छोड़ दी या भूल गए।",
+    oneClearNextAction: "प्रमुख अगला कदम",
+    managePrescriptions: "दवाएं प्रबंधित करें",
+    addPrescription: "+ नई दवा जोड़ें"
   },
   medicines: {
     title: "सक्रिय दवाएं",
@@ -38,7 +47,14 @@ export const hi: TranslationType = {
     frequency: "आवृत्ति",
     instructions: "निर्देश",
     reminderTime: "रिमाइंडर समय",
-    delete: "हटाएं"
+    delete: "हटाएं",
+    activePrescriptions: "सक्रिय प्रिस्क्रिप्शन",
+    addPrescriptionBtn: "+ नई दवा जोड़ें",
+    scanSummaryBtn: "डिस्चार्ज समरी स्कैन करें",
+    manualEntryBtn: "मैन्युअल प्रविष्टि",
+    noMedicinesLogged: "अभी तक कोई सक्रिय दवाएं दर्ज नहीं की गई हैं।",
+    pillsRemaining: "गोलियां शेष",
+    nextDose: "अगली खुराक"
   },
   ayurbook: {
     title: "आयुर्वेद लाइब्रेरी",
@@ -48,7 +64,17 @@ export const hi: TranslationType = {
     safe: "उपयोग के लिए सुरक्षित",
     caution: "सावधानी बरतें",
     avoid: "साथ में न लें",
-    viewRemedy: "विवरण देखें"
+    viewRemedy: "विवरण देखें",
+    remedyFinder: "उपचार खोजें",
+    searchBySymptom: "लक्षण के अनुसार उपचार खोजें",
+    quickSearch: "त्वरित खोज",
+    showingResults: "सुरक्षित विकल्प दिखाए जा रहे हैं:",
+    clearFilter: "फ़िल्टर हटाएं",
+    remedyDetails: "उपचार विवरण",
+    targetSymptoms: "लक्ष्य लक्षण",
+    preparationInstructions: "बनाने की विधि",
+    activeCompounds: "सक्रिय तत्व",
+    safetyRating: "सुरक्षा रेटिंग"
   },
   timeline: {
     title: "रिकवरी टाइमलाइन",
@@ -57,7 +83,8 @@ export const hi: TranslationType = {
     medications: "दवाएं",
     symptoms: "लक्षण",
     remedies: "उपचार",
-    today: "आज"
+    today: "आज",
+    noEvents: "अभी तक कोई टाइमलाइन इवेंट दर्ज नहीं किया गया है।"
   },
   profile: {
     title: "प्रोफाइल और सेटिंग्स",
@@ -82,7 +109,7 @@ export const hi: TranslationType = {
   auth: {
     loginTitle: "पुनः स्वागत है 👋",
     loginSubtitle: "अपने पोस्ट-डिस्चार्ज रिकवरी साथी को प्रबंधित करने के लिए लॉग इन करें",
-    signupTitle: "अपना CareConnect खाता बनाएं",
+    signupTitle: "अपना नया खाता बनाएं",
     signupSubtitle: "पोस्ट-डिस्चार्ज रिकवरी प्लेटफॉर्म से जुड़ें",
     email: "ईमेल पता",
     password: "पासवर्ड",
@@ -93,7 +120,11 @@ export const hi: TranslationType = {
     orEmail: "या ईमेल के साथ",
     noAccount: "खाता नहीं है?",
     alreadyAccount: "पहले से खाता है?",
-    forgotPassword: "पासवर्ड भूल गए?"
+    forgotPassword: "पासवर्ड भूल गए?",
+    welcomeToCareConnect: "CareConnect में आपका स्वागत है",
+    heroTitle1: "आत्मविश्वास के साथ ठीक हों।",
+    heroTitle2: "आजमाने से पहले सुरक्षा जांचें।",
+    heroDesc: "आपकी व्यक्तिगत रिकवरी साथी जो दवाओं और पारंपरिक घरेलू उपचारों के बीच सुरक्षा सुनिश्चित करती है।"
   },
   deleteModal: {
     title: "उपयोगकर्ता खाता हटाएं?",

@@ -93,14 +93,14 @@ export const RecoveryDashboardScreen: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-700">
             <div>
               <span className="text-[10px] font-bold uppercase tracking-wider text-brand-700 dark:text-brand-300 bg-brand-100 dark:bg-brand-950 px-2.5 py-0.5 rounded-md border border-brand-200 dark:border-brand-800">
-                Today's Status • {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                {t.home.todaysStatus} • {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
               </span>
               <h1 className="text-2xl font-extrabold text-slate-900 dark:text-slate-100 mt-1">{t.home.welcome}, {patient.name}</h1>
               <p className="text-xs text-slate-500 dark:text-slate-400">{t.home.subtitle}</p>
             </div>
             <div className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 px-3 py-1.5 rounded-full">
               <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300">Care Plan Active</span>
+              <span className="text-xs font-bold text-emerald-800 dark:text-emerald-300">{t.home.carePlanActive}</span>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export const RecoveryDashboardScreen: React.FC = () => {
               </label>
               {isSavedCondition && (
                 <span className="text-[10px] font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 rounded-md">
-                  ✓ Saved
+                  ✓ {t.home.saved}
                 </span>
               )}
             </div>
@@ -132,7 +132,7 @@ export const RecoveryDashboardScreen: React.FC = () => {
                 onClick={() => handleSaveCondition(conditionInput)}
                 className="bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition"
               >
-                Save
+                {t.home.save}
               </button>
             </div>
 
@@ -161,8 +161,8 @@ export const RecoveryDashboardScreen: React.FC = () => {
             <div className="flex items-center gap-3 text-rose-900 dark:text-rose-200">
               <AlertTriangle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0" />
               <div>
-                <h3 className="font-extrabold text-sm text-slate-900 dark:text-slate-100">Missed Dosage Alert ({missedMedications.length})</h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300">You skipped or missed a scheduled prescription dose today.</p>
+                <h3 className="font-extrabold text-sm text-slate-900 dark:text-slate-100">{t.home.missedDosageAlert} ({missedMedications.length})</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-300">{t.home.missedDosageDesc}</p>
               </div>
             </div>
 
@@ -187,7 +187,7 @@ export const RecoveryDashboardScreen: React.FC = () => {
         <div className="bg-gradient-to-r from-brand-600 via-teal-600 to-emerald-600 text-white rounded-3xl p-6 shadow-xl space-y-4">
           <div className="flex items-center gap-2">
             <span className="text-[10px] font-black uppercase tracking-wider bg-white/20 px-3 py-1 rounded-full text-white backdrop-blur-md">
-              🎯 One Clear Next Action
+              🎯 {t.home.oneClearNextAction}
             </span>
           </div>
 
@@ -217,7 +217,7 @@ export const RecoveryDashboardScreen: React.FC = () => {
               onClick={() => setStep('MEDICATIONS')}
               className="text-xs font-bold text-brand-600 dark:text-brand-400 hover:text-brand-700 underline"
             >
-              Manage Prescriptions &rarr;
+              {t.home.managePrescriptions} &rarr;
             </button>
           </div>
 

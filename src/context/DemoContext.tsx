@@ -55,7 +55,7 @@ export const STEP_ORDER: DemoStep[] = [
 ];
 
 export const STEP_LABELS: Record<DemoStep, { title: string; subtitle: string }> = {
-  LANDING: { title: "Welcome", subtitle: "CareConnect Safety Companion" },
+  LANDING: { title: "Welcome", subtitle: "Your Recovery. Understood." },
   SIGN_UP: { title: "Create Account", subtitle: "Sign Up for CareConnect" },
   LOG_IN: { title: "Welcome Back", subtitle: "Log In to Your Account" },
   FORGOT_PASSWORD: { title: "Reset Password", subtitle: "Recover Your Account" },

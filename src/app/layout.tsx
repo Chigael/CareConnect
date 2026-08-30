@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
+
 import { AuthProvider } from "@/context/AuthContext";
 import { DemoProvider } from "@/context/DemoContext";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -11,7 +13,7 @@ import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
 import { MobileNav } from "@/components/layout/MobileNav";
 
 export const metadata: Metadata = {
-  title: "CareConnect | Post-Discharge Safety & Recovery Companion",
+  title: "CareConnect | Your Recovery. Understood.",
   description:
     "Post-discharge safety companion bridging prescription medications with traditional herbal remedies.",
   icons: {
@@ -62,6 +64,7 @@ export default function RootLayout({
             </DemoProvider>
           </LanguageProvider>
         </AuthProvider>
+        <Analytics />
       </body>
     </html>
   );
